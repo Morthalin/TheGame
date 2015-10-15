@@ -13,45 +13,11 @@ public class BaseCharacterClass
 	private int stamina;
 	private int armor;
 
-	public string CharacterClassName
-	{
-		get{ return characterClassName;}
-		set{characterClassName = value;}
-	}
-
-	public string CharacterClassDescription
-	{
-		get{ return characterClassDescription;}
-		set{characterClassDescription = value;}
-	}
-
-	public int Strength
-	{
-		get{ return strength;}
-		set{strength = value;}
-	}
-
-	public int Intellect
-	{
-		get{ return intellect;}
-		set{intellect = value;}
-	}
-
-	public int Agility
-	{
-		get{ return agility;}
-		set{agility = value;}
-	}
-
-	public int Stamina
-	{
-		get{ return stamina;}
-		set{stamina = value;}
-	}
-
-	public int Armor
-	{
-		get{ return armor;}
-		set{armor = value;}
-	}
+	public string CharacterClassName { get; set; }
+    public string CharacterClassDescription { get; set; }
+    public int Strength { get; set; }
+    public int Intellect { get; set; }
+    public int Agility { get; set; }
+    public int Stamina { get; set; }
+    public int Armor { get; set; }
 }

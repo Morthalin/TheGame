@@ -15,15 +15,6 @@ public class BaseEquipment : BaseItemStats
 	private EquipTypes equipType;
 	private int specialStatID;
 
-	public EquipTypes EquipType
-	{
-		get{ return equipType;}
-		set{ equipType = value;} 
-	}
-
-	public int SpecialStatID
-	{
-		get{ return specialStatID;}
-		set{ specialStatID = value;} 
-	}
+	public EquipTypes EquipType { get; set; }
+    public int SpecialStatID { get; set; }
 }

@@ -10,33 +10,9 @@ public class BaseItemStats : BaseItems
 	private int stamina;
 	private int armor;
 
-	public int Strength
-	{
-		get{return strength;}
-		set{strength = value;}
-	}
-
-	public int Intellect
-	{
-		get{return intellect;}
-		set{intellect = value;}
-	}
-	
-	public int Agility
-	{
-		get{return agility;}
-		set{agility = value;}
-	}
-	
-	public int Stamina
-	{
-		get{return stamina;}
-		set{stamina = value;}
-	}
-
-	public int Armor
-	{
-		get{return armor;}
-		set{armor = value;}
-	}
+	public int Strength { get; set; }
+    public int Intellect { get; set; }
+    public int Agility { get; set; }
+    public int Stamina { get; set; }
+    public int Armor { get; set; }
 }

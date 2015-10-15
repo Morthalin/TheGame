@@ -15,16 +15,9 @@ public class BasePotion : BaseItemStats
 	}
 	private PotionTypes potionType;
 	private int potionValue;
+    private int potionDuration;
 
-	public PotionTypes PotionType
-	{
-		get{ return potionType;}
-		set{ potionType = value;}
-	}
-
-	public int PotionValue
-	{
-		get{ return potionValue;}
-		set{ potionValue = value;}
-	}
+	public PotionTypes PotionType { get; set; }
+	public int PotionValue { get; set; }
+    public int PotionDuration { get; set; }
 }
