@@ -14,10 +14,17 @@ public class BasePotion : BaseItemStats
 		ARMOR = 7
 	}
 	private PotionTypes potionType;
+	private int potionValue;
 
 	public PotionTypes PotionType
 	{
 		get{ return potionType;}
 		set{ potionType = value;}
+	}
+
+	public int PotionValue
+	{
+		get{ return potionValue;}
+		set{ potionValue = value;}
 	}
 }

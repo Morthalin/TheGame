@@ -1,14 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Items\BaseNote.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Items\BaseItems.cs">
     <Files>
-      <File FileName="Assets\Scripts\Items\BaseItemStats.cs" Line="37" Column="18" />
-      <File FileName="Assets\Scripts\Items\BaseEquipment.cs" Line="28" Column="3" />
-      <File FileName="Assets\Scripts\Items\BaseWeapon.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Items\BasePotion.cs" Line="22" Column="3" />
-      <File FileName="Assets\Scripts\Character Classes\BaseCharacterClass.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Items\BaseItems.cs" Line="16" Column="7" />
-      <File FileName="Assets\Scripts\Items\BaseNote.cs" Line="12" Column="3" />
+      <File FileName="Assets\Scripts\Character Classes\BaseCharacterClass.cs" Line="10" Column="20" />
+      <File FileName="Assets\Scripts\Character Classes\BaseWarriorClass.cs" Line="10" Column="32" />
+      <File FileName="Assets\Scripts\Items\BaseItems.cs" Line="19" Column="22" />
+      <File FileName="Assets\Scripts\Items\BaseItemStats.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Items\BasePotion.cs" Line="17" Column="26" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

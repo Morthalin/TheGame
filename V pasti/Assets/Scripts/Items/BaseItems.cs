@@ -13,7 +13,8 @@ public class BaseItems
 		EQUIPMENT = 1,
 		WEAPON = 2,
 		POTION = 3,
-		NOTE = 4
+		NOTE = 4,
+		QUEST = 5
 	}
 	private ItemTypes itemType;
 
