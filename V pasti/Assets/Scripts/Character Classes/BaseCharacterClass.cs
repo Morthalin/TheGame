@@ -11,6 +11,8 @@ public class BaseCharacterClass
 	private int intellect;
 	private int agility;
 	private int stamina;
+    private int health;
+    private int energy;
 	private int armor;
 
 	public string CharacterClassName { get; set; }
@@ -19,5 +21,7 @@ public class BaseCharacterClass
     public int Intellect { get; set; }
     public int Agility { get; set; }
     public int Stamina { get; set; }
+    public int Health { get; set; }
+    public int Energy { get; set; }
     public int Armor { get; set; }
 }
