@@ -74,8 +74,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="V pasti.CSharp.Plugins.csproj">
+      <Project>{F44E3795-E43B-3BD8-47A4-0A6C93EA94A3}</Project>
+      <Name>V pasti.CSharp.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\Scripts\Character Classes\BaseCharacterClass.cs" />
     <Compile Include="Assets\Scripts\Character Classes\BaseWarriorClass.cs" />
+    <Compile Include="Assets\Scripts\Controllers\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Items\BaseEquipment.cs" />
     <Compile Include="Assets\Scripts\Items\BaseItemStats.cs" />
     <Compile Include="Assets\Scripts\Items\BaseItems.cs" />
@@ -84,6 +91,13 @@
     <Compile Include="Assets\Scripts\Items\BaseWeapon.cs" />
     <Compile Include="Assets\Scripts\Player\BasePlayer.cs" />
     <Compile Include="Assets\Scripts\test.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
+    <None Include="Assets\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
+    <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
+    <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
+    <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
