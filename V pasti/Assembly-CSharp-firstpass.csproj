@@ -71,6 +71,12 @@
  <Reference Include="UnityEngine.Analytics">
  <HintPath>D:/Programy/unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
+ <Reference Include="Mono.Data.Sqlite">
+ <HintPath>D:/FIT/pha/SEMESTRALKA/TheGame/V pasti/Assets/Plugins/Mono.Data.Sqlite.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Data">
+ <HintPath>D:/FIT/pha/SEMESTRALKA/TheGame/V pasti/Assets/Plugins/System.Data.dll</HintPath>
+ </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>D:/Programy/unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
  </Reference>
