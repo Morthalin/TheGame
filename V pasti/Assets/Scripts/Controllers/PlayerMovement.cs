@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float movementSpeed;
-    public float rotateSpeed;
+    public float movementSpeed = 8;
+    public float rotateSpeed = 90;
     private Vector3 movementVector;
     private Vector3 rotateVector;
     private float horizontal;
@@ -15,8 +15,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Start ()
     {
+        //Priradenie a kontrola komponent
         control = GetComponent<CharacterController>();
+        if (!control)
+        {
+            Debug.LogError("Missing controller!");
+        }
+
         animator = GetComponent<Animator>();
+        if (!animator)
+        {
+            Debug.LogError("Missing animator!");
+        }
     }
 
     void Update()
@@ -39,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
         Animate(horizontal, vertical);
     }
 
+    //Pohybove animacie
     void Animate (float horizontal, float vertical)
     {
         if (horizontal != 0 || vertical != 0)

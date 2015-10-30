@@ -7,10 +7,10 @@ public class FollowTrackingCamera : MonoBehaviour
     
     public float height = 20f;
     public float distance = 20f;
-    public float minZoom = 10f;
-    public float maxZoom = 60f;
-    public float minHeight = 10f;
-    public float maxHeight = 60f;
+    public float minZoom = 0f;
+    public float maxZoom = 30f;
+    public float minHeight = -2f;
+    public float maxHeight = 15f;
     public float rotateSpeedX = 1f;
     public float rotateSpeedY = 100f;
     public bool doRotate;
@@ -19,7 +19,7 @@ public class FollowTrackingCamera : MonoBehaviour
     public float zoomSpeed = 5f;
     private float heightWanted;
     private float distanceWanted;
-    
+
     private Vector3 zoomResult;
     private Quaternion rotationResult;
     private Vector3 targetAdjustedPosition;
@@ -35,7 +35,7 @@ public class FollowTrackingCamera : MonoBehaviour
     {
         if (!target)
         {
-            Debug.LogError("This camera has no target, you need to assign a target in the inspector.");
+            Debug.LogError("Nie je nastaveny target kamery.");
             return;
         }
 
@@ -47,13 +47,25 @@ public class FollowTrackingCamera : MonoBehaviour
             distanceWanted -= Input.GetAxis("Mouse ScrollWheel") * zoomStep;
 
             // Orezanie na limit
+            
             heightWanted = Mathf.Clamp(heightWanted, minHeight, maxHeight);
             distanceWanted = Mathf.Clamp(distanceWanted, minZoom, maxZoom);
             height = Mathf.Lerp(height, heightWanted, Time.deltaTime * zoomSpeed);
             distance = Mathf.Lerp(distance, distanceWanted, Time.deltaTime * zoomSpeed);
 
-            // Poslanie vysledku
-            zoomResult = new Vector3(0f, height, -distance);
+            // Zoom na kolizii
+            RaycastHit hit;
+            if (Physics.Linecast(target.position, transform.position, out hit))
+            {
+                if (!hit.collider.CompareTag("Player") || !hit.collider.CompareTag("Enemy"))
+                {
+                    zoomResult = new Vector3(0f, height, -(hit.distance));
+                }
+            }
+            else
+            {
+                zoomResult = new Vector3(0f, height, -distance);
+            }
         }
 
         // Rotacia po X
@@ -72,6 +84,7 @@ public class FollowTrackingCamera : MonoBehaviour
         // Nastavenie posunu
         targetAdjustedPosition = rotationResult * zoomResult;
         transform.position = target.position + targetAdjustedPosition;
+        
         
         // Pohlad na target
         transform.LookAt(target);
