@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:V pasti/Assets/Scripts/test.cs.meta
+guid: 307a870dd8fb593419b8a97c2811818e
+timeCreated: 1446035448
+=======
+guid: 61c923132c7590a4d90f73561b9e7f13
+timeCreated: 1446499859
+>>>>>>> remotes/origin/devel:V pasti/Assets/Scripts/GUI/ExitGameMenu.cs.meta
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
