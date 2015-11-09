@@ -55,12 +55,10 @@ public class FollowTrackingCamera : MonoBehaviour
 
             // Zoom na kolizii
             RaycastHit hit;
-            if (Physics.Linecast(target.position, transform.position, out hit))
+            int layerMask = 1 << 8;
+            if (Physics.Linecast(target.position, transform.position, out hit, layerMask))
             {
-                if (!hit.collider.CompareTag("Player") || !hit.collider.CompareTag("Enemy"))
-                {
-                    zoomResult = new Vector3(0f, height, -(hit.distance));
-                }
+                zoomResult = new Vector3(0f, height, -(hit.distance));
             }
             else
             {

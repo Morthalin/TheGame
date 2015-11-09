@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
     public float movementSpeed = 8;
@@ -12,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController control;
     private Animator animator;
+    private Rigidbody rigidbody;
 
     void Start ()
     {
@@ -27,26 +31,35 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.LogError("Missing animator!");
         }
+
+        rigidbody = GetComponent<Rigidbody>();
+        if (!rigidbody)
+        {
+            Debug.LogError("Missing rigidbody!");
+        }
+        rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
     }
 
     void Update()
     {
+        if (GetComponent<BasePlayer>().health > 0)
+        {
+            horizontal = Input.GetAxisRaw("Horizontal");
+            vertical = Input.GetAxisRaw("Vertical");
 
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
-
-        //Movement
-        movementVector = new Vector3(horizontal, 0f, vertical);
-        movementVector.Normalize();
-        movementVector = transform.TransformDirection(movementVector);
-        control.SimpleMove(movementVector * movementSpeed);
+            //Movement
+            movementVector = new Vector3(horizontal, 0f, vertical);
+            movementVector.Normalize();
+            movementVector = transform.TransformDirection(movementVector);
+            control.SimpleMove(movementVector * movementSpeed);
 
 
-        //Rotation
-        rotateVector = new Vector3(0f, Input.GetAxis("Mouse X") * rotateSpeed * Time.deltaTime, 0f);
-        transform.Rotate(rotateVector);
+            //Rotation
+            rotateVector = new Vector3(0f, Input.GetAxis("Mouse X") * rotateSpeed * Time.deltaTime, 0f);
+            transform.Rotate(rotateVector);
 
-        Animate(horizontal, vertical);
+            Animate(horizontal, vertical);
+        }
     }
 
     //Pohybove animacie
