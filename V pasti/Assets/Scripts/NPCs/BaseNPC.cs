@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using Mono.Data.Sqlite;
 using System.Data;
 using System.Collections;
@@ -9,6 +10,7 @@ public class BaseNPC : MonoBehaviour
     public int attackMin;
     public int attackMax;
     public int health;
+    public int healthMax;
     public int energy;
     public int armor;
 
@@ -28,7 +30,7 @@ public class BaseNPC : MonoBehaviour
         {
             //nacitanie premennych
             creatureName = reader.GetString(1);
-            health = reader.GetInt32(2);
+            healthMax = health = reader.GetInt32(2);
             energy = reader.GetInt32(3);
             armor = reader.GetInt32(4);
             attackMin = reader.GetInt32(5);
@@ -37,5 +39,6 @@ public class BaseNPC : MonoBehaviour
         reader.Close();
         command.Dispose();
         connection.Close();
+        transform.Find("HPFrame").transform.Find("HPBar").transform.Find("Text").GetComponent<Text>().text = health.ToString() + "/" + healthMax.ToString();
     }
 }

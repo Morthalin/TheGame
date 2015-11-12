@@ -12,7 +12,7 @@ public class LoadPlayer : MonoBehaviour
         player.LoadPlayer("Morth");
         baseNPC = GameObject.Find("Knight").GetComponent<BaseNPC>();
         baseNPC.LoadNPC("Knight");
-        GameObject.Find("knight").GetComponent<BaseNPC>().LoadNPC("Knight");
+        //GameObject.Find("knight").GetComponent<BaseNPC>().LoadNPC("Knight");
         //Cursor.visible = false;
     }
 }

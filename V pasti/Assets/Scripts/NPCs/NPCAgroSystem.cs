@@ -27,6 +27,7 @@ public class NPCAgroSystem : BaseNPC
     private float initDistance;
     private float targetDistance;
     private float timer;
+    private bool hitted;
 
     void Start ()
     {
@@ -37,6 +38,7 @@ public class NPCAgroSystem : BaseNPC
         deadNPC = false;
         deadPlayer = false;
         timer = 0f;
+        hitted = false;
 
         //Vyhladanie hraca
         if (GameObject.Find("Player"))
@@ -93,16 +95,20 @@ public class NPCAgroSystem : BaseNPC
             if (baseNPC.health <= 0 && !deadNPC)
             {
                 deadNPC = true;
-                animator.SetTrigger("death");
+                animator.SetTrigger("die");
+                animator.SetBool("death", true);
                 animator.SetBool("isCombat", false);
                 targetAnimator.SetBool("isCombat", false);
+                transform.Find("HPFrame").gameObject.SetActive(false);
             }
         }
         else if (targetScript.health <= 0 && !deadPlayer)
         {
+            //smrt hraca
             deadPlayer = true;
             goingHome = true;
-            targetAnimator.SetTrigger("death");
+            targetAnimator.SetTrigger("die");
+            targetAnimator.SetBool("death", true);
             animator.SetBool("isCombat", false);
             targetAnimator.SetBool("isCombat", false);
         }
@@ -144,6 +150,7 @@ public class NPCAgroSystem : BaseNPC
             {
                 //Beh ku hracovy
                 transform.LookAt(target.transform);
+                transform.Find("HPFrame").gameObject.SetActive(true);
                 movementVector = new Vector3(0f, 0f, 1f);
                 movementVector = transform.TransformDirection(movementVector);
 
@@ -178,11 +185,17 @@ public class NPCAgroSystem : BaseNPC
             if (timer > 0f)
             {
                 timer -= Time.deltaTime;
+                if(timer <= 1f && !hitted)
+                {
+                    hitted = true;
+                    targetAnimator.SetTrigger("damage");
+                }
             }
             else
             {
                 //perioda utoku
                 timer = 2f;
+                hitted = false;
                 targetScript.health -= Random.Range(baseNPC.attackMin, baseNPC.attackMax);
                 animator.SetTrigger("Attack1");
             }

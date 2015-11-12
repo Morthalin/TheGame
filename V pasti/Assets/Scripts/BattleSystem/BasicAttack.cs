@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 
@@ -52,6 +53,8 @@ public class BasicAttack : MonoBehaviour
                 if (!hitted)
                 {
                     hit.transform.gameObject.GetComponent<BaseNPC>().health -= DamageCalculation();
+                    hit.transform.gameObject.GetComponent<Animator>().SetTrigger("damage");
+                    HPBarChange(hit.transform.gameObject);
                     hitted = true;
                 }
             }
@@ -65,5 +68,13 @@ public class BasicAttack : MonoBehaviour
         //TODO chybajuci prepocet statou na damage
 
         return damage;
+    }
+
+    void HPBarChange(GameObject target)
+    {
+        float percentage = (float)target.GetComponent<BaseNPC>().health / (float)target.GetComponent<BaseNPC>().healthMax;
+
+        target.transform.Find("HPFrame").transform.Find("HPBar").GetComponent<Image>().fillAmount = percentage;
+        target.transform.Find("HPFrame").transform.Find("HPBar").transform.Find("Text").GetComponent<Text>().text = target.GetComponent<BaseNPC>().health.ToString() + "/" + target.GetComponent<BaseNPC>().healthMax.ToString();
     }
 }
