@@ -148,7 +148,7 @@ public class NPCAgroSystem : BaseNPC
                 targetAnimator.SetBool("isCombat", false);
                 transform.Find("HPFrame").gameObject.SetActive(false);
             }
-            else if (targetDistance < minAgro && targetDistance > 10f && !deadPlayer)
+            else if (targetDistance < minAgro && targetDistance > 20f && !deadPlayer)
             {
                 //Beh ku hracovy
                 transform.LookAt(target.transform);
@@ -170,7 +170,7 @@ public class NPCAgroSystem : BaseNPC
                 animator.SetBool("runningForward", false);
             }
 
-            if (targetDistance <= 15f && !deadPlayer)
+            if (targetDistance <= 25f && !deadPlayer)
             {
                 //Atack
                 Attack1();
