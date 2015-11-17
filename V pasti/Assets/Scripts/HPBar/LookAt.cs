@@ -3,11 +3,11 @@ using System.Collections;
 
 public class LookAt : MonoBehaviour
 {
-    public Transform camera;
+    public Transform cam;
 
 	void Start ()
     {
-	    if(!camera)
+	    if(!cam)
         {
             Debug.LogError("Missing target transform!");
         }
@@ -15,6 +15,6 @@ public class LookAt : MonoBehaviour
 	
 	void Update ()
     {
-        transform.LookAt(camera);
+        transform.LookAt(cam);
 	}
 }

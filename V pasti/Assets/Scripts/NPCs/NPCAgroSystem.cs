@@ -16,7 +16,7 @@ public class NPCAgroSystem : BaseNPC
     private BaseNPC baseNPC;
     private GameObject[] inRangeObjects;
     private CharacterController controller;
-    private Rigidbody rigidbody;
+    private Rigidbody rigid;
     private Animator animator;
     private Animator targetAnimator;
 
@@ -73,12 +73,12 @@ public class NPCAgroSystem : BaseNPC
             Debug.LogError("Missing animator!");
         }
 
-        rigidbody = GetComponent<Rigidbody>();
-        if(!rigidbody)
+        rigid = GetComponent<Rigidbody>();
+        if(!rigid)
         {
             Debug.LogError("Missing rigidbody!");
         }
-        rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+        rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 
         baseNPC = GetComponent<BaseNPC>();
         if (!baseNPC)
@@ -143,8 +143,10 @@ public class NPCAgroSystem : BaseNPC
             {
                 //Koniec Combatu
                 goingHome = true;
+                baseNPC.health = baseNPC.healthMax;
                 animator.SetBool("isCombat", false);
                 targetAnimator.SetBool("isCombat", false);
+                transform.Find("HPFrame").gameObject.SetActive(false);
             }
             else if (targetDistance < minAgro && targetDistance > 10f && !deadPlayer)
             {
@@ -196,7 +198,9 @@ public class NPCAgroSystem : BaseNPC
                 //perioda utoku
                 timer = 2f;
                 hitted = false;
-                targetScript.health -= Random.Range(baseNPC.attackMin, baseNPC.attackMax);
+                int damage = (Random.Range(baseNPC.attackMin, baseNPC.attackMax) - targetScript.armor);
+                if(damage > 0)
+                    targetScript.health -= damage;
                 animator.SetTrigger("Attack1");
             }
         }

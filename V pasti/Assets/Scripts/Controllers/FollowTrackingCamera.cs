@@ -4,87 +4,56 @@ using System.Collections;
 public class FollowTrackingCamera : MonoBehaviour
 {
     public Transform target;
-    
-    public float height = 20f;
-    public float distance = 20f;
+    public float distanceWanted = 20f;
     public float minZoom = 0f;
     public float maxZoom = 30f;
-    public float minHeight = -2f;
-    public float maxHeight = 15f;
-    public float rotateSpeedX = 1f;
-    public float rotateSpeedY = 100f;
-    public bool doRotate;
-    public bool doZoom;
     public float zoomStep = 15f;
     public float zoomSpeed = 5f;
-    private float heightWanted;
-    private float distanceWanted;
+    private float distance;
 
     private Vector3 zoomResult;
-    private Quaternion rotationResult;
     private Vector3 targetAdjustedPosition;
+    private Transform cameraCollider;
 
     void Start()
     {
-        heightWanted = height;
-        distanceWanted = distance;
-        zoomResult = new Vector3(0f, height, -distance);
-    }
-
-    void LateUpdate()
-    {
+        distance = distanceWanted;
         if (!target)
         {
             Debug.LogError("Nie je nastaveny target kamery.");
-            return;
         }
 
-        // Zoom a posun po Y ose
-        if (doZoom)
+        cameraCollider = transform.parent.Find("Camera Collider");
+        if(!cameraCollider)
+        {
+            Debug.LogError("Nie je nastaveny Camera Collider");
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (!GameObject.Find("Player").GetComponent<BasePlayer>().pause)
         {
             // Nacitanie polohy mysky
-            heightWanted -= Input.GetAxis("Mouse Y") * rotateSpeedY * 0.01f;
             distanceWanted -= Input.GetAxis("Mouse ScrollWheel") * zoomStep;
 
             // Orezanie na limit
-            
-            heightWanted = Mathf.Clamp(heightWanted, minHeight, maxHeight);
+
             distanceWanted = Mathf.Clamp(distanceWanted, minZoom, maxZoom);
-            height = Mathf.Lerp(height, heightWanted, Time.deltaTime * zoomSpeed);
+            cameraCollider.localPosition = new Vector3(0f, 0f, -distanceWanted);
             distance = Mathf.Lerp(distance, distanceWanted, Time.deltaTime * zoomSpeed);
 
             // Zoom na kolizii
             RaycastHit hit;
             int layerMask = 1 << 8;
-            if (Physics.Linecast(target.position, transform.position, out hit, layerMask))
+            if (Physics.Linecast(target.position, cameraCollider.position, out hit, layerMask))
             {
-                zoomResult = new Vector3(0f, height, -(hit.distance));
+                distance = hit.distance;
             }
-            else
-            {
-                zoomResult = new Vector3(0f, height, -distance);
-            }
+            zoomResult = new Vector3(0f, 0f, -distance);
+            
+            // Nastavenie posunu
+            transform.localPosition = zoomResult;
         }
-
-        // Rotacia po X
-        if (doRotate)
-        {
-            float currentRotationAngle = transform.eulerAngles.y;
-            float wantedRotationAngle = target.eulerAngles.y;
-
-            // Zjemnenie rotacie
-            currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, rotateSpeedX * Time.deltaTime);
-
-            // Poslanie vysledku
-            rotationResult = Quaternion.Euler(0f, currentRotationAngle, 0f);
-        }
-
-        // Nastavenie posunu
-        targetAdjustedPosition = rotationResult * zoomResult;
-        transform.position = target.position + targetAdjustedPosition;
-        
-        
-        // Pohlad na target
-        transform.LookAt(target);
     }
 }

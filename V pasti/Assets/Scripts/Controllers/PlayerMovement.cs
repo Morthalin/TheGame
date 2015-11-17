@@ -6,8 +6,10 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float movementSpeed = 8;
-    public float rotateSpeed = 90;
+    public float movementSpeed = 8f;
+    public float rotateSpeed = 90f;
+    public float minX = 350f;
+    public float maxX = 70f;
     private Vector3 movementVector;
     private Vector3 rotateVector;
     private float horizontal;
@@ -15,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController control;
     private Animator animator;
-    private Rigidbody rigidbody;
+    private Rigidbody rigid;
 
     void Start ()
     {
@@ -32,17 +34,17 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("Missing animator!");
         }
 
-        rigidbody = GetComponent<Rigidbody>();
-        if (!rigidbody)
+        rigid = GetComponent<Rigidbody>();
+        if (!rigid)
         {
             Debug.LogError("Missing rigidbody!");
         }
-        rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+        rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
     }
 
     void Update()
     {
-        if (GetComponent<BasePlayer>().health > 0)
+        if (GetComponent<BasePlayer>().health > 0 && !GetComponent<BasePlayer>().pause)
         {
             horizontal = Input.GetAxisRaw("Horizontal");
             vertical = Input.GetAxisRaw("Vertical");
@@ -57,6 +59,17 @@ public class PlayerMovement : MonoBehaviour
             //Rotation
             rotateVector = new Vector3(0f, Input.GetAxis("Mouse X") * rotateSpeed * Time.deltaTime, 0f);
             transform.Rotate(rotateVector);
+            rotateVector = new Vector3(-(Input.GetAxis("Mouse Y") * rotateSpeed * Time.deltaTime), 0f, 0f);
+
+            float actualAngle = transform.Find("Camera Target").rotation.eulerAngles.x;
+            float newAngle = actualAngle - (Input.GetAxis("Mouse Y") * rotateSpeed * Time.deltaTime);
+            if(newAngle > 180)
+            {
+                newAngle -= 360;
+            }
+
+            if (newAngle > minX && newAngle < maxX)
+                transform.Find("Camera Target").Rotate(rotateVector);
 
             Animate(horizontal, vertical);
         }

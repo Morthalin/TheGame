@@ -9,6 +9,7 @@ public class BasicAttack : MonoBehaviour
     private float timer;
     private BasePlayer basePlayer;
     private bool hitted;
+    private bool attacking;
 
     void Start ()
     {
@@ -36,6 +37,8 @@ public class BasicAttack : MonoBehaviour
 
             if (timer > 0f)
             {
+                if (timer < 0.5f)
+                    attacking = false;
                 timer -= Time.deltaTime;
             }
             else
@@ -43,6 +46,7 @@ public class BasicAttack : MonoBehaviour
                 if (Input.GetMouseButton(0))
                 {
                     animator.SetTrigger("Attack1");
+                    attacking = true;
                     hitted = false;
                     timer = 1.5f;
                 }
@@ -50,9 +54,9 @@ public class BasicAttack : MonoBehaviour
             int layerMask = 1 << 9;
             if (Physics.Linecast(transform.position, transform.parent.position, out hit, layerMask))
             {
-                if (!hitted)
+                if (!hitted && attacking)
                 {
-                    hit.transform.gameObject.GetComponent<BaseNPC>().health -= DamageCalculation();
+                    hit.transform.gameObject.GetComponent<BaseNPC>().health -= DamageCalculation(GameObject.Find("Player").GetComponent<BasePlayer>(), hit.transform.gameObject.GetComponent<BaseNPC>());
                     hit.transform.gameObject.GetComponent<Animator>().SetTrigger("damage");
                     HPBarChange(hit.transform.gameObject);
                     hitted = true;
@@ -61,12 +65,14 @@ public class BasicAttack : MonoBehaviour
         }
     }
 
-    int DamageCalculation ()
+    int DamageCalculation (BasePlayer player, BaseNPC target)
     {
-        int damage = 100;
+        int damage = (player.strength * 5) + Random.Range(player.minAttack, player.maxAttack);
+        int armor = target.armor - (player.agility * 5);
 
-        //TODO chybajuci prepocet statou na damage
-
+        damage -= armor;
+        if (damage <= 0)
+            damage = 0;
         return damage;
     }
 
