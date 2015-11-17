@@ -78,7 +78,7 @@ public class NPCAgroSystem : BaseNPC
         {
             Debug.LogError("Missing rigidbody!");
         }
-        rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+        rigid.constraints = RigidbodyConstraints.FreezeAll;
 
         baseNPC = GetComponent<BaseNPC>();
         if (!baseNPC)

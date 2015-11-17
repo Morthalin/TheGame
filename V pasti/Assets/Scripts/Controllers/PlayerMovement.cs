@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.LogError("Missing rigidbody!");
         }
-        rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+        rigid.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     void FixedUpdate()

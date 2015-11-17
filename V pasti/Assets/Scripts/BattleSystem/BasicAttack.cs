@@ -54,7 +54,6 @@ public class BasicAttack : MonoBehaviour
             int layerMask = 1 << 9;
             if (Physics.Linecast(transform.position, transform.parent.parent.parent.parent.parent.parent.parent.position, out hit, layerMask))
             {
-                Debug.Log(hit.transform.name);
                 if (!hitted && attacking)
                 {
                     hit.transform.gameObject.GetComponent<BaseNPC>().health -= DamageCalculation(GameObject.Find("Player").GetComponent<BasePlayer>(), hit.transform.gameObject.GetComponent<BaseNPC>());
