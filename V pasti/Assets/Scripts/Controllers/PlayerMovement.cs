@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (GetComponent<BasePlayer>().health > 0 && !GetComponent<BasePlayer>().pause)
         {

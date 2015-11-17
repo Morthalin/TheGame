@@ -87,7 +87,7 @@ public class NPCAgroSystem : BaseNPC
         }
     }
 	
-	void LateUpdate ()
+	void FixedUpdate ()
     {
         if (baseNPC.health <= 0)
         {

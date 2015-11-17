@@ -13,7 +13,7 @@ public class LookAt : MonoBehaviour
         }
 	}
 	
-	void Update ()
+	void FixedUpdate ()
     {
         transform.LookAt(cam);
 	}
