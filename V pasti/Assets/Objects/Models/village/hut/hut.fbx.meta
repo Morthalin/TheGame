@@ -6,11 +6,20 @@ ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: collider
+    100004: hut
     400000: //RootNode
+    400002: collider
+    400004: hut
     2300000: //RootNode
+    2300002: collider
+    2300004: hut
     3300000: //RootNode
+    3300002: collider
+    3300004: hut
     4300000: Circle
     4300002: hut
+    4300004: collider
   materials:
     importMaterials: 1
     materialName: 0
