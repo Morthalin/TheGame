@@ -13,6 +13,7 @@ public class BaseNPC : MonoBehaviour
     public int healthMax;
     public int energy;
     public int armor;
+    public bool hitted;
 
     public void LoadNPC(string name)
     {
@@ -35,6 +36,7 @@ public class BaseNPC : MonoBehaviour
             armor = reader.GetInt32(4);
             attackMin = reader.GetInt32(5);
             attackMax = reader.GetInt32(6);
+            hitted = false;
         }
         reader.Close();
         command.Dispose();

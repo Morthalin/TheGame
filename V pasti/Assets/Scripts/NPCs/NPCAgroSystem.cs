@@ -4,7 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody))]
-public class NPCAgroSystem : BaseNPC
+public class NPCAgroSystem : MonoBehaviour
 {
     public float speed = 8;
     public float minAgro = 800;
@@ -87,7 +87,7 @@ public class NPCAgroSystem : BaseNPC
         }
     }
 	
-	void FixedUpdate ()
+	void LateUpdate ()
     {
         if (baseNPC.health <= 0)
         {
@@ -148,7 +148,7 @@ public class NPCAgroSystem : BaseNPC
                 targetAnimator.SetBool("isCombat", false);
                 transform.Find("HPFrame").gameObject.SetActive(false);
             }
-            else if (targetDistance < minAgro && targetDistance > 20f && !deadPlayer)
+            else if (targetDistance < minAgro && targetDistance > 10f && !deadPlayer)
             {
                 //Beh ku hracovy
                 transform.LookAt(target.transform);
@@ -170,7 +170,7 @@ public class NPCAgroSystem : BaseNPC
                 animator.SetBool("runningForward", false);
             }
 
-            if (targetDistance <= 25f && !deadPlayer)
+            if (targetDistance <= 15f && !deadPlayer)
             {
                 //Atack
                 Attack1();
@@ -196,9 +196,9 @@ public class NPCAgroSystem : BaseNPC
             else
             {
                 //perioda utoku
-                timer = 2f;
+                timer = 3f;
                 hitted = false;
-                int damage = (Random.Range(baseNPC.attackMin, baseNPC.attackMax) - targetScript.armor);
+                int damage = (Random.Range(baseNPC.attackMin, baseNPC.attackMax) - targetScript.activeArmor);
                 if(damage > 0)
                     targetScript.health -= damage;
                 animator.SetTrigger("Attack1");

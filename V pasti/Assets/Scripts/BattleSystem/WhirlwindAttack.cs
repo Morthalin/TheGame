@@ -1,19 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System.Collections.Generic;
 
-
-public class BasicAttack : MonoBehaviour
+public class WhirlwindAttack : MonoBehaviour
 {
     private Animator animator;
     private float timer;
     private BasePlayer basePlayer;
-    private bool hitted;
+    private List<BaseNPC> targets;
 
-    void Start ()
+    void Start()
     {
         animator = GameObject.Find("Player").GetComponent<Animator>();
-        if(!animator)
+        if (!animator)
         {
             Debug.LogError("Missing animator!");
         }
@@ -25,10 +24,10 @@ public class BasicAttack : MonoBehaviour
         }
 
         timer = 0f;
-        hitted = false;
-	}
-	
-	void Update ()
+        targets = new List<BaseNPC>();
+}
+
+void Update ()
     {
         if (basePlayer.health > 0)
         {
@@ -36,7 +35,7 @@ public class BasicAttack : MonoBehaviour
 
             if (timer > 0f)
             {
-                if (timer < 0.5f)
+                if (timer < 3f)
                 {
                     basePlayer.attacking = false;
                     basePlayer.activeArmor = basePlayer.armor;
@@ -45,32 +44,34 @@ public class BasicAttack : MonoBehaviour
             }
             else
             {
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButton(1))
                 {
-                    animator.SetTrigger("Attack1");
+                    animator.SetTrigger("Attack2");
                     basePlayer.attacking = true;
                     basePlayer.activeArmor /= 2;
-                    hitted = false;
-                    timer = 1.5f;
+                    ResetHitted(targets);
+                    targets.Clear();
+                    timer = 4f;
                 }
             }
             int layerMask = 1 << 9;
             if (Physics.Linecast(transform.position, transform.parent.parent.parent.parent.parent.parent.parent.position, out hit, layerMask))
             {
-                if (!hitted && basePlayer.attacking)
+                if (!hit.transform.gameObject.GetComponent<BaseNPC>().hitted && basePlayer.attacking)
                 {
                     hit.transform.gameObject.GetComponent<BaseNPC>().health -= DamageCalculation(GameObject.Find("Player").GetComponent<BasePlayer>(), hit.transform.gameObject.GetComponent<BaseNPC>());
                     hit.transform.gameObject.GetComponent<Animator>().SetTrigger("damage");
                     //HPBarChange(hit.transform.gameObject);
-                    hitted = true;
+                    hit.transform.gameObject.GetComponent<BaseNPC>().hitted = true;
+                    targets.Add(hit.transform.gameObject.GetComponent<BaseNPC>());
                 }
             }
         }
     }
 
-    int DamageCalculation (BasePlayer player, BaseNPC target)
+    int DamageCalculation(BasePlayer player, BaseNPC target)
     {
-        int damage = (player.strength * 5) + Random.Range(player.minAttack, player.maxAttack);
+        int damage = (player.strength * 5) + Random.Range(player.minAttack, player.maxAttack) * 2;
         int armor = target.armor - (player.agility * 5);
 
         damage -= armor;
@@ -86,4 +87,12 @@ public class BasicAttack : MonoBehaviour
     //    target.transform.Find("HPFrame").transform.Find("HPBar").GetComponent<Image>().fillAmount = percentage;
     //    target.transform.Find("HPFrame").transform.Find("HPBar").transform.Find("Text").GetComponent<Text>().text = target.GetComponent<BaseNPC>().health.ToString() + "/" + target.GetComponent<BaseNPC>().healthMax.ToString();
     //}
+
+    void ResetHitted (List<BaseNPC> targets)
+    {
+        for(int i = 0; i < targets.Count; i++)
+        {
+            targets[i].hitted = false;
+        }
+    }
 }

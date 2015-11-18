@@ -30,9 +30,9 @@ public class Loot : MonoBehaviour {
 		inventory = new Inventory (1);
 		inventory.itemsID.Add (2);
 		Vector3 pos = gameObject.transform.position;
-		Debug.Log ("Ahoj nastartovala se Loot.cs " + pos.ToString());
+		//Debug.Log ("Ahoj nastartovala se Loot.cs " + pos.ToString());
 		Vector3 v = new Vector3 (3, 3, 3);
-		Debug.Log ("Distance is " + v.sqrMagnitude );
+		//Debug.Log ("Distance is " + v.sqrMagnitude );
 
 		presseText = GameObject.Find ("Canvas").transform.Find ("PressE").GetComponent<Text> ();
 		if (presseText == null) {

@@ -15,9 +15,12 @@ public class BasePlayer: MonoBehaviour
     public int agility;
     public int stamina;
     public int health;
+    public int healthMax;
     public int energy;
     public int armor;
+    public int activeArmor;
     public bool pause;
+    public bool attacking;
     private string character;
 
     public void LoadPlayer (string player)
@@ -56,10 +59,13 @@ public class BasePlayer: MonoBehaviour
             agility = reader.GetInt32(6);
             stamina = reader.GetInt32(7);
             health = stamina * 100;
+            healthMax = health;
             energy = reader.GetInt32(8);
             armor = reader.GetInt32(9);
+            activeArmor = armor;
             minAttack = reader.GetInt32(10);
             maxAttack = reader.GetInt32(11);
+            attacking = false;
         }
         reader.Close();
         command.Dispose();
