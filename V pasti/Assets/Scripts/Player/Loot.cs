@@ -70,7 +70,7 @@ public class Loot : MonoBehaviour {
 			{
 				if( !showPressE )
 				{
-					Debug.Log ("[E] prohledat mrtvolu.");
+					//Debug.Log ("[E] prohledat mrtvolu.");
 					showPressE = true;
 					showPresse(true);
 				}
@@ -195,7 +195,7 @@ public class Loot : MonoBehaviour {
 		connection = new SqliteConnection(path);
 		connection.Open();
 
-		Debug.Log (query);
+		//Debug.Log (query);
 		SqliteCommand command = new SqliteCommand (query, connection);
 		SqliteDataReader reader = command.ExecuteReader ();
 		
@@ -216,7 +216,7 @@ public class Loot : MonoBehaviour {
 			loadedItems.Add(itsdesc);
 
 		}
-		Debug.Log (gain);
+		//Debug.Log (gain);
 				
 		reader.Close ();
 		command.Dispose();
