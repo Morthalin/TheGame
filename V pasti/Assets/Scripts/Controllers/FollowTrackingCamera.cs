@@ -54,6 +54,7 @@ public class FollowTrackingCamera : MonoBehaviour
             
             // Nastavenie posunu
             transform.localPosition = zoomResult;
+            //transform.LookAt(target);
         }
     }
 }

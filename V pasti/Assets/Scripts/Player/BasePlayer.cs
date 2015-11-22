@@ -23,6 +23,18 @@ public class BasePlayer: MonoBehaviour
     public bool attacking;
     private string character;
 
+    void Update()
+    {
+        if(pause)
+        {
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.visible = false;
+        }
+    }
+
     public void LoadPlayer (string player)
     {
         LoadStats(player);

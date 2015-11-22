@@ -30,7 +30,7 @@ public class BasicAttack : MonoBehaviour
 	
 	void Update ()
     {
-        if (basePlayer.health > 0)
+        if (basePlayer.health > 0 && !basePlayer.pause)
         {
             RaycastHit hit;
 

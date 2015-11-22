@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         rigid.constraints = RigidbodyConstraints.FreezeAll;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (GetComponent<BasePlayer>().health > 0 && !GetComponent<BasePlayer>().pause)
         {
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
             float actualAngle = transform.Find("Camera Target").rotation.eulerAngles.x;
             float newAngle = actualAngle - (Input.GetAxis("Mouse Y") * rotateSpeed * Time.deltaTime);
-            if(newAngle > 180)
+            if (newAngle > 180)
             {
                 newAngle -= 360;
             }
@@ -72,6 +72,10 @@ public class PlayerMovement : MonoBehaviour
                 transform.Find("Camera Target").Rotate(rotateVector);
 
             Animate(horizontal, vertical);
+        }
+        else if(GetComponent<BasePlayer>().pause)
+        {
+            Animate(0f, 0f);
         }
     }
 

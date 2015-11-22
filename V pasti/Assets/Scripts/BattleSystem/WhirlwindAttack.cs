@@ -25,11 +25,11 @@ public class WhirlwindAttack : MonoBehaviour
 
         timer = 0f;
         targets = new List<BaseNPC>();
-}
+    }
 
-void Update ()
+    void Update ()
     {
-        if (basePlayer.health > 0)
+        if (basePlayer.health > 0 && !basePlayer.pause)
         {
             RaycastHit hit;
 
@@ -79,14 +79,6 @@ void Update ()
             damage = 0;
         return damage;
     }
-
-    //void HPBarChange(GameObject target)
-    //{
-    //    float percentage = (float)target.GetComponent<BaseNPC>().health / (float)target.GetComponent<BaseNPC>().healthMax;
-
-    //    target.transform.Find("HPFrame").transform.Find("HPBar").GetComponent<Image>().fillAmount = percentage;
-    //    target.transform.Find("HPFrame").transform.Find("HPBar").transform.Find("Text").GetComponent<Text>().text = target.GetComponent<BaseNPC>().health.ToString() + "/" + target.GetComponent<BaseNPC>().healthMax.ToString();
-    //}
 
     void ResetHitted (List<BaseNPC> targets)
     {
