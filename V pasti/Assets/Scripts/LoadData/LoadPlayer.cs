@@ -10,8 +10,9 @@ public class LoadPlayer : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<BasePlayer>();
         player.LoadPlayer("Morth");
-        baseNPC = GameObject.Find("Knight").GetComponent<BaseNPC>();
-        baseNPC.LoadNPC("Knight");
+        //baseNPC = GameObject.Find("Knight").GetComponent<BaseNPC>();
+        //baseNPC.LoadNPC("Knight");
+        //GameObject.Find("Goblin").GetComponent<BaseNPC>().LoadNPC("Goblin");
     }
 
     void Update()

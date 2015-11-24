@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (GetComponent<BasePlayer>().health > 0 && !GetComponent<BasePlayer>().pause)
+        if (GetComponent<BasePlayer>().health > 0 && !GetComponent<BasePlayer>().pause && !GetComponent<BasePlayer>().attacking)
         {
             horizontal = Input.GetAxisRaw("Horizontal");
             vertical = Input.GetAxisRaw("Vertical");
@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
 
             Animate(horizontal, vertical);
         }
-        else if(GetComponent<BasePlayer>().pause)
+        else if(GetComponent<BasePlayer>().pause || GetComponent<BasePlayer>().attacking)
         {
             Animate(0f, 0f);
         }
@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            animator.SetInteger("idleState", Random.Range(1, 30));
+            animator.SetInteger("idleState", Random.Range(1, 40));
             animator.SetBool("isRunning", false);
             animator.SetBool("runningForward", false);
             animator.SetBool("runningBack", false);

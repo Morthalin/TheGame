@@ -14,6 +14,18 @@ public class BaseNPC : MonoBehaviour
     public int energy;
     public int armor;
     public bool hitted;
+    private Animator animator;
+
+    void Awake()
+    {
+        animator = transform.GetComponent<Animator>();
+        LoadNPC(creatureName);
+    }
+
+    void Update()
+    {
+        animator.SetInteger("idleState", Random.Range(1, 40));
+    }
 
     public void LoadNPC(string name)
     {

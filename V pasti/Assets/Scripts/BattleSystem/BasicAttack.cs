@@ -9,6 +9,7 @@ public class BasicAttack : MonoBehaviour
     private float timer;
     private BasePlayer basePlayer;
     private bool hitted;
+    private bool attacking;
 
     void Start ()
     {
@@ -25,20 +26,34 @@ public class BasicAttack : MonoBehaviour
         }
 
         timer = 0f;
-        hitted = false;
-	}
-	
-	void Update ()
-    {
-        if (basePlayer.health > 0 && !basePlayer.pause)
-        {
-            RaycastHit hit;
+        hitted = true;
+        attacking = false;
+    }
 
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.layer == 9)
+        {
+            if (!hitted && basePlayer.attacking)
+            {
+                collider.gameObject.GetComponent<BaseNPC>().health -= DamageCalculation(GameObject.Find("Player").GetComponent<BasePlayer>(), collider.gameObject.GetComponent<BaseNPC>());
+                collider.gameObject.GetComponent<Animator>().SetTrigger("damage");
+                //HPBarChange(hit.transform.gameObject);
+                hitted = true;
+            }
+        }
+    }
+
+    void Update ()
+    {
+        if (basePlayer.health > 0 && !basePlayer.pause && !(basePlayer.attacking && !attacking))
+        {
             if (timer > 0f)
             {
-                if (timer < 0.5f)
+                if (timer < 0.2f && basePlayer.attacking)
                 {
                     basePlayer.attacking = false;
+                    attacking = false;
                     basePlayer.activeArmor = basePlayer.armor;
                 }
                 timer -= Time.deltaTime;
@@ -49,20 +64,10 @@ public class BasicAttack : MonoBehaviour
                 {
                     animator.SetTrigger("Attack1");
                     basePlayer.attacking = true;
+                    attacking = true;
                     basePlayer.activeArmor /= 2;
                     hitted = false;
                     timer = 1.5f;
-                }
-            }
-            int layerMask = 1 << 9;
-            if (Physics.Linecast(transform.position, transform.parent.parent.parent.parent.parent.parent.parent.position, out hit, layerMask))
-            {
-                if (!hitted && basePlayer.attacking)
-                {
-                    hit.transform.gameObject.GetComponent<BaseNPC>().health -= DamageCalculation(GameObject.Find("Player").GetComponent<BasePlayer>(), hit.transform.gameObject.GetComponent<BaseNPC>());
-                    hit.transform.gameObject.GetComponent<Animator>().SetTrigger("damage");
-                    //HPBarChange(hit.transform.gameObject);
-                    hitted = true;
                 }
             }
         }
@@ -78,12 +83,4 @@ public class BasicAttack : MonoBehaviour
             damage = 0;
         return damage;
     }
-
-    //void HPBarChange(GameObject target)
-    //{
-    //    float percentage = (float)target.GetComponent<BaseNPC>().health / (float)target.GetComponent<BaseNPC>().healthMax;
-
-    //    target.transform.Find("HPFrame").transform.Find("HPBar").GetComponent<Image>().fillAmount = percentage;
-    //    target.transform.Find("HPFrame").transform.Find("HPBar").transform.Find("Text").GetComponent<Text>().text = target.GetComponent<BaseNPC>().health.ToString() + "/" + target.GetComponent<BaseNPC>().healthMax.ToString();
-    //}
 }

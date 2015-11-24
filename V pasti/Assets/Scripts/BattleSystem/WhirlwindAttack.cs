@@ -8,6 +8,7 @@ public class WhirlwindAttack : MonoBehaviour
     private float timer;
     private BasePlayer basePlayer;
     private List<BaseNPC> targets;
+    private bool attacking;
 
     void Start()
     {
@@ -25,19 +26,33 @@ public class WhirlwindAttack : MonoBehaviour
 
         timer = 0f;
         targets = new List<BaseNPC>();
+        attacking = false;
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.layer == 9)
+        {
+            if (!collider.gameObject.GetComponent<BaseNPC>().hitted && basePlayer.attacking)
+            {
+                collider.gameObject.GetComponent<BaseNPC>().health -= DamageCalculation(GameObject.Find("Player").GetComponent<BasePlayer>(), collider.transform.gameObject.GetComponent<BaseNPC>());
+                collider.gameObject.GetComponent<Animator>().SetTrigger("damage");
+                collider.gameObject.GetComponent<BaseNPC>().hitted = true;
+                targets.Add(collider.gameObject.GetComponent<BaseNPC>());
+            }
+        }
     }
 
     void Update ()
     {
-        if (basePlayer.health > 0 && !basePlayer.pause)
+        if (basePlayer.health > 0 && !basePlayer.pause && !(basePlayer.attacking && !attacking))
         {
-            RaycastHit hit;
-
             if (timer > 0f)
             {
-                if (timer < 3f)
+                if (timer < 2.7f && basePlayer.attacking)
                 {
                     basePlayer.attacking = false;
+                    attacking = false;
                     basePlayer.activeArmor = basePlayer.armor;
                 }
                 timer -= Time.deltaTime;
@@ -48,22 +63,11 @@ public class WhirlwindAttack : MonoBehaviour
                 {
                     animator.SetTrigger("Attack2");
                     basePlayer.attacking = true;
+                    attacking = true;
                     basePlayer.activeArmor /= 2;
                     ResetHitted(targets);
                     targets.Clear();
-                    timer = 4f;
-                }
-            }
-            int layerMask = 1 << 9;
-            if (Physics.Linecast(transform.position, transform.parent.parent.parent.parent.parent.parent.parent.position, out hit, layerMask))
-            {
-                if (!hit.transform.gameObject.GetComponent<BaseNPC>().hitted && basePlayer.attacking)
-                {
-                    hit.transform.gameObject.GetComponent<BaseNPC>().health -= DamageCalculation(GameObject.Find("Player").GetComponent<BasePlayer>(), hit.transform.gameObject.GetComponent<BaseNPC>());
-                    hit.transform.gameObject.GetComponent<Animator>().SetTrigger("damage");
-                    //HPBarChange(hit.transform.gameObject);
-                    hit.transform.gameObject.GetComponent<BaseNPC>().hitted = true;
-                    targets.Add(hit.transform.gameObject.GetComponent<BaseNPC>());
+                    timer = 5f;
                 }
             }
         }
