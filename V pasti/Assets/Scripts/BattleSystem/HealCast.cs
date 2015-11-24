@@ -5,6 +5,8 @@ public class HealCast : MonoBehaviour
 {
     public GameObject particle;
     private GameObject localParticle;
+    public GameObject krigel;
+    private GameObject localKrigel;
     private Animator animator;
     private float timer;
     private BasePlayer basePlayer;
@@ -29,6 +31,11 @@ public class HealCast : MonoBehaviour
             Debug.LogError("Missing particle system!");
         }
 
+        if(!krigel)
+        {
+            Debug.LogError("Missing efect object!");
+        }
+
         timer = 0f;
         healing = false;
     }
@@ -38,13 +45,14 @@ public class HealCast : MonoBehaviour
         if (localParticle && !localParticle.GetComponent<ParticleSystem>().IsAlive())
         {
             Destroy(localParticle);
+            Destroy(localKrigel);
         }
 
         if (basePlayer.health > 0 && !basePlayer.pause && !(basePlayer.attacking && !healing))
         {
             if (timer > 0f)
             {
-                if (timer < 6.7f && basePlayer.attacking)
+                if (timer < 2.5f && basePlayer.attacking)
                 {
                     if (basePlayer.healthMax < basePlayer.health + HealCalculation(basePlayer))
                     {
@@ -54,8 +62,14 @@ public class HealCast : MonoBehaviour
                     {
                         basePlayer.health += HealCalculation(basePlayer);
                     }
-                    
-                    localParticle = (GameObject)Instantiate(particle, GameObject.Find("Player").transform.position + new Vector3(0f, 8f, 0f), GameObject.Find("Player").transform.rotation);
+
+                    Vector3 eAngle = new Vector3(180f, 0f, 90f) + GameObject.Find("Player").transform.rotation.eulerAngles;
+                    Quaternion rot = Quaternion.Euler(eAngle);
+                    localKrigel = (GameObject)Instantiate(krigel, GameObject.Find("Player").transform.position + new Vector3(-3.25f, 8f, -3.25f), rot);
+                    localKrigel.transform.SetParent(GameObject.Find("Player").transform);
+                    eAngle = new Vector3(0f, 270f, 0f) + GameObject.Find("Player").transform.rotation.eulerAngles;
+                    rot = Quaternion.Euler(eAngle);
+                    localParticle = (GameObject)Instantiate(particle, GameObject.Find("Player").transform.position + new Vector3(-2.25f, 8f, -2.25f), rot);
                     localParticle.transform.SetParent(GameObject.Find("Player").transform);
                     basePlayer.attacking = false;
                     healing = false;
@@ -71,7 +85,7 @@ public class HealCast : MonoBehaviour
                     basePlayer.attacking = true;
                     healing = true;
                     basePlayer.activeArmor /= 2;
-                    timer = 10f;
+                    timer = 5f;
                 }
             }
         }
