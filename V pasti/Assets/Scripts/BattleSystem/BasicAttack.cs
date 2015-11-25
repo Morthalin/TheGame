@@ -10,6 +10,8 @@ public class BasicAttack : MonoBehaviour
     private BasePlayer basePlayer;
     private bool hitted;
     private bool attacking;
+    private AudioSource audioSource;
+    public AudioClip[] clip;
 
     void Start ()
     {
@@ -23,6 +25,17 @@ public class BasicAttack : MonoBehaviour
         if (!basePlayer)
         {
             Debug.LogError("Missing BasePlayer script!");
+        }
+
+        audioSource = GameObject.Find("Player").GetComponent<AudioSource>();
+        if (!audioSource)
+        {
+            Debug.LogError("Missing audio source!");
+        }
+
+        if (clip.Length == 0)
+        {
+            Debug.LogError("0 sounds for attacking!");
         }
 
         timer = 0f;
@@ -50,7 +63,7 @@ public class BasicAttack : MonoBehaviour
         {
             if (timer > 0f)
             {
-                if (timer < 0.2f && basePlayer.attacking)
+                if (timer < 0.5f && basePlayer.attacking)
                 {
                     basePlayer.attacking = false;
                     attacking = false;
@@ -63,11 +76,16 @@ public class BasicAttack : MonoBehaviour
                 if (Input.GetMouseButton(0))
                 {
                     animator.SetTrigger("Attack1");
+                    audioSource.clip = clip[Random.Range(0, clip.Length)];
+                    audioSource.volume = Random.Range(0.5f, 1f);
+                    audioSource.pitch = 0.7f;
+                    audioSource.PlayDelayed(0.5f);
+
                     basePlayer.attacking = true;
                     attacking = true;
                     basePlayer.activeArmor /= 2;
                     hitted = false;
-                    timer = 1.5f;
+                    timer = 2f;
                 }
             }
         }

@@ -9,6 +9,8 @@ public class WhirlwindAttack : MonoBehaviour
     private BasePlayer basePlayer;
     private List<BaseNPC> targets;
     private bool attacking;
+    private AudioSource audioSource;
+    public AudioClip[] clip;
 
     void Start()
     {
@@ -22,6 +24,17 @@ public class WhirlwindAttack : MonoBehaviour
         if (!basePlayer)
         {
             Debug.LogError("Missing BasePlayer script!");
+        }
+
+        audioSource = GameObject.Find("Player").GetComponent<AudioSource>();
+        if (!audioSource)
+        {
+            Debug.LogError("Missing audio source!");
+        }
+
+        if (clip.Length == 0)
+        {
+            Debug.LogError("0 sounds for attacking!");
         }
 
         timer = 0f;
@@ -49,7 +62,7 @@ public class WhirlwindAttack : MonoBehaviour
         {
             if (timer > 0f)
             {
-                if (timer < 2.7f && basePlayer.attacking)
+                if (timer < 3f && basePlayer.attacking)
                 {
                     basePlayer.attacking = false;
                     attacking = false;
@@ -61,13 +74,17 @@ public class WhirlwindAttack : MonoBehaviour
             {
                 if (Input.GetMouseButton(1))
                 {
+                    audioSource.clip = clip[Random.Range(0, clip.Length)];
+                    audioSource.volume = Random.Range(0.5f, 1f);
+                    audioSource.pitch = 1f;
+                    audioSource.PlayDelayed(0.7f);
                     animator.SetTrigger("Attack2");
                     basePlayer.attacking = true;
                     attacking = true;
                     basePlayer.activeArmor /= 2;
                     ResetHitted(targets);
                     targets.Clear();
-                    timer = 5f;
+                    timer = 4f;
                 }
             }
         }

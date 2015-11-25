@@ -4,6 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(AudioSource))]
 public class PlayerMovement : MonoBehaviour
 {
     public float movementSpeed = 8f;
@@ -18,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController control;
     private Animator animator;
     private Rigidbody rigid;
+    private AudioSource audioSource;
+    public AudioClip[] clip;
 
     void Start ()
     {
@@ -40,6 +43,17 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("Missing rigidbody!");
         }
         rigid.constraints = RigidbodyConstraints.FreezeAll;
+
+        audioSource = GetComponent<AudioSource>();
+        if(!audioSource)
+        {
+            Debug.LogError("Missing audio source!");
+        }
+
+        if(clip.Length == 0)
+        {
+            Debug.LogError("0 sounds for running!");
+        }
     }
 
     void Update()
@@ -73,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
 
             Animate(horizontal, vertical);
         }
-        else if(GetComponent<BasePlayer>().pause || GetComponent<BasePlayer>().attacking)
+        else if(GetComponent<BasePlayer>().pause)
         {
             Animate(0f, 0f);
         }
@@ -84,6 +98,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (horizontal != 0 || vertical != 0)
         {
+            if (audioSource.time > 0.4f || !audioSource.isPlaying)
+            {
+                audioSource.clip = clip[Random.Range(0, clip.Length)];
+                audioSource.volume = Random.Range(0.5f, 1f);
+                audioSource.pitch = 1f;
+                audioSource.Play();
+            }
+
             animator.SetBool("isRunning", true);
             animator.SetBool("runningForward", false);
             animator.SetBool("runningBack", false);
