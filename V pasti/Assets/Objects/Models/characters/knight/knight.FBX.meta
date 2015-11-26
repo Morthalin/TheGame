@@ -86,6 +86,19 @@ ModelImporter:
     100156: arm_left001
     100158: shoulder_left001
     100160: elbowPad_right001
+    100162: Bip001 HeadNub
+    100164: Bip001 L Finger0Nub
+    100166: Bip001 L Finger1Nub
+    100168: Bip001 L Finger2Nub
+    100170: Bip001 L Finger3Nub
+    100172: Bip001 L Finger4Nub
+    100174: Bip001 L Toe0Nub
+    100176: Bip001 R Finger0Nub
+    100178: Bip001 R Finger1Nub
+    100180: Bip001 R Finger2Nub
+    100182: Bip001 R Finger3Nub
+    100184: Bip001 R Finger4Nub
+    100186: Bip001 R Toe0Nub
     400000: arm_left
     400002: arm_right
     400004: Bip001
@@ -167,6 +180,19 @@ ModelImporter:
     400156: arm_left001
     400158: shoulder_left001
     400160: elbowPad_right001
+    400162: Bip001 HeadNub
+    400164: Bip001 L Finger0Nub
+    400166: Bip001 L Finger1Nub
+    400168: Bip001 L Finger2Nub
+    400170: Bip001 L Finger3Nub
+    400172: Bip001 L Finger4Nub
+    400174: Bip001 L Toe0Nub
+    400176: Bip001 R Finger0Nub
+    400178: Bip001 R Finger1Nub
+    400180: Bip001 R Finger2Nub
+    400182: Bip001 R Finger3Nub
+    400184: Bip001 R Finger4Nub
+    400186: Bip001 R Toe0Nub
     2300000: arm_left
     2300002: shoulder_left
     3300000: arm_left
