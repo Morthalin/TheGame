@@ -24,7 +24,7 @@ public class showObject : MonoBehaviour {
 		if (items) {
 			if (other.gameObject.name == "Player") {
 				Debug.Log ("Exit");
-				NPCs.SetActive (false);
+				items.SetActive (false);
 			}
 		}
 	}
@@ -39,7 +39,7 @@ public class showObject : MonoBehaviour {
 		if (items) {
 			if (other.gameObject.name == "Player") {
 				Debug.Log ("Enter");
-				NPCs.SetActive (true);
+				items.SetActive (true);
 			}
 		}
 	}
@@ -54,7 +54,7 @@ public class showObject : MonoBehaviour {
 		if (items) {
 			if (other.gameObject.name == "Player") {
 				Debug.Log ("Enter");
-				NPCs.SetActive (true);
+				items.SetActive (true);
 			}
 		}
 	}
