@@ -9,6 +9,8 @@ public class NPCAgroSystem : MonoBehaviour
     public float speed = 8;
     public float minAgro = 800;
     public float agroReset = 2400;
+    public float attackRangeMax = 15;
+    public float attackRangeMin = 10;
     private Vector3 initPosition;
     private Quaternion initRotation;
     private GameObject target;
@@ -148,7 +150,7 @@ public class NPCAgroSystem : MonoBehaviour
                 targetAnimator.SetBool("isCombat", false);
                 transform.Find("HPFrame").gameObject.SetActive(false);
             }
-            else if (targetDistance < minAgro && targetDistance > 10f && !deadPlayer)
+            else if (targetDistance < minAgro && targetDistance > attackRangeMin && !deadPlayer)
             {
                 //Beh ku hracovy
                 transform.LookAt(target.transform);
@@ -170,7 +172,7 @@ public class NPCAgroSystem : MonoBehaviour
                 animator.SetBool("runningForward", false);
             }
 
-            if (targetDistance <= 15f && !deadPlayer)
+            if (targetDistance <= attackRangeMax && !deadPlayer)
             {
                 //Atack
                 Attack1();

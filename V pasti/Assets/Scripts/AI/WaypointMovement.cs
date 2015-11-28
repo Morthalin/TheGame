@@ -4,22 +4,34 @@ using System.Collections;
 public class WaypointMovement : MonoBehaviour
 {
     public Transform[] waypoints;
-    public float movementSpeed = 6f;
-    public float rotationSpeed = 1f;
+    public float[] movementSpeeds;
+    public float[] rotationSpeeds;
     public float distanceToNext = 10f;
     private bool moving;
     private bool turning;
+    public bool singleMovementSpeed = true;
+    public bool singleRotationSpeed = true;
     public bool stepEnter = false;
     public bool smooth = true;
     private int position;
     private bool wait;
 
-    void Start()
+    void Awake()
     {
         moving = false;
         turning = false;
         wait = true;
         position = 0; 
+
+        if(waypoints.Length != movementSpeeds.Length && !singleMovementSpeed)
+        {
+            Debug.LogError("Wrong count of movementSpeeds!");
+        }
+
+        if (waypoints.Length != rotationSpeeds.Length && !singleRotationSpeed)
+        {
+            Debug.LogError("Wrong count of movementSpeeds!");
+        }
     }
 
     void Update()
@@ -54,7 +66,14 @@ public class WaypointMovement : MonoBehaviour
         }
         else
         {
-            transform.position = transform.position + transform.TransformDirection(0f, 0f, movementSpeed * Time.deltaTime);
+            if (singleMovementSpeed)
+            {
+                transform.position = transform.position + transform.TransformDirection(0f, 0f, movementSpeeds[0] * Time.deltaTime);
+            }
+            else
+            {
+                transform.position = transform.position + transform.TransformDirection(0f, 0f, movementSpeeds[position] * Time.deltaTime);
+            }
         }
     }
 
@@ -76,7 +95,14 @@ public class WaypointMovement : MonoBehaviour
         }
         else
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(waypoints[position].position - transform.position), Time.deltaTime * rotationSpeed);
+            if (singleRotationSpeed)
+            {
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(waypoints[position].position - transform.position), Time.deltaTime * rotationSpeeds[0]);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(waypoints[position].position - transform.position), Time.deltaTime * rotationSpeeds[position]);
+            }
         }
     }
 

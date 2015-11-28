@@ -64,12 +64,13 @@ public class HealCast : MonoBehaviour
                     }
 
                     Vector3 eAngle = new Vector3(180f, 0f, 90f) + GameObject.Find("Player").transform.rotation.eulerAngles;
+                    Vector3 pos = GameObject.Find("Player").transform.TransformPoint(new Vector3(3f, 5f, 0f));
                     Quaternion rot = Quaternion.Euler(eAngle);
-                    localKrigel = (GameObject)Instantiate(krigel, GameObject.Find("Player").transform.position + new Vector3(-3.25f, 8f, -3.25f), rot);
+                    localKrigel = (GameObject)Instantiate(krigel, pos, rot);
                     localKrigel.transform.SetParent(GameObject.Find("Player").transform);
                     eAngle = new Vector3(0f, 270f, 0f) + GameObject.Find("Player").transform.rotation.eulerAngles;
                     rot = Quaternion.Euler(eAngle);
-                    localParticle = (GameObject)Instantiate(particle, GameObject.Find("Player").transform.position + new Vector3(-2.25f, 8f, -2.25f), rot);
+                    localParticle = (GameObject)Instantiate(particle, pos, rot);
                     localParticle.transform.SetParent(GameObject.Find("Player").transform);
                     basePlayer.attacking = false;
                     healing = false;

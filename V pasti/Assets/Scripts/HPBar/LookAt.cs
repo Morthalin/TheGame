@@ -9,11 +9,15 @@ public class LookAt : MonoBehaviour
     {
 	    if(!cam)
         {
-            Debug.LogError("Missing target transform!");
+            cam = GameObject.Find("Player").transform.FindChild("Camera Target").FindChild("Main Camera");
+            if(!cam)
+            {
+                Debug.LogError("Missing main camera!");
+            }
         }
 	}
 	
-	void FixedUpdate ()
+	void Update ()
     {
         transform.LookAt(cam);
 	}
