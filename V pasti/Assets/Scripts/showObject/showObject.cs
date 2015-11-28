@@ -17,13 +17,13 @@ public class showObject : MonoBehaviour {
 	void OnTriggerExit (Collider other) {
 		if (NPCs) {
 			if (other.gameObject.name == "Player") {
-				Debug.Log ("Exit");
+				//Debug.Log ("Exit");
 				NPCs.SetActive (false);
 			}
 		}
 		if (items) {
 			if (other.gameObject.name == "Player") {
-				Debug.Log ("Exit");
+				//Debug.Log ("Exit");
 				items.SetActive (false);
 			}
 		}
@@ -32,13 +32,13 @@ public class showObject : MonoBehaviour {
 	void OnTriggerStay (Collider other) {
 		if (NPCs) {
 			if (other.gameObject.name == "Player") {
-				Debug.Log ("Enter");
+				//Debug.Log ("Enter");
 				NPCs.SetActive (true);
 			}
 		}
 		if (items) {
 			if (other.gameObject.name == "Player") {
-				Debug.Log ("Enter");
+				//Debug.Log ("Enter");
 				items.SetActive (true);
 			}
 		}
@@ -47,13 +47,13 @@ public class showObject : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (NPCs) {
 			if (other.gameObject.name == "Player") {
-				Debug.Log ("Enter");
+				//Debug.Log ("Enter");
 				NPCs.SetActive (true);
 			}
 		}
 		if (items) {
 			if (other.gameObject.name == "Player") {
-				Debug.Log ("Enter");
+				//Debug.Log ("Enter");
 				items.SetActive (true);
 			}
 		}
