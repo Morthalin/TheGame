@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using Mono.Data.Sqlite;
 using System.Data;
 using System;
@@ -9,6 +10,7 @@ using System;
 public class Loot : MonoBehaviour {
 	// corpseList
 	public static ArrayList corpseList = new ArrayList();
+	public float  lootDistSqrt  = 25;
 
 	// GUI elements
 	private Text 	presseText = null;
@@ -18,30 +20,34 @@ public class Loot : MonoBehaviour {
 
 	// soft copy of players inventry object
 	private Inventory  inventory; 
+	private Dictionary<int, BaseItemStats> itemsData = new Dictionary<int, BaseItemStats>();
+	private Dictionary<int, int>           itemsQuantity = new Dictionary<int, int>();
+	
 
 	// helper variables
 	private bool showPressE = false;
 	private bool showInventoryPanel = false;
 	private float timesCalseBefore = 0.0f;
 	private ArrayList loadedItems = new ArrayList();
+	// inventory buttons
+	private string description = "";
+	private int    inventorySellectedItem = -1;
 
 	// Use this for initialization
 	void Start () {
+		ItemsData.Load ();
 		inventory = new Inventory (1);
-		inventory.itemsID.Add (2);
-		Vector3 pos = gameObject.transform.position;
-		//Debug.Log ("Ahoj nastartovala se Loot.cs " + pos.ToString());
-		Vector3 v = new Vector3 (3, 3, 3);
-		//Debug.Log ("Distance is " + v.sqrMagnitude );
 
-		presseText = GameObject.Find ("Canvas").transform.Find ("PressE").GetComponent<Text> ();
+		corpseList.Add (new Corpse("Knight", gameObject.transform.position));
+
+		presseText = GameObject.Find ("Interface").transform.Find ("PressE").GetComponent<Text> ();
 		if (presseText == null) {
 			Debug.LogError("presseText");
 		}
 		presseText.enabled = false;
 		presseText.text = "<b>[E]</b> prohledat mrtvolu.";
 
-		lootList = GameObject.Find ("Canvas").transform.Find ("LootList").GetComponent<Text> ();
+		lootList = GameObject.Find ("Interface").transform.Find ("LootList").GetComponent<Text> ();
 		if (lootList == null) {
 			Debug.LogError("lootList");
 		}
@@ -49,7 +55,7 @@ public class Loot : MonoBehaviour {
 		lootList.text = "Tohle je konstruktorovej text";
 
 
-		canvas = GameObject.Find ("Canvas").GetComponent<Canvas> ();
+		canvas = GameObject.Find ("Interface").GetComponent<Canvas> ();
 		if (canvas == null) {
 			Debug.LogError("canvas");
 		}
@@ -62,7 +68,6 @@ public class Loot : MonoBehaviour {
 	// Update is called once per frame
 	public void Update () {
 		Vector3 pos = gameObject.transform.position;
-		float lootDistSqrt = 4;
 		 
 		foreach (Corpse corpse in corpseList) {
 			Vector3 v = corpse.pos - pos;
@@ -99,16 +104,16 @@ public class Loot : MonoBehaviour {
 				showLoot(false);
 			}
 		}
-
-		if (showInventoryPanel == false && Input.GetKeyDown ("i")) {
-			showInventory (true);
-			showInventoryPanel = true;
+		// ukazat/schovat inventar
+		if (Input.GetKeyDown ("i")) {
+			if(showInventoryPanel){
+				showInventory (false);
+				showInventoryPanel = false;
+			} else {
+				showInventory (true);
+				showInventoryPanel = true;
+			}
 		}
-		if (showInventoryPanel && Input.GetKeyDown (KeyCode.Escape)) {
-			showInventory (false);
-			showInventoryPanel = false;
-		}
-
 	}
 
 	private void getItems( string name ){
@@ -130,24 +135,30 @@ public class Loot : MonoBehaviour {
 		while (reader.Read())
 		{
 			float probability = (float)reader.GetFloat(0);
-			int id = (int)reader.GetInt32(1);
-			string itsname = (string) reader["itemName"];
-		/*	reader.GetString(3); // itemDescription
-			reader.GetInt32(4); // itemType
-			reader.GetInt32(5); // strength
-			reader.GetInt32(6); // intellect
-			reader.GetInt32(7); // agility
-			reader.GetInt32(8); // stamina
-			reader.GetInt32(9); // armor
-		    */
+			 
+			BaseItemStats one = new BaseItemStats();
+			one.ItemID = (int)reader.GetInt32(1);
+			one.ItemName = (string) reader["itemName"];
+			one.ItemDescription = reader.GetString(3);
+			one.ItemType = (BaseItemStats.ItemTypes)reader.GetInt32(4); // itemType
+			one.Strength = reader.GetInt32(5); // strength
+			one.Intellect = reader.GetInt32(6); // intellect
+			one.Agility = reader.GetInt32(7); // agility
+			one.Stamina = reader.GetInt32(8); // stamina
+			one.Armor = reader.GetInt32(9); // armor
 
 			if( UnityEngine.Random.Range(0.0f, 100.0f) <= probability )
 			{
-				gain += itsname + "\n";
-				inventory.itemsID.Add(id);
+				gain += one.ItemName + "\n";
+				inventory.itemsID.Add(one.ItemID);
+				itemsData[one.ItemID] = one;
+				if(  !itemsQuantity.ContainsKey(one.ItemID) )
+					itemsQuantity[one.ItemID] = 1;
+				else 
+					itemsQuantity[one.ItemID] ++;
 			}
 		}
-		Debug.Log (gain);
+
 		lootList.text = gain + "</b>";
 		showLoot (true);
 
@@ -174,77 +185,76 @@ public class Loot : MonoBehaviour {
 	void showInventory( bool show )
 	{
 		if (show) {
+			inventorySellectedItem = -1;
+			description = "";
 			timesCalseBefore = Time.timeScale;
 			Time.timeScale = 0.0f;
 
-			foreach (int itemid in inventory.itemsID) {
-				showInventoryItem(itemid);
-			}
 		} else {
 			Time.timeScale = timesCalseBefore;
 		}
 
 	}
 
-	void showInventoryItem (int id)
-	{
-		string query = "select itemName,itemDescription,itemType,strength,intellect,agility,stamina,armor from items where Items.ID == " + id;
-
-		string path = "URI=file:" + Application.dataPath + "/Database/Database.s3db";
-		SqliteConnection connection;
-		connection = new SqliteConnection(path);
-		connection.Open();
-
-		//Debug.Log (query);
-		SqliteCommand command = new SqliteCommand (query, connection);
-		SqliteDataReader reader = command.ExecuteReader ();
-		
-		string gain = "<b>";
-		if (reader.Read())
-		{
-			string itsname = (string) reader["itemName"];
-			string itsdesc = (string) reader["itemDescription"];
-			int    itstype = reader.GetInt32(2); //itemType
-			/*	
-			reader.GetInt32(3); // strength
-			reader.GetInt32(4); // intellect
-			reader.GetInt32(5); // agility
-			reader.GetInt32(6); // stamina
-			reader.GetInt32(7); // armor
-		    */
-			gain += itsname +" "+itsdesc +" "+ itstype;
-			loadedItems.Add(itsdesc);
-
-		}
-		//Debug.Log (gain);
-				
-		reader.Close ();
-		command.Dispose();
-		connection.Close();
-	}
-	private string desctription = "zatim nic";
 	void OnGUI()
 	{
 		if (showInventoryPanel) {
 			int fromX = Screen.width - 320;
-			int toX  = fromX +300;
-			int cnt = 0;
 
 			GUI.BeginGroup( new Rect(fromX, 25, 300, 500) );
 			GUI.Box(new Rect( 0, 0, 300, 500 ), "Inventář" );
-			for (int i = 20; i < 350; i+=50) {
-				for (int j = 20; j < 260; j+=45) {
-					if( ++cnt > inventory.itemsID.Count)
-						goto konec;
-					if( GUI.Button( new Rect(j, i, 40, 40), "neco" ) )
-						desctription = "popis " + i + " " + j;
+			GUIStyle gs = new GUIStyle(GUI.skin.button);
+			gs.fontSize = 10;
+
+			int i = 20, j = 20;
+			foreach (var key in itemsQuantity.Keys) {
+				if( itemsQuantity[key] > 0 ) {
+					BaseItemStats one = itemsData[key];
+					String buttonText = one.ItemName + " (" + itemsQuantity[key] + ")";
+					if( GUI.Button( new Rect(j, i, 80, 40), buttonText, gs ) ) {
+						inventorySellectedItem = key;
+						description = one.ItemDescription;
+					}
+					j += 90;
+					if( j >= 350 ){
+						j = 20;
+						i += 50;
+					}
 				}
 			}
-		konec:
-			GUI.TextArea( new Rect(0, 400, 300, 100), desctription );
-			if( GUI.Button( new Rect(220,440,60, 40), "Použít" ) ){
+
+			if( GUI.Button( new Rect(240,400,60, 100), "Použít" ) ){
+				if( inventorySellectedItem != -1 ){
+					useItem(itemsData[inventorySellectedItem]);
+					int rest = --itemsQuantity[inventorySellectedItem];
+
+					if( rest < 1 ){
+						description = "";
+						inventorySellectedItem = -1;
+					}					
+				}
 			}
+
+			GUI.TextArea( new Rect(0, 400, 240, 100), description );
 			GUI.EndGroup();
+		}
+	}
+
+	void useItem(BaseItemStats item)
+	{
+		BasePlayer pl = GameObject.Find ("Player").GetComponent<BasePlayer> ();
+
+		pl.strength += item.Strength; 
+		pl.intellect += item.Intellect;
+		pl.agility += item.Agility; 
+		pl.stamina += item.Stamina; 
+		pl.armor += item.Armor;
+
+		if (item.ItemType == BaseItems.ItemTypes.NOTE) {
+			//Debug.Log ("NOTE: " + ItemsData.notesData[item.ItemID].NoteText );
+			lootList.text = "<b>"+ItemsData.notesData[item.ItemID].NoteText+"</b>";
+			lootListLive += 10;
+			showLoot(true);
 		}
 	}
 }

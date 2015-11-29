@@ -102,6 +102,9 @@ public class NPCAgroSystem : MonoBehaviour
                 animator.SetBool("isCombat", false);
                 targetAnimator.SetBool("isCombat", false);
                 transform.Find("HPFrame").gameObject.SetActive(false);
+
+				// pridani mrtvoli
+				Loot.corpseList.Add (new Corpse(baseNPC.creatureName, baseNPC.transform.position));
             }
         }
         else if (targetScript.health <= 0 && !deadPlayer)
