@@ -1,43 +1,118 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Mono.Data.Sqlite;
+using System.Data;
 
-public class MainMenu : MonoBehaviour {
+public class MainMenu : MonoBehaviour
+{
 
-	public Canvas mainMenu;
-	public Canvas newMenu;
-	public Canvas loadMenu;
-	public Canvas settingsMenu;
-	public Canvas exitMenu;
+	public Transform mainMenu;
+	public Transform newMenu;
+	public Transform settingsMenu;
+	public Transform exitMenu;
 
-    void Start () {
-		mainMenu = mainMenu.GetComponent<Canvas> ();
-		newMenu = newMenu.GetComponent<Canvas> ();
-		settingsMenu = settingsMenu.GetComponent<Canvas> ();
-		loadMenu = loadMenu.GetComponent<Canvas> ();
-		exitMenu = exitMenu.GetComponent<Canvas> ();
-		mainMenu.enabled = true;
-		newMenu.enabled = settingsMenu.enabled = loadMenu.enabled = exitMenu.enabled = false;
+    void Start ()
+    {
+        if(!mainMenu)
+        {
+            Debug.LogError("Missing main menu!");
+        }
+
+        if (!newMenu)
+        {
+            Debug.LogError("Missing new character menu!");
+        }
+
+        if (!settingsMenu)
+        {
+            Debug.LogError("Missing settings menu!");
+        }
+
+        if (!exitMenu)
+        {
+            Debug.LogError("Missing exit menu!");
+        }
+
+		mainMenu.gameObject.SetActive(true);
+		newMenu.gameObject.SetActive(false);
+        settingsMenu.gameObject.SetActive(false);
+        exitMenu.gameObject.SetActive(false);
     }
 	
 	public void newGamePressed()
 	{
-		mainMenu.enabled = false;
-		newMenu.enabled = true;
-	}
+        if (transform.FindChild("Hraci").gameObject.activeSelf)
+        {
+            transform.FindChild("Hraci").gameObject.SetActive(false);
+            transform.FindChild("loadHruBut").gameObject.SetActive(false);
+        }
+        mainMenu.gameObject.SetActive(false);
+        newMenu.gameObject.SetActive(true);
+    }
+
 	public void loadGamePressed()
-	{
-		mainMenu.enabled = false;
-		loadMenu.enabled = true;
-	}
+    {
+        if(transform.FindChild("Hraci").gameObject.activeSelf)
+        {
+            transform.FindChild("Hraci").gameObject.SetActive(false);
+            transform.FindChild("loadHruBut").gameObject.SetActive(false);
+        }
+        else
+        {
+            transform.FindChild("Hraci").GetComponent<Dropdown>().options.Clear();
+            transform.FindChild("Hraci").GetComponent<Dropdown>().value = -1;
+            string path = "URI=file:" + Application.dataPath + "/Database/Database.s3db";
+            IDbConnection connection;
+
+            connection = (IDbConnection)new SqliteConnection(path);
+            connection.Open();
+            IDbCommand command = connection.CreateCommand();
+            string sqlQuery = "SELECT playerName FROM Players;";
+            command.CommandText = sqlQuery;
+            IDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                transform.FindChild("Hraci").GetComponent<Dropdown>().options.Add(new Dropdown.OptionData(reader[0].ToString()));
+            }
+            reader.Close();
+            command.Dispose();
+            connection.Close();
+            transform.FindChild("Hraci").gameObject.SetActive(true);
+        }
+    }
+
 	public void settingsPressed()
-	{
-		mainMenu.enabled = false;
-		settingsMenu.enabled = true;
-	}
+    {
+        if (transform.FindChild("Hraci").gameObject.activeSelf)
+        {
+            transform.FindChild("Hraci").gameObject.SetActive(false);
+            transform.FindChild("loadHruBut").gameObject.SetActive(false);
+        }
+        mainMenu.gameObject.SetActive(false);
+        settingsMenu.gameObject.SetActive(true);
+    }
+
 	public void exitGamePressed()
-	{
-		mainMenu.enabled = false;
-		exitMenu.enabled = true;
-	}
+    {
+        if (transform.FindChild("Hraci").gameObject.activeSelf)
+        {
+            transform.FindChild("Hraci").gameObject.SetActive(false);
+            transform.FindChild("loadHruBut").gameObject.SetActive(false);
+        }
+        mainMenu.gameObject.SetActive(false);
+        exitMenu.gameObject.SetActive(true);
+    }
+
+    public void playerSelected()
+    {
+        if (transform.FindChild("Hraci").GetComponent<Dropdown>().value != -1)
+        {
+            transform.FindChild("loadHruBut").gameObject.SetActive(true);
+        }
+        else
+        {
+            transform.FindChild("loadHruBut").gameObject.SetActive(false);
+        }
+    }
 }
