@@ -38,7 +38,7 @@ public class Loot : MonoBehaviour {
 		ItemsData.Load ();
 		inventory = new Inventory (1);
 
-		corpseList.Add (new Corpse("Knight", gameObject.transform.position));
+		//corpseList.Add (new Corpse("Knight", gameObject.transform.position));
 
 		presseText = GameObject.Find ("Interface").transform.Find ("PressE").GetComponent<Text> ();
 		if (presseText == null) {
