@@ -72,7 +72,7 @@ public class NewGameMenu : MonoBehaviour
         command = connection.CreateCommand();
         sqlQuery = @"INSERT INTO Players (playerName, className, strength, intellect, agility, stamina, energy, armor, minAttack, maxAttack, positionX, positionY, positionZ) VALUES 
                     ('" + transform.FindChild("PlayerName").FindChild("Text").GetComponent<Text>().text + @"', 
-                        '" + info.FindChild("ClassName").FindChild("Value").GetComponent<Text>().text + @"',
+                        'Warrior',
                         '" + info.FindChild("Strength").FindChild("Value").GetComponent<Text>().text  + @"',
                         '" + info.FindChild("Intellect").FindChild("Value").GetComponent<Text>().text  + @"',
                         '" + info.FindChild("Agility").FindChild("Value").GetComponent<Text>().text + @"',
@@ -87,7 +87,7 @@ public class NewGameMenu : MonoBehaviour
         command.Dispose();
         connection.Close();
         SqliteConnection.ClearAllPools();
-        GameObject.Find("LoadPlayer").GetComponent<LoadPlayerChar>().name = transform.FindChild("PlayerName").FindChild("Text").GetComponent<Text>().text;
+        GameObject.Find("LoadPlayer").GetComponent<LoadPlayerChar>().jmeno = transform.FindChild("PlayerName").FindChild("Text").GetComponent<Text>().text;
         Application.LoadLevel("scene");
     }
 
@@ -104,7 +104,7 @@ public class NewGameMenu : MonoBehaviour
         IDataReader reader = command.ExecuteReader();
         if (reader.Read())
         {
-            info.FindChild("ClassName").FindChild("Value").GetComponent<Text>().text = "Warrior";
+            info.FindChild("ClassName").FindChild("Value").GetComponent<Text>().text = "Rytíř";
             info.FindChild("Strength").FindChild("Value").GetComponent<Text>().text = reader["strength"].ToString();
             info.FindChild("Intellect").FindChild("Value").GetComponent<Text>().text = reader["intellect"].ToString();
             info.FindChild("Agility").FindChild("Value").GetComponent<Text>().text = reader["agility"].ToString();

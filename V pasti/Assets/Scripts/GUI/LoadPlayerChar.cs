@@ -4,7 +4,7 @@ using System.Collections;
 
 public class LoadPlayerChar : MonoBehaviour
 {
-    public string name = "";
+    public string jmeno = "";
 
 	void Awake ()
     {

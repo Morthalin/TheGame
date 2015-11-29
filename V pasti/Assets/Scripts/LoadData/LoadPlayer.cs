@@ -11,7 +11,7 @@ public class LoadPlayer : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<BasePlayer>();
         if (GameObject.Find("LoadPlayer"))
         {
-            player.LoadPlayer(GameObject.Find("LoadPlayer").GetComponent<LoadPlayerChar>().name);
+            player.LoadPlayer(GameObject.Find("LoadPlayer").GetComponent<LoadPlayerChar>().jmeno);
         }
         else
         {

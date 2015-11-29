@@ -111,7 +111,7 @@ public class MainMenu : MonoBehaviour
         if (transform.FindChild("Hraci").GetComponent<Dropdown>().value != -1)
         {
             transform.FindChild("loadHruBut").gameObject.SetActive(true);
-            GameObject.Find("LoadPlayer").GetComponent<LoadPlayerChar>().name = transform.FindChild("Hraci").GetComponent<Dropdown>().options[transform.FindChild("Hraci").GetComponent<Dropdown>().value].text;
+            GameObject.Find("LoadPlayer").GetComponent<LoadPlayerChar>().jmeno = transform.FindChild("Hraci").GetComponent<Dropdown>().options[transform.FindChild("Hraci").GetComponent<Dropdown>().value].text;
         }
         else
         {
