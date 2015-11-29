@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
 
             Animate(horizontal, vertical);
         }
-        else if(GetComponent<BasePlayer>().pause)
+        else if(GetComponent<BasePlayer>().pause || GetComponent<BasePlayer>().attacking)
         {
             Animate(0f, 0f);
         }

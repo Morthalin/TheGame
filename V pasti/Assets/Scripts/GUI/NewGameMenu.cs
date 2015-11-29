@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using Mono.Data.Sqlite;
 using System.Data;
 
@@ -73,21 +72,22 @@ public class NewGameMenu : MonoBehaviour
         command = connection.CreateCommand();
         sqlQuery = @"INSERT INTO Players (playerName, className, strength, intellect, agility, stamina, energy, armor, minAttack, maxAttack, positionX, positionY, positionZ) VALUES 
                     ('" + transform.FindChild("PlayerName").FindChild("Text").GetComponent<Text>().text + @"', 
-                     '" + info.FindChild("ClassName").FindChild("Value").GetComponent<Text>().text + @"',
-                     '" + info.FindChild("Strength").FindChild("Value").GetComponent<Text>().text  + @"',
-                     '" + info.FindChild("Intellect").FindChild("Value").GetComponent<Text>().text  + @"',
-                     '" + info.FindChild("Agility").FindChild("Value").GetComponent<Text>().text + @"',
-                     '" + info.FindChild("Stamina").FindChild("Value").GetComponent<Text>().text + @"',
-                     '" + info.FindChild("Energy").FindChild("Value").GetComponent<Text>().text + @"',
-                     '" + info.FindChild("Armor").FindChild("Value").GetComponent<Text>().text + @"',
-                     '" + attack.Substring(0, attack.IndexOf('-') - 1) + @"',
-                     '" + attack.Substring(attack.IndexOf('-') + 2) + @"',
-                     '-193', '101', '531');";
+                        '" + info.FindChild("ClassName").FindChild("Value").GetComponent<Text>().text + @"',
+                        '" + info.FindChild("Strength").FindChild("Value").GetComponent<Text>().text  + @"',
+                        '" + info.FindChild("Intellect").FindChild("Value").GetComponent<Text>().text  + @"',
+                        '" + info.FindChild("Agility").FindChild("Value").GetComponent<Text>().text + @"',
+                        '" + info.FindChild("Stamina").FindChild("Value").GetComponent<Text>().text + @"',
+                        '" + info.FindChild("Energy").FindChild("Value").GetComponent<Text>().text + @"',
+                        '" + info.FindChild("Armor").FindChild("Value").GetComponent<Text>().text + @"',
+                        '" + attack.Substring(0, attack.IndexOf('-') - 1) + @"',
+                        '" + attack.Substring(attack.IndexOf('-') + 2) + @"',
+                        '404', '66.5', '814');";
         command.CommandText = sqlQuery;
         command.ExecuteNonQuery();
         command.Dispose();
         connection.Close();
-
+        SqliteConnection.ClearAllPools();
+        GameObject.Find("LoadPlayer").GetComponent<LoadPlayerChar>().name = transform.FindChild("PlayerName").FindChild("Text").GetComponent<Text>().text;
         Application.LoadLevel("scene");
     }
 
@@ -123,6 +123,7 @@ public class NewGameMenu : MonoBehaviour
         reader.Close();
         command.Dispose();
         connection.Close();
+        SqliteConnection.ClearAllPools();
     }
     
     public void NavratPressed()

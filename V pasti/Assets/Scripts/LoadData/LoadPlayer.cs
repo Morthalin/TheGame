@@ -9,19 +9,18 @@ public class LoadPlayer : MonoBehaviour
     void Awake()
     {
         player = GameObject.Find("Player").GetComponent<BasePlayer>();
-        player.LoadPlayer(GameObject.Find("LoadPlayer").GetComponent<LoadPlayerChar>().name);
+        if (GameObject.Find("LoadPlayer"))
+        {
+            player.LoadPlayer(GameObject.Find("LoadPlayer").GetComponent<LoadPlayerChar>().name);
+        }
+        else
+        {
+            player.LoadPlayer("test");
+        }
     }
 
-    void Update()
+    public void loadPlayer(string name)
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && GameObject.Find("Player").GetComponent<BasePlayer>().pause == false)
-        {
-            GameObject.Find("Player").GetComponent<BasePlayer>().pause = true;
-            //Application.Quit();
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape) && GameObject.Find("Player").GetComponent<BasePlayer>().pause == true)
-        {
-            GameObject.Find("Player").GetComponent<BasePlayer>().pause = false;
-        }
+        player.LoadPlayer(name);
     }
 }

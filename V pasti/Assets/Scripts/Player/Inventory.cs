@@ -29,7 +29,7 @@ public class Inventory
         reader.Close();
         command.Dispose();
         connection.Close();
-
+        SqliteConnection.ClearAllPools();
         playerID = ID;
     }
 }

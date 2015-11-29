@@ -62,7 +62,7 @@ public class WhirlwindAttack : MonoBehaviour
         {
             if (timer > 0f)
             {
-                if (timer < 3f && basePlayer.attacking)
+                if (timer < 2.5f && basePlayer.attacking)
                 {
                     basePlayer.attacking = false;
                     attacking = false;

@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 using Mono.Data.Sqlite;
 using System.Data;
-using System.Collections;
 
 public class BaseNPC : MonoBehaviour
 {
@@ -53,6 +52,7 @@ public class BaseNPC : MonoBehaviour
         reader.Close();
         command.Dispose();
         connection.Close();
+        SqliteConnection.ClearAllPools();
         transform.Find("HPFrame").transform.Find("HPBar").transform.Find("Text").GetComponent<Text>().text = health.ToString() + "/" + healthMax.ToString();
     }
 }

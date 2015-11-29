@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using Mono.Data.Sqlite;
 using System.Data;
-using System.Collections;
 
 public class BasePlayer: MonoBehaviour
 {
@@ -77,10 +76,12 @@ public class BasePlayer: MonoBehaviour
             activeArmor = armor;
             minAttack = reader.GetInt32(9);
             maxAttack = reader.GetInt32(10);
+            transform.position = new Vector3(float.Parse(reader[11].ToString()), float.Parse(reader[12].ToString()), float.Parse(reader[13].ToString()));
             attacking = false;
         }
         reader.Close();
         command.Dispose();
         connection.Close();
+        SqliteConnection.ClearAllPools();
     }
 }

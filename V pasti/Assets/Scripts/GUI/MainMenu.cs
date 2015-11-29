@@ -3,12 +3,13 @@ using UnityEngine.UI;
 using System.Collections;
 using Mono.Data.Sqlite;
 using System.Data;
+using System;
 
 public class MainMenu : MonoBehaviour
 {
 
 	public Transform mainMenu;
-	public Transform newMenu;
+	public Transform newMenu = null;
 	public Transform settingsMenu;
 	public Transform exitMenu;
 
@@ -19,7 +20,7 @@ public class MainMenu : MonoBehaviour
             Debug.LogError("Missing main menu!");
         }
 
-        if (!newMenu)
+        if (!newMenu && Application.loadedLevelName != "scene")
         {
             Debug.LogError("Missing new character menu!");
         }
@@ -78,6 +79,7 @@ public class MainMenu : MonoBehaviour
             reader.Close();
             command.Dispose();
             connection.Close();
+            SqliteConnection.ClearAllPools();
             transform.FindChild("Hraci").gameObject.SetActive(true);
         }
     }
@@ -117,8 +119,46 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    public void playerSelectedIngame()
+    {
+        if (transform.FindChild("Hraci").GetComponent<Dropdown>().value != -1)
+        {
+            transform.FindChild("loadHruBut").gameObject.SetActive(true);
+        }
+        else
+        {
+            transform.FindChild("loadHruBut").gameObject.SetActive(false);
+        }
+    }
+
     public void loadGamePressed()
     {
         Application.LoadLevel("scene");
+    }
+
+    public void loadGamePressedIngame()
+    {
+        GameObject.Find("Interface").GetComponent<LoadPlayer>().loadPlayer(transform.FindChild("Hraci").GetComponent<Dropdown>().options[transform.FindChild("Hraci").GetComponent<Dropdown>().value].text);
+        mainMenu.parent.gameObject.SetActive(false);
+        mainMenu.gameObject.SetActive(false);
+        exitMenu.gameObject.SetActive(false);
+        settingsMenu.gameObject.SetActive(false);
+        GameObject.Find("Player").GetComponent<BasePlayer>().pause = false;
+    }
+
+    public void savePressed()
+    {
+        string path = "URI=file:" + Application.dataPath + "/Database/Database.s3db";
+        IDbConnection connection;
+
+        connection = (IDbConnection)new SqliteConnection(path);
+        connection.Open();
+        IDbCommand command = connection.CreateCommand();
+        string sqlQuery = "UPDATE Players SET positionX = " + GameObject.Find("Player").transform.position.x.ToString() + ", positionY = " + GameObject.Find("Player").transform.position.y.ToString() + " + 1, positionZ = " + GameObject.Find("Player").transform.position.z.ToString() + " WHERE playerName = '" + GameObject.Find("Player").GetComponent<BasePlayer>().playerName + "';";
+        command.CommandText = sqlQuery;
+        command.ExecuteNonQuery();
+        command.Dispose();
+        connection.Close();
+        SqliteConnection.ClearAllPools();
     }
 }
