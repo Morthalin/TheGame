@@ -2,17 +2,23 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class ExitGameMenu : MonoBehaviour {
+public class ExitGameMenu : MonoBehaviour
+{
+	public Transform mainMenu;
+	public Transform exitMenu;
 	
-	public Canvas mainMenu;
-	public Canvas exitMenu;
-	
-	void Start () {
-		mainMenu = mainMenu.GetComponent<Canvas> ();
-		exitMenu = exitMenu.GetComponent<Canvas> ();
-		exitMenu.enabled = true;
-		mainMenu.enabled = false;
-	}
+	void Start ()
+    {
+        if (!mainMenu)
+        {
+            Debug.LogError("Missing main menu!");
+        }
+
+        if (!exitMenu)
+        {
+            Debug.LogError("Missing exit menu reference!");
+        }
+    }
 	
 	public void yesPressed()
 	{
@@ -20,7 +26,7 @@ public class ExitGameMenu : MonoBehaviour {
 	}
 	public void noPressed()
 	{
-		mainMenu.enabled = true;
-		exitMenu.enabled = false;
-	}
+        mainMenu.gameObject.SetActive(true);
+        exitMenu.gameObject.SetActive(false);
+    }
 }

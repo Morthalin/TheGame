@@ -9,10 +9,7 @@ public class LoadPlayer : MonoBehaviour
     void Awake()
     {
         player = GameObject.Find("Player").GetComponent<BasePlayer>();
-        player.LoadPlayer("Morth");
-        //baseNPC = GameObject.Find("Knight").GetComponent<BaseNPC>();
-        //baseNPC.LoadNPC("Knight");
-        //GameObject.Find("Goblin").GetComponent<BaseNPC>().LoadNPC("Goblin");
+        player.LoadPlayer(GameObject.Find("LoadPlayer").GetComponent<LoadPlayerChar>().name);
     }
 
     void Update()

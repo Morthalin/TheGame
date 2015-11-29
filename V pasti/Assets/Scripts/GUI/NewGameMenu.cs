@@ -124,4 +124,10 @@ public class NewGameMenu : MonoBehaviour
         command.Dispose();
         connection.Close();
     }
+    
+    public void NavratPressed()
+    {
+        mainMenu.gameObject.SetActive(true);
+        transform.gameObject.SetActive(false);
+    }
 }

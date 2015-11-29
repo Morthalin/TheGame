@@ -65,18 +65,18 @@ public class BasePlayer: MonoBehaviour
             //nacitanie premennych
             playerName = reader.GetString(1);
             character = reader.GetString(2);
-            inventory = new Inventory(reader.GetInt32(3));
-            strength = reader.GetInt32(4);
-            intellect = reader.GetInt32(5);
-            agility = reader.GetInt32(6);
-            stamina = reader.GetInt32(7);
+            inventory = new Inventory(reader.GetInt32(0));
+            strength = reader.GetInt32(3);
+            intellect = reader.GetInt32(4);
+            agility = reader.GetInt32(5);
+            stamina = reader.GetInt32(6);
             health = stamina * 100;
             healthMax = health;
-            energy = reader.GetInt32(8);
-            armor = reader.GetInt32(9);
+            energy = reader.GetInt32(7);
+            armor = reader.GetInt32(8);
             activeArmor = armor;
-            minAttack = reader.GetInt32(10);
-            maxAttack = reader.GetInt32(11);
+            minAttack = reader.GetInt32(9);
+            maxAttack = reader.GetInt32(10);
             attacking = false;
         }
         reader.Close();

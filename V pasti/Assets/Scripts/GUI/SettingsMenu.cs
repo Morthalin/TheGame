@@ -2,23 +2,32 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class SettingsMenu : MonoBehaviour {
+public class SettingsMenu : MonoBehaviour
+{
+	public Transform mainMenu;
+	public Transform settingsMenu;
+    
+	void Start ()
+    {
+        if (!mainMenu)
+        {
+            Debug.LogError("Missing main menu!");
+        }
 
-	public Canvas mainMenu;
-	public Canvas settingsMenu;
-
-	// Use this for initialization
-	void Start () {
-		mainMenu = mainMenu.GetComponent<Canvas> ();
-		settingsMenu = settingsMenu.GetComponent<Canvas> ();
-		settingsMenu.enabled = true;
-		mainMenu.enabled = false;
-	}
+        if (!settingsMenu)
+        {
+            Debug.LogError("Missing setting menu reference!");
+        }
+    }
 	
-	// Update is called once per frame
-	void Update () {
-		// todo tahla
+	void Update ()
+    {
+		
 	}
 
-	// todo bind funkce
+	public void navratPressed()
+    {
+        mainMenu.gameObject.SetActive(true);
+        settingsMenu.gameObject.SetActive(false);
+    }
 }

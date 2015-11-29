@@ -51,7 +51,7 @@ public class MainMenu : MonoBehaviour
         newMenu.gameObject.SetActive(true);
     }
 
-	public void loadGamePressed()
+	public void loadPlayerPressed()
     {
         if(transform.FindChild("Hraci").gameObject.activeSelf)
         {
@@ -109,10 +109,16 @@ public class MainMenu : MonoBehaviour
         if (transform.FindChild("Hraci").GetComponent<Dropdown>().value != -1)
         {
             transform.FindChild("loadHruBut").gameObject.SetActive(true);
+            GameObject.Find("LoadPlayer").GetComponent<LoadPlayerChar>().name = transform.FindChild("Hraci").GetComponent<Dropdown>().options[transform.FindChild("Hraci").GetComponent<Dropdown>().value].text;
         }
         else
         {
             transform.FindChild("loadHruBut").gameObject.SetActive(false);
         }
+    }
+
+    public void loadGamePressed()
+    {
+        Application.LoadLevel("scene");
     }
 }
