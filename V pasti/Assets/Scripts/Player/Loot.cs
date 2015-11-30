@@ -127,7 +127,6 @@ public class Loot : MonoBehaviour {
 		string query = "select Loot.lootChance, Items.* from Creatures join Loot on Creatures.ID = creatureID "
 					 + "join Items on ItemID = items.ID "
 					 + "where creatureName = '" + name + "';";
-		Debug.Log (query);
 		SqliteCommand command = new SqliteCommand (query, connection);
 		SqliteDataReader reader = command.ExecuteReader ();
 
@@ -187,12 +186,12 @@ public class Loot : MonoBehaviour {
 		if (show) {
 			inventorySellectedItem = -1;
 			description = "";
-			timesCalseBefore = Time.timeScale;
-			Time.timeScale = 0.0f;
+            transform.GetComponent<BasePlayer>().pause = true;
 
-		} else {
-			Time.timeScale = timesCalseBefore;
-		}
+		} else
+        {
+            transform.GetComponent<BasePlayer>().pause = false;
+        }
 
 	}
 
