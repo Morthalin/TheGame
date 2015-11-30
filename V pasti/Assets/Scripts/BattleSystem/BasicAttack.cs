@@ -59,7 +59,7 @@ public class BasicAttack : MonoBehaviour
 
     void Update ()
     {
-        if (basePlayer.health > 0 && !basePlayer.pause && !(basePlayer.attacking && !attacking))
+        if (basePlayer.health > 0 && basePlayer.pause == 0 && !(basePlayer.attacking && !attacking))
         {
             if (timer > 0f)
             {

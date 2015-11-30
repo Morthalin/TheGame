@@ -15,21 +15,21 @@ public class InterfaceControll : MonoBehaviour
 	
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && GameObject.Find("Player").GetComponent<BasePlayer>().pause == false)
+        if (Input.GetKeyDown(KeyCode.Escape) && !menu.gameObject.activeSelf)
         {
             menu.gameObject.SetActive(true);
             menu.GetChild(1).gameObject.SetActive(true);
             menu.GetChild(2).gameObject.SetActive(false);
             menu.GetChild(3).gameObject.SetActive(false);
-            GameObject.Find("Player").GetComponent<BasePlayer>().pause = true;
+            GameObject.Find("Player").GetComponent<BasePlayer>().pause++;
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && GameObject.Find("Player").GetComponent<BasePlayer>().pause == true)
+        else if (Input.GetKeyDown(KeyCode.Escape) && menu.gameObject.activeSelf)
         {
             menu.gameObject.SetActive(false);
             menu.GetChild(1).gameObject.SetActive(false);
             menu.GetChild(2).gameObject.SetActive(false);
             menu.GetChild(3).gameObject.SetActive(false);
-            GameObject.Find("Player").GetComponent<BasePlayer>().pause = false;
+            GameObject.Find("Player").GetComponent<BasePlayer>().pause--;
         }
     }
 }

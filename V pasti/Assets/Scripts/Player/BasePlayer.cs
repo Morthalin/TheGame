@@ -18,13 +18,13 @@ public class BasePlayer: MonoBehaviour
     public int energy;
     public int armor;
     public int activeArmor;
-    public bool pause;
+    public int pause;
     public bool attacking;
     private string character;
 
     void Update()
     {
-        if(pause)
+        if(pause != 0)
         {
             Cursor.visible = true;
         }
@@ -43,7 +43,7 @@ public class BasePlayer: MonoBehaviour
             playerClass = new BaseWarriorClass();
         }
 
-        pause = false;
+        pause = 0;
     }
 
     public void LoadStats(string player)

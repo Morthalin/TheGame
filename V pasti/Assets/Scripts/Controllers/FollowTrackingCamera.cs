@@ -32,7 +32,7 @@ public class FollowTrackingCamera : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!GameObject.Find("Player").GetComponent<BasePlayer>().pause)
+        if (GameObject.Find("Player").GetComponent<BasePlayer>().pause == 0)
         {
             // Nacitanie polohy mysky
             distanceWanted -= Input.GetAxis("Mouse ScrollWheel") * zoomStep;

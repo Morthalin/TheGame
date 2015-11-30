@@ -186,11 +186,11 @@ public class Loot : MonoBehaviour {
 		if (show) {
 			inventorySellectedItem = -1;
 			description = "";
-            transform.GetComponent<BasePlayer>().pause = true;
+            transform.GetComponent<BasePlayer>().pause++;
 
 		} else
         {
-            transform.GetComponent<BasePlayer>().pause = false;
+            transform.GetComponent<BasePlayer>().pause--;
         }
 
 	}

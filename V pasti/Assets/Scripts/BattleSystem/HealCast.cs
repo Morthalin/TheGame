@@ -48,7 +48,7 @@ public class HealCast : MonoBehaviour
             Destroy(localKrigel);
         }
 
-        if (basePlayer.health > 0 && !basePlayer.pause && !(basePlayer.attacking && !healing))
+        if (basePlayer.health > 0 && basePlayer.pause == 0 && !(basePlayer.attacking && !healing))
         {
             if (timer > 0f)
             {

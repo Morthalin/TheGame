@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (GetComponent<BasePlayer>().health > 0 && !GetComponent<BasePlayer>().pause && !GetComponent<BasePlayer>().attacking)
+        if (GetComponent<BasePlayer>().health > 0 && GetComponent<BasePlayer>().pause == 0 && !GetComponent<BasePlayer>().attacking)
         {
             horizontal = Input.GetAxisRaw("Horizontal");
             vertical = Input.GetAxisRaw("Vertical");
@@ -87,7 +87,24 @@ public class PlayerMovement : MonoBehaviour
 
             Animate(horizontal, vertical);
         }
-        else if(GetComponent<BasePlayer>().pause || GetComponent<BasePlayer>().attacking)
+        else if (GetComponent<BasePlayer>().health <= 0)
+        {
+            rotateVector = new Vector3(0f, Input.GetAxis("Mouse X") * rotateSpeed * Time.deltaTime, 0f);
+            transform.Find("Camera Target").Rotate(rotateVector);
+            rotateVector = new Vector3(-(Input.GetAxis("Mouse Y") * rotateSpeed * Time.deltaTime), 0f, 0f);
+
+            float actualAngle = transform.Find("Camera Target").rotation.eulerAngles.x;
+            float newAngle = actualAngle - (Input.GetAxis("Mouse Y") * rotateSpeed * Time.deltaTime);
+            if (newAngle > 180)
+            {
+                newAngle -= 360;
+            }
+
+            if (newAngle > minX && newAngle < maxX)
+                transform.Find("Camera Target").Rotate(rotateVector);
+            Animate(0f, 0f);
+        }
+        else if(GetComponent<BasePlayer>().pause != 0 || GetComponent<BasePlayer>().attacking)
         {
             Animate(0f, 0f);
         }

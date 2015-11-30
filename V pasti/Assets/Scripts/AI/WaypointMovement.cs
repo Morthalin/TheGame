@@ -110,14 +110,14 @@ public class WaypointMovement : MonoBehaviour
     {
         if (transform.parent.name == "Camera Target" && position == 0)
         {
-            transform.parent.parent.GetComponent<BasePlayer>().pause = true;
+            transform.parent.parent.GetComponent<BasePlayer>().pause++;
         }
 
         if (position == waypoints.Length)
         {
             if (transform.parent.name == "Camera Target")
             {
-                transform.parent.parent.GetComponent<BasePlayer>().pause = false;
+                transform.parent.parent.GetComponent<BasePlayer>().pause--;
                 transform.localEulerAngles = new Vector3(0f, 0f, 0f);
             }
             enabled = false;

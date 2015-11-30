@@ -34,7 +34,7 @@ public class DialogEvent : MonoBehaviour
         {
             active = true;
             start = true;
-            GameObject.Find("Player").GetComponent<BasePlayer>().pause = true;
+            GameObject.Find("Player").GetComponent<BasePlayer>().pause++;
             Time.timeScale = 0f;
         }
 
@@ -78,7 +78,7 @@ public class DialogEvent : MonoBehaviour
             {
                 dialogBox.gameObject.SetActive(false);
                 Time.timeScale = 1f;
-                GameObject.Find("Player").GetComponent<BasePlayer>().pause = false;
+                GameObject.Find("Player").GetComponent<BasePlayer>().pause--;
             }
         }
 	}
