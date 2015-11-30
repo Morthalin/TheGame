@@ -3,7 +3,8 @@ using System.Collections;
 using Mono.Data.Sqlite;
 using System.Data;
 using UnityEngine.UI;
-using UnityEditor;
+using System.Text;
+using System;
 
 public class DialogEvent : MonoBehaviour
 {
@@ -55,7 +56,7 @@ public class DialogEvent : MonoBehaviour
                 if (reader.Read())
                 {
                     dialogBox.FindChild("SpeakerImage").GetComponent<Image>().sprite = Resources.Load<Sprite>("Portraits/" + reader[1].ToString());
-                    dialogBox.FindChild("Text").GetComponent<Text>().text =  reader[0].ToString();
+                    dialogBox.FindChild("Text").GetComponent<Text>().text = reader[0].ToString();
                     if(!dialogBox.gameObject.activeSelf)
                     {
                         dialogBox.gameObject.SetActive(true);

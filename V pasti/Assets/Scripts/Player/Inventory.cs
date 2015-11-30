@@ -5,9 +5,7 @@ using System.Collections.Generic;
 
 public class Inventory
 {
-    private int playerID;
-
-    public int PlayerID {get; set; }
+    public int playerID;
     public List<int> itemsID = new List<int>();
 
     public Inventory(int ID)
