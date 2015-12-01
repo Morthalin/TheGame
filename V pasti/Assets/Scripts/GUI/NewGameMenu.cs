@@ -88,6 +88,7 @@ public class NewGameMenu : MonoBehaviour
         connection.Close();
         SqliteConnection.ClearAllPools();
         GameObject.Find("LoadPlayer").GetComponent<LoadPlayerChar>().jmeno = transform.FindChild("PlayerName").FindChild("Text").GetComponent<Text>().text;
+        transform.parent.GetComponent<LoadingSceen>().loading++;
         Application.LoadLevel("scene");
     }
 

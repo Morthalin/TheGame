@@ -133,6 +133,7 @@ public class MainMenu : MonoBehaviour
 
     public void loadGamePressed()
     {
+        transform.parent.GetComponent<LoadingSceen>().loading++;
         Application.LoadLevel("scene");
     }
 
