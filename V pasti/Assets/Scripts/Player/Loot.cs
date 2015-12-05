@@ -285,7 +285,6 @@ public class Loot : MonoBehaviour {
 		foreach (var item in equipmentOrder) {
 			equipmentMap[item] = emptyItem;
 		}
-		Debug.Log("equipment inited.");
 	}
 
 	void displayEquipment(Rect grouprec){
@@ -328,9 +327,6 @@ public class Loot : MonoBehaviour {
 			lootListLive += 10;
 			showLoot (true);
 		} else if (item.ItemType == BaseItems.ItemTypes.EQUIPMENT) {
-			foreach (var ite in ItemsData.equipmentData.Keys) {
-				Debug.Log ("" + ite + " " + ItemsData.equipmentData [ite]);
-			}
 
 			BaseEquipment.EquipTypes etype = ItemsData.equipmentData [item.ItemID].EquipType;
 			int index = (int)etype - 1;
