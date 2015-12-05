@@ -28,7 +28,8 @@ public class InfoTable : MonoBehaviour {
 		if (isActive) {
 			BasePlayer pl = GameObject.Find ("Player").GetComponent<BasePlayer> ();
 
-			statPanel.FindChild("ClassName").Find("Value").GetComponent<Text>().text = pl.playerClass.CharacterClassName;
+			statPanel.FindChild("ClassName").Find("Value").GetComponent<Text>().text
+				= pl.playerClass.CharacterClassName;
 			statPanel.FindChild("Strength").Find("Value").GetComponent<Text>().text = "" + pl.strength;
 			statPanel.FindChild("Intellect").Find("Value").GetComponent<Text>().text = "" + pl.intellect;
 			statPanel.FindChild("Agility").Find("Value").GetComponent<Text>().text = "" + pl.agility;

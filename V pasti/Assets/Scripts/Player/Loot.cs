@@ -19,9 +19,14 @@ public class Loot : MonoBehaviour {
 	private float   lootListLive = 0.0f;
 
 	// soft copy of players inventry object
-	private Inventory  inventory; 
 	private Dictionary<int, BaseItemStats> itemsData = new Dictionary<int, BaseItemStats>();
-	private Dictionary<int, int>           itemsQuantity = new Dictionary<int, int>();
+	public  Dictionary<int, int>           itemsQuantity = new Dictionary<int, int>();
+
+	// equipment
+	private Dictionary<string, BaseItemStats>   equipmentMap;
+	private List<string>						equipmentOrder;
+	// active potions
+	private Dictionary<int, float> 				activePotions = new Dictionary<int, float>();
 	
 
 	// helper variables
@@ -36,9 +41,16 @@ public class Loot : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		ItemsData.Load ();
-		inventory = new Inventory (1);
 
-		//corpseList.Add (new Corpse("Knight", gameObject.transform.position));
+		initEquipment ();
+		BasePlayer pl = GameObject.Find ("Player").GetComponent<BasePlayer> ();
+		foreach (var item in pl.inventory.itemsID) {
+			if (!itemsQuantity.ContainsKey(item)) {
+				itemsQuantity[item] = 0;
+				itemsData[item] = ItemsData.itemsData[item];
+			}
+			itemsQuantity[item] ++;
+		}
 
 		presseText = GameObject.Find ("Interface").transform.Find ("PressE").GetComponent<Text> ();
 		if (presseText == null) {
@@ -114,6 +126,18 @@ public class Loot : MonoBehaviour {
 				showInventoryPanel = true;
 			}
 		}
+		List<int> keys = new List<int> (activePotions.Keys);
+		foreach (var item in keys) {
+			if(activePotions[item] > 0.0f )
+			{
+				activePotions[item] -= Time.deltaTime;
+				if(activePotions[item] < 0.0f){
+					potionAction(item, false);
+					activePotions.Remove(item);
+				}
+			}
+		}
+
 	}
 
 	private void getItems( string name ){
@@ -149,7 +173,7 @@ public class Loot : MonoBehaviour {
 			if( UnityEngine.Random.Range(0.0f, 100.0f) <= probability )
 			{
 				gain += one.ItemName + "\n";
-				inventory.itemsID.Add(one.ItemID);
+				//inventory.itemsID.Add(one.ItemID);
 				itemsData[one.ItemID] = one;
 				if(  !itemsQuantity.ContainsKey(one.ItemID) )
 					itemsQuantity[one.ItemID] = 1;
@@ -197,11 +221,12 @@ public class Loot : MonoBehaviour {
 
 	void OnGUI()
 	{
+		displayActivePotions ();
 		if (showInventoryPanel) {
 			int fromX = Screen.width - 320;
-
+			GUI.Box(new Rect( fromX-200, 25, 300+200, 450 ), "Inventář" );
 			GUI.BeginGroup( new Rect(fromX, 25, 300, 500) );
-			GUI.Box(new Rect( 0, 0, 300, 500 ), "Inventář" );
+			//GUI.Box(new Rect( 0, 0, 300, 500 ), "Inventář" );
 			GUIStyle gs = new GUIStyle(GUI.skin.button);
 			gs.fontSize = 10;
 
@@ -215,18 +240,19 @@ public class Loot : MonoBehaviour {
 						description = one.ItemDescription;
 					}
 					j += 90;
-					if( j >= 350 ){
+					if( j >= 250 ){
 						j = 20;
 						i += 50;
 					}
 				}
 			}
-
-			if( GUI.Button( new Rect(240,400,60, 100), "Použít" ) ){
+			GUI.EndGroup();
+			GUI.TextArea( new Rect(fromX-188, 350, 350, 100), description );
+			if( GUI.Button( new Rect(fromX-190+350,350,125, 100), "Použít" ) ){
 				if( inventorySellectedItem != -1 ){
 					useItem(itemsData[inventorySellectedItem]);
 					int rest = --itemsQuantity[inventorySellectedItem];
-
+					
 					if( rest < 1 ){
 						description = "";
 						inventorySellectedItem = -1;
@@ -234,8 +260,55 @@ public class Loot : MonoBehaviour {
 				}
 			}
 
-			GUI.TextArea( new Rect(0, 400, 240, 100), description );
-			GUI.EndGroup();
+			displayEquipment( new Rect(fromX - 202, 25, 192, 340));
+		}
+	}
+	private BaseItemStats emptyItem = new BaseItemStats ();
+	void initEquipment(){
+		equipmentOrder = new List<string> ();
+		equipmentMap = new Dictionary<string, BaseItemStats> ();
+		equipmentOrder.Add ("Hlava");
+		equipmentOrder.Add ("Hruď");
+		equipmentOrder.Add ("Ramena");
+		equipmentOrder.Add ("Ruce");
+		equipmentOrder.Add ("Nohy");
+		equipmentOrder.Add ("Chodidla");
+
+		equipmentOrder.Add ("Meč");
+		equipmentOrder.Add ("Věc");
+		equipmentOrder.Add ("Štít");
+
+		//BaseItemStats emptyItem = new BaseItemStats ();
+		emptyItem.ItemName = "(prázdné)";
+		emptyItem.Agility = emptyItem.Armor = emptyItem.Intellect = emptyItem.Stamina = emptyItem.Strength = 0;
+
+		foreach (var item in equipmentOrder) {
+			equipmentMap[item] = emptyItem;
+		}
+		Debug.Log("equipment inited.");
+	}
+
+	void displayEquipment(Rect grouprec){
+		GUI.BeginGroup (grouprec);
+		//GUI.Box (new Rect(0, 0, grouprec.width, grouprec.height), "Oblečení a zbraně");
+		GUIStyle gs = new GUIStyle(GUI.skin.textField);
+		gs.alignment = TextAnchor.MiddleCenter;
+		Rect rc = new Rect (15, 30, 60, 30);
+		Rect rc2 = new Rect (rc.x+rc.width+2, 30, 100, 30);
+		foreach (var item in equipmentOrder) {
+			GUI.TextField(rc, item );
+			GUI.TextField(rc2,equipmentMap[item].ItemName,gs);
+			rc.y += 32;
+			rc2.y += 32;
+		}
+		GUI.EndGroup ();
+	}
+
+	void displayActivePotions (){
+		Rect rc = new Rect (0, 0, 100, 30);
+		foreach (var item in activePotions.Keys) {
+			GUI.TextField(rc, itemsData[item].ItemName+" "+ (int)activePotions[item] +" s" );
+			rc.x += 100; 
 		}
 	}
 
@@ -251,10 +324,83 @@ public class Loot : MonoBehaviour {
 
 		if (item.ItemType == BaseItems.ItemTypes.NOTE) {
 			//Debug.Log ("NOTE: " + ItemsData.notesData[item.ItemID].NoteText );
-			lootList.text = "<b>"+ItemsData.notesData[item.ItemID].NoteText+"</b>";
+			lootList.text = "<b>" + ItemsData.notesData [item.ItemID].NoteText + "</b>";
 			lootListLive += 10;
-			showLoot(true);
+			showLoot (true);
+		} else if (item.ItemType == BaseItems.ItemTypes.EQUIPMENT) {
+			foreach (var ite in ItemsData.equipmentData.Keys) {
+				Debug.Log ("" + ite + " " + ItemsData.equipmentData [ite]);
+			}
+
+			BaseEquipment.EquipTypes etype = ItemsData.equipmentData [item.ItemID].EquipType;
+			int index = (int)etype - 1;
+			// kdyz neni prazdne, odecteme vyhody a pridame do inventare
+			if (equipmentMap [equipmentOrder [index]].ItemName != emptyItem.ItemName) {
+				BaseItemStats bis = equipmentMap [equipmentOrder [index]];
+				pl.strength -= bis.Strength; 
+				pl.intellect -= bis.Intellect;
+				pl.agility -= bis.Agility; 
+				pl.stamina -= bis.Stamina; 
+				pl.armor -= bis.Armor;
+				// pridani do inventare
+				itemsQuantity [bis.ItemID]++;
+			}
+			equipmentMap [equipmentOrder [index]] = item;
+		} else if (item.ItemType == BaseItems.ItemTypes.WEAPON) {
+			BaseWeapon.WeaponTypes wtype = ItemsData.weaponsData [item.ItemID].WeaponType;
+			int index = (int)wtype - 1 + 6;
+			// kdyz neni prazdne, odecteme vyhody a pridame do inventare
+			if (equipmentMap [equipmentOrder [index]].ItemName != emptyItem.ItemName) {
+				BaseItemStats bis = equipmentMap [equipmentOrder [index]];
+				pl.strength -= bis.Strength; 
+				pl.intellect -= bis.Intellect;
+				pl.agility -= bis.Agility; 
+				pl.stamina -= bis.Stamina; 
+				pl.armor -= bis.Armor;
+				// pridani do inventare
+				itemsQuantity [bis.ItemID]++;
+			}
+			equipmentMap [equipmentOrder [index]] = item;
+		} else if (item.ItemType == BaseItems.ItemTypes.POTION) {
+			pl.strength -= item.Strength; 
+			pl.intellect -= item.Intellect;
+			pl.agility -= item.Agility; 
+			pl.stamina -= item.Stamina; 
+			pl.armor -= item.Armor;
+			BasePotion bp = ItemsData.potionsData[item.ItemID];
+			if(activePotions.ContainsKey(item.ItemID)){
+				activePotions[item.ItemID] += bp.PotionDuration;
+			} else {
+				activePotions[item.ItemID] = bp.PotionDuration;
+				potionAction(item.ItemID, true);
+			}
 		}
+
+	}
+
+	// if apply is true then add value else sub value 
+	private void potionAction(int itid, bool apply)
+	{
+		BasePotion bp = ItemsData.potionsData[itid];
+		BasePlayer pl = GameObject.Find ("Player").GetComponent<BasePlayer> ();
+
+		if (! apply)
+			bp.PotionValue *= -1;
+
+		switch (bp.PotionType) {
+		case BasePotion.PotionTypes.AGILITY 	: pl.agility += bp.PotionValue; break;
+		case BasePotion.PotionTypes.ARMOR 		: pl.armor += bp.PotionValue; break;
+		case BasePotion.PotionTypes.ENERGY 		: pl.energy += bp.PotionValue; break;
+		case BasePotion.PotionTypes.HEALTH 		: pl.health += bp.PotionValue; break;
+		case BasePotion.PotionTypes.INTELLECT 	: pl.intellect += bp.PotionValue; break;
+		case BasePotion.PotionTypes.STAMINA  	: pl.stamina += bp.PotionValue; break;
+		case BasePotion.PotionTypes.STRENGTH 	: pl.strength += bp.PotionValue; break;
+		default:
+			break;
+		}
+
+		if (! apply)
+			bp.PotionValue *= -1;
 	}
 }
 

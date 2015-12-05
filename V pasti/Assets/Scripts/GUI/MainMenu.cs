@@ -149,6 +149,8 @@ public class MainMenu : MonoBehaviour
 
     public void savePressed()
     {
+		BasePlayer pl = GameObject.Find ("Player").GetComponent<BasePlayer> ();
+		pl.inventory.Save ();
         string path = "URI=file:" + Application.dataPath + "/Database/Database.s3db";
         IDbConnection connection;
 

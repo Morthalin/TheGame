@@ -17,7 +17,7 @@ public class ItemsData : MonoBehaviour {
 		loadNotes ();
 		loadPotions ();
 		loadWeapons ();
-		//loadItems ();
+		loadItems ();
 	}
 
 	public static void loadEquipment (){
@@ -33,9 +33,9 @@ public class ItemsData : MonoBehaviour {
 		while (reader.Read())
 		{
 			BaseEquipment be = new BaseEquipment();
-			be.ItemID = reader.GetInt32 (1);
-			be.EquipType = (BaseEquipment.EquipTypes)reader.GetInt32 (2);
-			be.SpecialStatID = reader.GetInt32 (3);
+			be.ItemID = reader.GetInt32 (0);
+			be.EquipType = (BaseEquipment.EquipTypes)reader.GetInt32 (1);
+			//be.SpecialStatID = reader.GetInt32 (3);
 			equipmentData[be.ItemID] = be;
 		}
 		reader.Close();
@@ -121,14 +121,14 @@ public class ItemsData : MonoBehaviour {
 		IDbCommand command = connection.CreateCommand();
 		
 		// Items.* = Items.ID, Items.itemName, Items.itemDescription, Items.itemType, Items.strength, Items.intellect, Items.agility, Items.stamina, Items.armor
-		string query = "select Items.* from Items;";
+		string query = "select * from Items;";
 		command.CommandText = query;
 		IDataReader reader = command.ExecuteReader();
 		while (reader.Read())
 		{			
 			BaseItemStats one = new BaseItemStats();
-			one.ItemID = (int)reader.GetInt32(0);
-			one.ItemName = (string) reader["itemName"];
+			one.ItemID = reader.GetInt32(0);
+			one.ItemName = reader.GetString(1);
 			one.ItemDescription = reader.GetString(2);
 			one.ItemType = (BaseItemStats.ItemTypes)reader.GetInt32(3);
 			one.Strength = reader.GetInt32(4);
