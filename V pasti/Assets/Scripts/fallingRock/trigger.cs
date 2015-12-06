@@ -15,10 +15,12 @@ public class trigger : MonoBehaviour {
 	private int pos = 0;
 	private float lastIteration;
 
+
 	// Use this for initialization
 	void Start () {
+
 		gameObject.GetComponent<Collider> ().isTrigger = true;
-		//stonePosition = new Vector3[Stones.Length];
+		stonePosition = new Vector3[Stones.Length];
 		stonePosition.Initialize ();
 
 		for (int i = 0; i < Stones.Length; i++){
@@ -51,8 +53,8 @@ public class trigger : MonoBehaviour {
 			for(int i = 0; i < Stones.Length;i++){
 				Stones[i].transform.position = stonePosition[i];
 				if( ((int)((lastIteration-startTime)/resetTime))%3 == 0){
-					Stones[i].GetComponent<Rigidbody>().isKinematic = true;
-					Stones[i].GetComponent<Rigidbody>().isKinematic = false;
+				/*	Stones[i].GetComponent<Rigidbody>().isKinematic = true;
+					Stones[i].GetComponent<Rigidbody>().isKinematic = false;*/
 				}
 			}
 			lastIteration = Time.time;

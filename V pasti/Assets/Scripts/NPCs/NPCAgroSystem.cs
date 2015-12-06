@@ -105,6 +105,9 @@ public class NPCAgroSystem : MonoBehaviour
 
 				// pridani mrtvoli
 				Loot.corpseList.Add (new Corpse(baseNPC.creatureName, baseNPC.transform.position));
+
+				//vypnuti collideru
+				gameObject.GetComponent<CharacterController>().enabled = false;
             }
         }
         else if (targetScript.health <= 0 && !deadPlayer)

@@ -1,0 +1,1226 @@
+fileFormatVersion: 2
+guid: 527efff782bc28a449246cdc624f0db9
+timeCreated: 1449431098
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Amazon_Generic_Male
+    100004: Armature
+    100006: bipamazon
+    100008: bipamazon-Head
+    100010: bipamazon-HeadNub
+    100012: bipamazon-L-Calf
+    100014: bipamazon-L-Clavicle
+    100016: bipamazon-L-Finger0
+    100018: bipamazon-L-Finger01
+    100020: bipamazon-L-Finger02
+    100022: bipamazon-L-Finger0Nub
+    100024: bipamazon-L-Finger1
+    100026: bipamazon-L-Finger11
+    100028: bipamazon-L-Finger12
+    100030: bipamazon-L-Finger1Nub
+    100032: bipamazon-L-Finger2
+    100034: bipamazon-L-Finger21
+    100036: bipamazon-L-Finger22
+    100038: bipamazon-L-Finger2Nub
+    100040: bipamazon-L-Finger3
+    100042: bipamazon-L-Finger31
+    100044: bipamazon-L-Finger32
+    100046: bipamazon-L-Finger3Nub
+    100048: bipamazon-L-Finger4
+    100050: bipamazon-L-Finger41
+    100052: bipamazon-L-Finger42
+    100054: bipamazon-L-Finger4Nub
+    100056: bipamazon-L-Foot
+    100058: bipamazon-L-Forearm
+    100060: bipamazon-L-Hand
+    100062: bipamazon-L-Thigh
+    100064: bipamazon-L-Toe0
+    100066: bipamazon-L-Toe0Nub
+    100068: bipamazon-L-Toe1
+    100070: bipamazon-L-Toe1Nub
+    100072: bipamazon-L-UpperArm
+    100074: bipamazon-Neck
+    100076: bipamazon-Pelvis
+    100078: bipamazon-R-Calf
+    100080: bipamazon-R-Clavicle
+    100082: bipamazon-R-Finger0
+    100084: bipamazon-R-Finger01
+    100086: bipamazon-R-Finger02
+    100088: bipamazon-R-Finger0Nub
+    100090: bipamazon-R-Finger1
+    100092: bipamazon-R-Finger11
+    100094: bipamazon-R-Finger12
+    100096: bipamazon-R-Finger1Nub
+    100098: bipamazon-R-Finger2
+    100100: bipamazon-R-Finger21
+    100102: bipamazon-R-Finger22
+    100104: bipamazon-R-Finger2Nub
+    100106: bipamazon-R-Finger3
+    100108: bipamazon-R-Finger31
+    100110: bipamazon-R-Finger32
+    100112: bipamazon-R-Finger3Nub
+    100114: bipamazon-R-Finger4
+    100116: bipamazon-R-Finger41
+    100118: bipamazon-R-Finger42
+    100120: bipamazon-R-Finger4Nub
+    100122: bipamazon-R-Foot
+    100124: bipamazon-R-Forearm
+    100126: bipamazon-R-Hand
+    100128: bipamazon-R-Thigh
+    100130: bipamazon-R-Toe0
+    100132: bipamazon-R-Toe0Nub
+    100134: bipamazon-R-Toe1
+    100136: bipamazon-R-Toe1Nub
+    100138: bipamazon-R-UpperArm
+    100140: bipamazon-Spine
+    100142: bipamazon-Spine1
+    100144: bipamazon-Spine2
+    100146: bone_brows_L
+    100148: bone_brows_R
+    100150: bone_cheeks_L
+    100152: bone_cheeks_R
+    100154: bone_ear_L
+    100156: bone_ear_R
+    100158: bone_frown
+    100160: bone_frown001
+    100162: bone_mouth_up_L
+    100164: bone_mouth_up_R
+    100166: bone_neck_nerve_L_back
+    100168: bone_neck_nerve_L_front
+    100170: bone_neck_nerve_R_back
+    100172: bone_neck_nerve_R_front
+    100174: bone_oeil_d
+    100176: bone_oeil_g
+    100178: bone_paupiere_L_down
+    100180: bone_paupiere_L_up
+    100182: bone_paupiere_r_down
+    100184: bone_paupiere_r_up
+    100186: dummy_hand_L
+    100188: dummy_hand_r
+    100190: dummy_mouth_corner_L
+    100192: dummy_mouth_corner_L2
+    100194: dummy_mouth_corner_R
+    100196: dummy_mouth_corner_R2
+    100198: dummy_mouth_down_L
+    100200: dummy_mouth_down_R
+    100202: machoire
+    100204: narine_l
+    100206: narine_r
+    400000: //RootNode
+    400002: Amazon_Generic_Male
+    400004: Armature
+    400006: bipamazon
+    400008: bipamazon-Head
+    400010: bipamazon-HeadNub
+    400012: bipamazon-L-Calf
+    400014: bipamazon-L-Clavicle
+    400016: bipamazon-L-Finger0
+    400018: bipamazon-L-Finger01
+    400020: bipamazon-L-Finger02
+    400022: bipamazon-L-Finger0Nub
+    400024: bipamazon-L-Finger1
+    400026: bipamazon-L-Finger11
+    400028: bipamazon-L-Finger12
+    400030: bipamazon-L-Finger1Nub
+    400032: bipamazon-L-Finger2
+    400034: bipamazon-L-Finger21
+    400036: bipamazon-L-Finger22
+    400038: bipamazon-L-Finger2Nub
+    400040: bipamazon-L-Finger3
+    400042: bipamazon-L-Finger31
+    400044: bipamazon-L-Finger32
+    400046: bipamazon-L-Finger3Nub
+    400048: bipamazon-L-Finger4
+    400050: bipamazon-L-Finger41
+    400052: bipamazon-L-Finger42
+    400054: bipamazon-L-Finger4Nub
+    400056: bipamazon-L-Foot
+    400058: bipamazon-L-Forearm
+    400060: bipamazon-L-Hand
+    400062: bipamazon-L-Thigh
+    400064: bipamazon-L-Toe0
+    400066: bipamazon-L-Toe0Nub
+    400068: bipamazon-L-Toe1
+    400070: bipamazon-L-Toe1Nub
+    400072: bipamazon-L-UpperArm
+    400074: bipamazon-Neck
+    400076: bipamazon-Pelvis
+    400078: bipamazon-R-Calf
+    400080: bipamazon-R-Clavicle
+    400082: bipamazon-R-Finger0
+    400084: bipamazon-R-Finger01
+    400086: bipamazon-R-Finger02
+    400088: bipamazon-R-Finger0Nub
+    400090: bipamazon-R-Finger1
+    400092: bipamazon-R-Finger11
+    400094: bipamazon-R-Finger12
+    400096: bipamazon-R-Finger1Nub
+    400098: bipamazon-R-Finger2
+    400100: bipamazon-R-Finger21
+    400102: bipamazon-R-Finger22
+    400104: bipamazon-R-Finger2Nub
+    400106: bipamazon-R-Finger3
+    400108: bipamazon-R-Finger31
+    400110: bipamazon-R-Finger32
+    400112: bipamazon-R-Finger3Nub
+    400114: bipamazon-R-Finger4
+    400116: bipamazon-R-Finger41
+    400118: bipamazon-R-Finger42
+    400120: bipamazon-R-Finger4Nub
+    400122: bipamazon-R-Foot
+    400124: bipamazon-R-Forearm
+    400126: bipamazon-R-Hand
+    400128: bipamazon-R-Thigh
+    400130: bipamazon-R-Toe0
+    400132: bipamazon-R-Toe0Nub
+    400134: bipamazon-R-Toe1
+    400136: bipamazon-R-Toe1Nub
+    400138: bipamazon-R-UpperArm
+    400140: bipamazon-Spine
+    400142: bipamazon-Spine1
+    400144: bipamazon-Spine2
+    400146: bone_brows_L
+    400148: bone_brows_R
+    400150: bone_cheeks_L
+    400152: bone_cheeks_R
+    400154: bone_ear_L
+    400156: bone_ear_R
+    400158: bone_frown
+    400160: bone_frown001
+    400162: bone_mouth_up_L
+    400164: bone_mouth_up_R
+    400166: bone_neck_nerve_L_back
+    400168: bone_neck_nerve_L_front
+    400170: bone_neck_nerve_R_back
+    400172: bone_neck_nerve_R_front
+    400174: bone_oeil_d
+    400176: bone_oeil_g
+    400178: bone_paupiere_L_down
+    400180: bone_paupiere_L_up
+    400182: bone_paupiere_r_down
+    400184: bone_paupiere_r_up
+    400186: dummy_hand_L
+    400188: dummy_hand_r
+    400190: dummy_mouth_corner_L
+    400192: dummy_mouth_corner_L2
+    400194: dummy_mouth_corner_R
+    400196: dummy_mouth_corner_R2
+    400198: dummy_mouth_down_L
+    400200: dummy_mouth_down_R
+    400202: machoire
+    400204: narine_l
+    400206: narine_r
+    4300000: Amazon_Generic_Male
+    9500000: //RootNode
+    13700000: Amazon_Generic_Male
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 3
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human:
+    - boneName: bipamazon
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Thigh
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Thigh
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Calf
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Calf
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Foot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Foot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-Spine1
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-Spine2
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Clavicle
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Clavicle
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-UpperArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-UpperArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Forearm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Forearm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Hand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Hand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Toe1
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Toe1
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bone_ear_L
+      humanName: LeftEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bone_ear_R
+      humanName: RightEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: machoire
+      humanName: Jaw
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Finger4
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Finger41
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Finger42
+      humanName: Left Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Finger0
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Finger01
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Finger02
+      humanName: Left Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Finger1
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Finger11
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Finger12
+      humanName: Left Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Finger3
+      humanName: Left Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Finger31
+      humanName: Left Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Finger32
+      humanName: Left Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Finger2
+      humanName: Left Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Finger21
+      humanName: Left Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-L-Finger22
+      humanName: Left Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Finger4
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Finger41
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Finger42
+      humanName: Right Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Finger0
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Finger01
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Finger02
+      humanName: Right Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Finger1
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Finger11
+      humanName: Right Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Finger12
+      humanName: Right Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Finger3
+      humanName: Right Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Finger31
+      humanName: Right Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Finger32
+      humanName: Right Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Finger2
+      humanName: Right Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Finger21
+      humanName: Right Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bipamazon-R-Finger22
+      humanName: Right Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Amazon_Generic_Male(Clone)
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Amazon_Generic_Male
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Armature
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bipamazon
+      position: {x: 0, y: 2.01242852, z: 0}
+      rotation: {x: -1.49148036e-07, y: 1.49148036e-07, z: -.707106829, w: .707106829}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bipamazon-Pelvis
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: -.000470966101, z: 0, w: .999999881}
+      scale: {x: 1.00000048, y: 1, z: 1.00000036}
+      transformModified: 1
+    - name: bipamazon-Spine
+      position: {x: -.178634003, y: 0, z: 0}
+      rotation: {x: 0, y: 2.98023224e-08, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bipamazon-Spine1
+      position: {x: -.211374, y: 0, z: -.0327760018}
+      rotation: {x: 2.98023224e-08, y: -.0775644481, z: -2.98023224e-08, w: .996987402}
+      scale: {x: 1.00000024, y: 1, z: 1.00000036}
+      transformModified: 1
+    - name: bipamazon-Spine2
+      position: {x: -.316807985, y: 0, z: 0}
+      rotation: {x: -7.45058131e-08, y: -.0269760061, z: -1.4901163e-08, w: .999636114}
+      scale: {x: 1.0000006, y: 1.00000012, z: 1.00000048}
+      transformModified: 1
+    - name: bipamazon-Neck
+      position: {x: -.430676013, y: 0, z: 0}
+      rotation: {x: 2.98023188e-08, y: 1.49011594e-08, z: 7.45057989e-08, w: 1}
+      scale: {x: .999999881, y: .999999762, z: 1}
+      transformModified: 1
+    - name: bipamazon-L-Clavicle
+      position: {x: .0945350006, y: -.154293001, z: .00432599988}
+      rotation: {x: -.429450601, y: -.572675228, z: .530731797, w: .453805208}
+      scale: {x: .99999994, y: 1.00000036, z: 1}
+      transformModified: 1
+    - name: bipamazon-L-UpperArm
+      position: {x: -.231549993, y: 0, z: 0}
+      rotation: {x: -.212184981, y: .0766726881, z: .0437530652, w: .973234117}
+      scale: {x: 1, y: 1.00000083, z: 1.00000048}
+      transformModified: 1
+    - name: bipamazon-L-Forearm
+      position: {x: -.54143399, y: 0, z: 0}
+      rotation: {x: -.00680820458, y: -.00761160906, z: .0409802236, w: .999107778}
+      scale: {x: .999999762, y: .999999821, z: .999999642}
+      transformModified: 1
+    - name: bipamazon-L-Hand
+      position: {x: -.556690991, y: 0, z: 0}
+      rotation: {x: 3.52738169e-07, y: -.0396798663, z: -.0316182412, w: .998712063}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bipamazon-L-Finger0
+      position: {x: -.0289520007, y: -.0561890006, z: .0527959988}
+      rotation: {x: .396331191, y: .158337176, z: .0381699651, w: .90354526}
+      scale: {x: 1.00000083, y: 1.00000012, z: 1.00000024}
+      transformModified: 1
+    - name: bipamazon-L-Finger01
+      position: {x: -.0965040028, y: 0, z: 0}
+      rotation: {x: -.384345651, y: -.0332247019, z: -.00510083558, w: .922577143}
+      scale: {x: 1.00000095, y: 1.00000048, z: .999998808}
+      transformModified: 1
+    - name: bipamazon-L-Finger02
+      position: {x: -.0743310004, y: 0, z: 0}
+      rotation: {x: -.0893278345, y: -.0405675881, z: -.00790803041, w: .995144427}
+      scale: {x: 1.0000006, y: 1.00000119, z: .999997854}
+      transformModified: 1
+    - name: bipamazon-L-Finger0Nub
+      position: {x: -.064786002, y: 0, z: 0}
+      rotation: {x: 1.22189476e-06, y: -6.70552041e-08, z: 5.96046235e-08, w: 1}
+      scale: {x: 1.00000012, y: .999999881, z: .999997139}
+      transformModified: 1
+    - name: bipamazon-L-Finger1
+      position: {x: -.192954004, y: -.0109869996, z: .0576560013}
+      rotation: {x: -.0848042741, y: .0680913776, z: .0441378318, w: .993088007}
+      scale: {x: .999999881, y: 1.00000155, z: .999999881}
+      transformModified: 1
+    - name: bipamazon-L-Finger11
+      position: {x: -.0875480026, y: 0, z: 0}
+      rotation: {x: -.163565025, y: -.0307021178, z: .01053432, w: .985998452}
+      scale: {x: .999999285, y: 1.00000143, z: .999999404}
+      transformModified: 1
+    - name: bipamazon-L-Finger12
+      position: {x: -.0655039996, y: 0, z: 0}
+      rotation: {x: .376139015, y: .0338170901, z: .00920160301, w: -.925900221}
+      scale: {x: 1.00000012, y: 1.00000107, z: 1.00000072}
+      transformModified: 1
+    - name: bipamazon-L-Finger1Nub
+      position: {x: -.0537649989, y: 0, z: 0}
+      rotation: {x: -2.19326421e-06, y: -3.23168848e-07, z: 2.98023167e-07, w: 1}
+      scale: {x: 1, y: .999999702, z: .999999762}
+      transformModified: 1
+    - name: bipamazon-L-Finger2
+      position: {x: -.191508994, y: .034506999, z: .0248770006}
+      rotation: {x: -.197248787, y: .0664742365, z: .0468883105, w: .976972699}
+      scale: {x: 1, y: 1.00000143, z: .999999523}
+      transformModified: 1
+    - name: bipamazon-L-Finger21
+      position: {x: -.0924400017, y: 0, z: 0}
+      rotation: {x: -.135190815, y: -.0306555219, z: .00929144863, w: .990301669}
+      scale: {x: .999998868, y: 1.00000072, z: .999999225}
+      transformModified: 1
+    - name: bipamazon-L-Finger22
+      position: {x: -.0683809966, y: 0, z: 0}
+      rotation: {x: .541054189, y: .0285948757, z: .0194054861, w: -.840277493}
+      scale: {x: .999998748, y: 1.00000012, z: .999999642}
+      transformModified: 1
+    - name: bipamazon-L-Finger2Nub
+      position: {x: -.0545199998, y: 0, z: 0}
+      rotation: {x: -1.84774353e-06, y: -2.23517361e-07, z: 1.78813892e-07, w: 1}
+      scale: {x: .999998987, y: .999998868, z: .999999046}
+      transformModified: 1
+    - name: bipamazon-L-Finger3
+      position: {x: -.170243993, y: .0685750023, z: -.0143919997}
+      rotation: {x: -.3161183, y: .0652380809, z: .0498424657, w: .945160806}
+      scale: {x: .99999994, y: 1.0000006, z: 1.00000024}
+      transformModified: 1
+    - name: bipamazon-L-Finger31
+      position: {x: -.0839739963, y: 0, z: 0}
+      rotation: {x: .352264613, y: .0249657072, z: .00158703385, w: -.935566068}
+      scale: {x: .999999464, y: 1.00000119, z: 1}
+      transformModified: 1
+    - name: bipamazon-L-Finger32
+      position: {x: -.0602619983, y: 0, z: 0}
+      rotation: {x: -.997835398, y: .0171818919, z: -.0309497863, w: .0554214269}
+      scale: {x: .999999285, y: 1.00000024, z: 1.0000006}
+      transformModified: 1
+    - name: bipamazon-L-Finger3Nub
+      position: {x: -.037535999, y: 0, z: 0}
+      rotation: {x: -5.40166809e-07, y: 1.67637978e-07, z: -1.21071881e-08, w: 1}
+      scale: {x: .999997854, y: .99999994, z: .999999046}
+      transformModified: 1
+    - name: bipamazon-L-Finger4
+      position: {x: -.142252997, y: .0897459984, z: -.0572870001}
+      rotation: {x: .500319839, y: .283494025, z: -.13514097, w: -.806875527}
+      scale: {x: .999998808, y: 1.00000119, z: 1.00000095}
+      transformModified: 1
+    - name: bipamazon-L-Finger41
+      position: {x: -.0636570007, y: 0, z: 0}
+      rotation: {x: -.0760775954, y: -.031125702, z: .00342241791, w: .996610105}
+      scale: {x: .999998212, y: 1.00000012, z: 1.0000006}
+      transformModified: 1
+    - name: bipamazon-L-Finger42
+      position: {x: -.0503140017, y: 0, z: 0}
+      rotation: {x: -.903455675, y: .016302336, z: -.0262342989, w: -.427567482}
+      scale: {x: .99999851, y: 1.00000048, z: .99999994}
+      transformModified: 1
+    - name: bipamazon-L-Finger4Nub
+      position: {x: -.0404389985, y: 0, z: 0}
+      rotation: {x: 3.68952715e-05, y: -4.02331295e-07, z: -1.08033404e-07, w: 1}
+      scale: {x: .999997318, y: 1, z: .999999106}
+      transformModified: 1
+    - name: dummy_hand_L
+      position: {x: -.247851998, y: .0424150005, z: -.0904320031}
+      rotation: {x: 8.94069458e-08, y: .497241765, z: -.617270648, w: .609694779}
+      scale: {x: .999999881, y: 1.00000036, z: .999999762}
+      transformModified: 1
+    - name: bipamazon-R-Clavicle
+      position: {x: .0945350006, y: .154293001, z: .00432599988}
+      rotation: {x: -.429450601, y: .57267803, z: .530731738, w: -.453801572}
+      scale: {x: 1.00000036, y: 1.0000006, z: 1.0000006}
+      transformModified: 1
+    - name: bipamazon-R-UpperArm
+      position: {x: -.231548995, y: 0, z: 0}
+      rotation: {x: .212180331, y: .0766756758, z: -.043753624, w: .973234773}
+      scale: {x: .999999523, y: .999999881, z: 1}
+      transformModified: 1
+    - name: bipamazon-R-Forearm
+      position: {x: -.54143399, y: 0, z: 0}
+      rotation: {x: .00680991774, y: -.00761173572, z: -.0409799181, w: .999107778}
+      scale: {x: 1, y: 1.00000072, z: .999999523}
+      transformModified: 1
+    - name: bipamazon-R-Hand
+      position: {x: -.556689978, y: 0, z: 0}
+      rotation: {x: 5.96046164e-08, y: -.0396750607, z: .031614624, w: .998712361}
+      scale: {x: 1, y: 1.00000024, z: .999999285}
+      transformModified: 1
+    - name: bipamazon-R-Finger0
+      position: {x: -.0289520007, y: .0561890006, z: .0527959988}
+      rotation: {x: -.39632532, y: .158332303, z: -.0381676666, w: .903548777}
+      scale: {x: 1.00000107, y: .999999344, z: .999999464}
+      transformModified: 1
+    - name: bipamazon-R-Finger01
+      position: {x: -.0965040028, y: 0, z: 0}
+      rotation: {x: .384473383, y: -.0332191736, z: .00510622049, w: .922524095}
+      scale: {x: 1.00000083, y: .999999046, z: .999998093}
+      transformModified: 1
+    - name: bipamazon-R-Finger02
+      position: {x: -.0743290037, y: 0, z: 0}
+      rotation: {x: .894854069, y: 2.38418465e-07, z: 7.74860041e-07, w: -.446358889}
+      scale: {x: 1, y: .99999845, z: .99999845}
+      transformModified: 1
+    - name: bipamazon-R-Finger0Nub
+      position: {x: -.0647829995, y: 0, z: 0}
+      rotation: {x: 8.86618977e-07, y: -4.47034779e-07, z: 2.94297905e-07, w: 1}
+      scale: {x: .999999046, y: .999997914, z: .999998093}
+      transformModified: 1
+    - name: bipamazon-R-Finger1
+      position: {x: -.192954004, y: .0109850001, z: .0576549992}
+      rotation: {x: .0847909376, y: .0680894256, z: -.0441352539, w: .993089318}
+      scale: {x: 1, y: 1.00000095, z: .999997854}
+      transformModified: 1
+    - name: bipamazon-R-Finger11
+      position: {x: -.0875480026, y: 0, z: 0}
+      rotation: {x: .163561031, y: -.0307029709, z: -.0105360821, w: .985999107}
+      scale: {x: 1.00000036, y: 1.00000203, z: 1}
+      transformModified: 1
+    - name: bipamazon-R-Finger12
+      position: {x: -.0655039996, y: 0, z: 0}
+      rotation: {x: .424317509, y: -1.07195194e-06, z: 2.68220816e-07, w: -.905513525}
+      scale: {x: 1.00000036, y: 1.00000095, z: 1.00000048}
+      transformModified: 1
+    - name: bipamazon-R-Finger1Nub
+      position: {x: -.0537640005, y: 0, z: 0}
+      rotation: {x: -1.71363311e-07, y: -1.49011576e-08, z: 0, w: 1}
+      scale: {x: .999999881, y: 1.00000012, z: 1}
+      transformModified: 1
+    - name: bipamazon-R-Finger2
+      position: {x: -.191508994, y: -.0345080011, z: .0248760004}
+      rotation: {x: .197236583, y: .0664716661, z: -.0468836166, w: .976975501}
+      scale: {x: 1, y: 1.00000012, z: .999998271}
+      transformModified: 1
+    - name: bipamazon-R-Finger21
+      position: {x: -.092441, y: 0, z: 0}
+      rotation: {x: .135220185, y: -.0306573417, z: -.00929047819, w: .990297675}
+      scale: {x: .999999821, y: 1.00000024, z: .999999702}
+      transformModified: 1
+    - name: bipamazon-R-Finger22
+      position: {x: -.0683809966, y: 0, z: 0}
+      rotation: {x: .448893547, y: 7.84173324e-07, z: 2.08616186e-07, w: -.893585265}
+      scale: {x: .999999106, y: 1.00000012, z: .999999106}
+      transformModified: 1
+    - name: bipamazon-R-Finger2Nub
+      position: {x: -.0545190014, y: 0, z: 0}
+      rotation: {x: -4.09781961e-07, y: -2.75671511e-07, z: -9.2200942e-08, w: 1}
+      scale: {x: .999998808, y: .999997854, z: .999998927}
+      transformModified: 1
+    - name: bipamazon-R-Finger3
+      position: {x: -.170245007, y: -.0685750023, z: -.0143910004}
+      rotation: {x: .316128671, y: .0652344674, z: -.0498370603, w: .945157886}
+      scale: {x: .999998927, y: 1.00000048, z: .999999285}
+      transformModified: 1
+    - name: bipamazon-R-Finger31
+      position: {x: -.083972998, y: 0, z: 0}
+      rotation: {x: .352244198, y: -.0249700584, z: .00158556493, w: .935573697}
+      scale: {x: .999999166, y: 1.00000155, z: .999999583}
+      transformModified: 1
+    - name: bipamazon-R-Finger32
+      position: {x: -.0602619983, y: 0, z: 0}
+      rotation: {x: .573957443, y: -1.82725364e-06, z: 2.18301852e-06, w: -.818885148}
+      scale: {x: .999999404, y: 1.00000095, z: 1.00000024}
+      transformModified: 1
+    - name: bipamazon-R-Finger3Nub
+      position: {x: -.037535999, y: 0, z: 0}
+      rotation: {x: -4.22820335e-07, y: -2.06753569e-07, z: 1.44729682e-07, w: 1}
+      scale: {x: .999998093, y: .99999994, z: .999998271}
+      transformModified: 1
+    - name: bipamazon-R-Finger4
+      position: {x: -.142253995, y: -.0897459984, z: -.0572870001}
+      rotation: {x: .500323474, y: -.283493847, z: -.135133922, w: .806874514}
+      scale: {x: .999999046, y: 1.00000024, z: 1.00000024}
+      transformModified: 1
+    - name: bipamazon-R-Finger41
+      position: {x: -.0636570007, y: 0, z: 0}
+      rotation: {x: .0760876909, y: -.0311264135, z: -.00342224422, w: .99660933}
+      scale: {x: .999999821, y: .999999523, z: .999999523}
+      transformModified: 1
+    - name: bipamazon-R-Finger42
+      position: {x: -.0503140017, y: 0, z: 0}
+      rotation: {x: .270370245, y: 2.11689576e-06, z: 9.38772928e-07, w: -.962756395}
+      scale: {x: .999998927, y: 1.00000095, z: 1.00000012}
+      transformModified: 1
+    - name: bipamazon-R-Finger4Nub
+      position: {x: -.0404389985, y: 0, z: 0}
+      rotation: {x: 4.96394819e-07, y: -7.26431466e-08, z: 4.92000147e-08, w: 1}
+      scale: {x: 1, y: .99999994, z: .999998987}
+      transformModified: 1
+    - name: dummy_hand_r
+      position: {x: -.247850001, y: -.0424150005, z: -.0904269964}
+      rotation: {x: 5.45159423e-07, y: -.49724263, z: -.617271125, w: -.609693587}
+      scale: {x: .999999642, y: 1.00000048, z: .999999881}
+      transformModified: 1
+    - name: bipamazon-Head
+      position: {x: -.184845999, y: 0, z: .132621005}
+      rotation: {x: -1.42710785e-08, y: -.629031003, z: 0, w: .777380288}
+      scale: {x: 1.0000006, y: 1.00000012, z: 1.00000048}
+      transformModified: 1
+    - name: bipamazon-HeadNub
+      position: {x: .142579004, y: -1.99999999e-06, z: .434204996}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bone_oeil_d
+      position: {x: .212116003, y: .0711160004, z: .154646993}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bone_oeil_g
+      position: {x: .212116003, y: -.0711089969, z: .154646993}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bone_paupiere_L_up
+      position: {x: .209261, y: -.0726810023, z: .154781997}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bone_paupiere_L_down
+      position: {x: .209261, y: -.0726810023, z: .154783994}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bone_paupiere_r_up
+      position: {x: .209261, y: .0699729994, z: .154783994}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bone_paupiere_r_down
+      position: {x: .209261, y: .0699729994, z: .154783994}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bone_mouth_up_R
+      position: {x: .289820999, y: .0175000001, z: .0194990002}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bone_mouth_up_L
+      position: {x: .289817989, y: -.0175020006, z: .0194959994}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bone_cheeks_R
+      position: {x: .248225003, y: .0891409963, z: .089497}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bone_cheeks_L
+      position: {x: .248225003, y: -.0891430005, z: .0894979984}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bone_brows_R
+      position: {x: .270648986, y: .067528002, z: .191822007}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bone_brows_L
+      position: {x: .270604998, y: -.0675330013, z: .191837996}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bone_frown
+      position: {x: .283964992, y: -.00139500003, z: .209677994}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bone_frown001
+      position: {x: .291216999, y: -.00139500003, z: .164747998}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bone_ear_R
+      position: {x: .136605993, y: .147740006, z: .151665002}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: narine_r
+      position: {x: .289820999, y: .0175000001, z: .0749899969}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: narine_l
+      position: {x: .289817989, y: -.0175020006, z: .0749870017}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bone_ear_L
+      position: {x: .136607006, y: -.147735, z: .151666}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: machoire
+      position: {x: .0699710026, y: 0, z: .0751169994}
+      rotation: {x: -2.72703371e-08, y: 7.51792015e-08, z: 1.36351654e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: dummy_mouth_down_R
+      position: {x: .0340819992, y: .00411200011, z: -.011438}
+      rotation: {x: 2.85116819e-08, y: 1.93971843e-08, z: -1.42558305e-14, w: 1}
+      scale: {x: .999998927, y: .999998987, z: .999998927}
+      transformModified: 1
+    - name: dummy_mouth_corner_R
+      position: {x: .0312339999, y: .010547, z: -.0113249999}
+      rotation: {x: 2.85116819e-08, y: 1.93971843e-08, z: -1.42558305e-14, w: 1}
+      scale: {x: .999998927, y: .999998987, z: .999998927}
+      transformModified: 1
+    - name: dummy_mouth_corner_L
+      position: {x: .032664001, y: -.0105459997, z: -.0113230003}
+      rotation: {x: 2.85116819e-08, y: 1.93971843e-08, z: -1.42558305e-14, w: 1}
+      scale: {x: .999998927, y: .999998987, z: .999998927}
+      transformModified: 1
+    - name: dummy_mouth_down_L
+      position: {x: .0340819992, y: -.00408799993, z: -.011438}
+      rotation: {x: 2.85116819e-08, y: 1.93971843e-08, z: -1.42558305e-14, w: 1}
+      scale: {x: .999998927, y: .999998987, z: .999998927}
+      transformModified: 1
+    - name: dummy_mouth_corner_R2
+      position: {x: .0274609998, y: .0177970007, z: -.0102859996}
+      rotation: {x: 2.85116819e-08, y: 1.93971843e-08, z: -1.42558305e-14, w: 1}
+      scale: {x: .999998927, y: .999998987, z: .999998927}
+      transformModified: 1
+    - name: dummy_mouth_corner_L2
+      position: {x: -.0281509999, y: .0169380009, z: .0105140004}
+      rotation: {x: 2.85116819e-08, y: 1.93971843e-08, z: -1.42558305e-14, w: 1}
+      scale: {x: .999998927, y: .999998987, z: .999998927}
+      transformModified: 1
+    - name: bone_neck_nerve_L_back
+      position: {x: -.0509489998, y: -.0948840007, z: .173674002}
+      rotation: {x: -1.42710785e-08, y: -.629031003, z: 0, w: .777380288}
+      scale: {x: 1.0000006, y: 1.00000012, z: 1.00000048}
+      transformModified: 1
+    - name: bone_neck_nerve_L_front
+      position: {x: -.0309929997, y: -.0331799984, z: .224326}
+      rotation: {x: -1.26016164e-09, y: -.62902981, z: 0, w: .777381241}
+      scale: {x: 1.00000036, y: 1.00000012, z: 1.00000036}
+      transformModified: 1
+    - name: bone_neck_nerve_R_front
+      position: {x: -.0309939999, y: .0331869982, z: .224326}
+      rotation: {x: -1.42710785e-08, y: -.629031003, z: 0, w: .777380288}
+      scale: {x: 1.0000006, y: 1.00000012, z: 1.00000048}
+      transformModified: 1
+    - name: bone_neck_nerve_R_back
+      position: {x: -.0509469993, y: .0948809981, z: .173673004}
+      rotation: {x: -1.42710785e-08, y: -.629031003, z: 0, w: .777380288}
+      scale: {x: 1.0000006, y: 1.00000012, z: 1.00000048}
+      transformModified: 1
+    - name: bipamazon-L-Thigh
+      position: {x: .178634003, y: -.208473995, z: 0}
+      rotation: {x: 0, y: -.998389423, z: 0, w: .0567328632}
+      scale: {x: 1.00000024, y: 1, z: 1.00000036}
+      transformModified: 1
+    - name: bipamazon-L-Calf
+      position: {x: -.892809987, y: 0, z: 0}
+      rotation: {x: 0, y: .000545889139, z: 0, w: .999999881}
+      scale: {x: 1.00000072, y: .999998868, z: 1.00000048}
+      transformModified: 1
+    - name: bipamazon-L-Foot
+      position: {x: -.913022995, y: 0, z: 0}
+      rotation: {x: 0, y: -2.98023188e-08, z: 0, w: 1}
+      scale: {x: 1, y: .999998033, z: 1}
+      transformModified: 1
+    - name: bipamazon-L-Toe0
+      position: {x: -.115020998, y: -.108635999, z: -.392264009}
+      rotation: {x: -.154011443, y: .64773351, z: -.172595814, w: .725901246}
+      scale: {x: .999999285, y: .999998212, z: .999999523}
+      transformModified: 1
+    - name: bipamazon-L-Toe0Nub
+      position: {x: -.0267830007, y: 0, z: 0}
+      rotation: {x: 2.82670882e-08, y: 1.27126869e-08, z: 5.96044423e-08, w: 1}
+      scale: {x: .999999881, y: .999996901, z: 1}
+      transformModified: 1
+    - name: bipamazon-L-Toe1
+      position: {x: -.113637999, y: -.0143719995, z: -.410988986}
+      rotation: {x: -.092437312, y: .659344792, z: -.103592053, w: .738910437}
+      scale: {x: 1, y: .999997139, z: 1.00000012}
+      transformModified: 1
+    - name: bipamazon-L-Toe1Nub
+      position: {x: -.0562580004, y: 0, z: 0}
+      rotation: {x: 1.6216287e-08, y: -5.16229059e-09, z: -2.08616257e-07, w: 1}
+      scale: {x: .999998748, y: .999994636, z: .999998927}
+      transformModified: 1
+    - name: bipamazon-R-Thigh
+      position: {x: .178634003, y: .208473995, z: 0}
+      rotation: {x: 0, y: -.998389423, z: 0, w: .0567328632}
+      scale: {x: 1.00000024, y: 1, z: 1.00000036}
+      transformModified: 1
+    - name: bipamazon-R-Calf
+      position: {x: -.892809987, y: 0, z: 0}
+      rotation: {x: 0, y: .000545889139, z: 0, w: .999999881}
+      scale: {x: 1.00000072, y: .999999881, z: 1.00000048}
+      transformModified: 1
+    - name: bipamazon-R-Foot
+      position: {x: -.913022995, y: 0, z: 0}
+      rotation: {x: 0, y: -2.98023188e-08, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: bipamazon-R-Toe0
+      position: {x: -.115020998, y: .108635001, z: -.392264009}
+      rotation: {x: .647724032, y: -.154144555, z: .725882351, w: -.172591761}
+      scale: {x: .999999702, y: 1.00000036, z: 1}
+      transformModified: 1
+    - name: bipamazon-R-Toe0Nub
+      position: {x: -.0267849993, y: 0, z: 0}
+      rotation: {x: 4.20543017e-07, y: -2.28450489e-07, z: 2.68208424e-07, w: 1}
+      scale: {x: .999998748, y: .999999702, z: 1}
+      transformModified: 1
+    - name: bipamazon-R-Toe1
+      position: {x: -.113637999, y: .0143710002, z: -.41099}
+      rotation: {x: .659344018, y: -.0925206169, z: .738902748, w: -.103577539}
+      scale: {x: .999999762, y: .999999285, z: .999999881}
+      transformModified: 1
+    - name: bipamazon-R-Toe1Nub
+      position: {x: -.0562589988, y: 0, z: 0}
+      rotation: {x: 1.92812832e-09, y: -2.80451715e-08, z: -1.19211236e-07, w: 1}
+      scale: {x: .999999285, y: 1.00000012, z: 1}
+      transformModified: 1
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
