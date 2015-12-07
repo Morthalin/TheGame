@@ -16,7 +16,7 @@ public class showObject : MonoBehaviour {
 	void Start () {
 		sc = GetComponent<SphereCollider>();
 		sc.isTrigger = true;
-		sc.radius = 100.0f;
+		sc.radius = 100.0f * 1/gameObject.transform.localScale.x;
 
 		if (NPCs) {
 			NPCs.SetActive (true);
@@ -85,14 +85,6 @@ public class showObject : MonoBehaviour {
 				items.SetActive (true);
 			}
 		}
-		/*if (NPCs) {
-			if (other.gameObject.name == "Player") {
-				//Debug.Log ("Enter");
-				NPCs.SetActive (true);
-			}
-		}
-
-		*/
 	}
 
 	void OnTriggerEnter(Collider other) {
@@ -109,20 +101,9 @@ public class showObject : MonoBehaviour {
 		}
 		if (items) {
 			if (other.gameObject.name == "Player") {
-				//Debug.Log ("Enter");
 				items.SetActive (true);
 			}
 		}
-		/*
-		if (NPCs) {
-			if (other.gameObject.name == "Player") {
-				//Debug.Log ("Enter");
-				NPCs.SetActive (true);
-			}
-		}
-
-
-		 */
 	}
 
 	// Update is called once per frame

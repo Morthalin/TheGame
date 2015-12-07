@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+[RequireComponent(typeof(Collider))]
 public class trigger : MonoBehaviour {
 
 	public GameObject Player;
