@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class giveMovement : MonoBehaviour {
+public class killByRock : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -25,7 +25,8 @@ public class giveMovement : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 	
 	}
 }

@@ -144,7 +144,6 @@ public class MainMenu : MonoBehaviour
         mainMenu.gameObject.SetActive(false);
         exitMenu.gameObject.SetActive(false);
         settingsMenu.gameObject.SetActive(false);
-        GameObject.Find("Player").GetComponent<BasePlayer>().pause--;
     }
 
     public void savePressed()

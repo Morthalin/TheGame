@@ -10,7 +10,7 @@ public class InfoTable : MonoBehaviour {
 		statPanel = GameObject.Find ("Interface").transform.Find("InfoTable");
 	
 		if (!statPanel) {
-			Debug.Log ("InfoTable has not been loaded from Interface.");
+			Debug.LogError ("InfoTable has not been loaded from Interface.");
 			return;
 		}
 		statPanel.gameObject.SetActive(isActive);
@@ -19,6 +19,12 @@ public class InfoTable : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// zobrazi / skryje statistiky hrace
+
+        if(GameObject.Find("Player").GetComponent<BasePlayer>().pause == 0 && isActive)
+        {
+            isActive = !isActive;
+            statPanel.gameObject.SetActive(isActive);
+        }
 
 		if (Input.GetKeyDown ("j")) {
 			isActive = !isActive;

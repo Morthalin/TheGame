@@ -117,7 +117,7 @@ public class Loot : MonoBehaviour {
 			}
 		}
 		// ukazat/schovat inventar
-		if (Input.GetKeyDown ("i")) {
+		if (Input.GetKeyDown ("i") || (GameObject.Find("Player").GetComponent<BasePlayer>().pause == 0 && showInventoryPanel)) {
 			if(showInventoryPanel){
 				showInventory (false);
 				showInventoryPanel = false;

@@ -38,6 +38,8 @@ public class BasePlayer: MonoBehaviour
     {
         LoadStats(player);
 
+        LoadScale();
+
         if (character == "Warrior")
         {
             playerClass = new BaseWarriorClass();
@@ -83,5 +85,10 @@ public class BasePlayer: MonoBehaviour
         command.Dispose();
         connection.Close();
         SqliteConnection.ClearAllPools();
+    }
+
+    private void LoadScale()
+    {
+        transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
     }
 }
