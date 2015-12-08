@@ -148,19 +148,22 @@ public class MainMenu : MonoBehaviour
 
     public void savePressed()
     {
-		BasePlayer pl = GameObject.Find ("Player").GetComponent<BasePlayer> ();
-		pl.inventory.Save ();
-        string path = "URI=file:" + Application.dataPath + "/Database/Database.s3db";
-        IDbConnection connection;
+        BasePlayer pl = GameObject.Find("Player").GetComponent<BasePlayer>();
+        if (pl.health > 0)
+        {
+            pl.inventory.Save();
+            string path = "URI=file:" + Application.dataPath + "/Database/Database.s3db";
+            IDbConnection connection;
 
-        connection = (IDbConnection)new SqliteConnection(path);
-        connection.Open();
-        IDbCommand command = connection.CreateCommand();
-        string sqlQuery = "UPDATE Players SET positionX = " + GameObject.Find("Player").transform.position.x.ToString() + ", positionY = " + GameObject.Find("Player").transform.position.y.ToString() + " + 1, positionZ = " + GameObject.Find("Player").transform.position.z.ToString() + " WHERE playerName = '" + GameObject.Find("Player").GetComponent<BasePlayer>().playerName + "';";
-        command.CommandText = sqlQuery;
-        command.ExecuteNonQuery();
-        command.Dispose();
-        connection.Close();
-        SqliteConnection.ClearAllPools();
+            connection = (IDbConnection)new SqliteConnection(path);
+            connection.Open();
+            IDbCommand command = connection.CreateCommand();
+            string sqlQuery = "UPDATE Players SET positionX = " + GameObject.Find("Player").transform.position.x.ToString() + ", positionY = " + GameObject.Find("Player").transform.position.y.ToString() + " + 1, positionZ = " + GameObject.Find("Player").transform.position.z.ToString() + " WHERE playerName = '" + GameObject.Find("Player").GetComponent<BasePlayer>().playerName + "';";
+            command.CommandText = sqlQuery;
+            command.ExecuteNonQuery();
+            command.Dispose();
+            connection.Close();
+            SqliteConnection.ClearAllPools();
+        }
     }
 }

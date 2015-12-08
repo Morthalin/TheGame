@@ -37,7 +37,7 @@ public class BasePlayer: MonoBehaviour
     public void LoadPlayer (string player)
     {
         LoadStats(player);
-
+        transform.GetComponent<Animator>().SetBool("Death", false);
         LoadScale();
 
         if (character == "Warrior")

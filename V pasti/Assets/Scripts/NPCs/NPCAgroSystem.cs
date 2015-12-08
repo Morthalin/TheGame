@@ -97,8 +97,8 @@ public class NPCAgroSystem : MonoBehaviour
             if (baseNPC.health <= 0 && !deadNPC)
             {
                 deadNPC = true;
-                animator.SetTrigger("die");
                 animator.SetBool("death", true);
+                animator.SetTrigger("die");
                 animator.SetBool("isCombat", false);
                 targetAnimator.SetBool("isCombat", false);
                 transform.Find("HPFrame").gameObject.SetActive(false);
@@ -115,8 +115,8 @@ public class NPCAgroSystem : MonoBehaviour
             //smrt hraca
             deadPlayer = true;
             goingHome = true;
-            targetAnimator.SetTrigger("die");
             targetAnimator.SetBool("death", true);
+            targetAnimator.SetTrigger("die");
             animator.SetBool("isCombat", false);
             targetAnimator.SetBool("isCombat", false);
         }
