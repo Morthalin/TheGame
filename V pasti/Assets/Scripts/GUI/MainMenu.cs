@@ -140,6 +140,8 @@ public class MainMenu : MonoBehaviour
     public void loadGamePressedIngame()
     {
         GameObject.Find("Interface").GetComponent<LoadPlayer>().loadPlayer(transform.FindChild("Hraci").GetComponent<Dropdown>().options[transform.FindChild("Hraci").GetComponent<Dropdown>().value].text);
+        transform.FindChild("Hraci").gameObject.SetActive(false);
+        transform.FindChild("loadHruBut").gameObject.SetActive(false);
         mainMenu.parent.gameObject.SetActive(false);
         mainMenu.gameObject.SetActive(false);
         exitMenu.gameObject.SetActive(false);
@@ -148,6 +150,11 @@ public class MainMenu : MonoBehaviour
 
     public void savePressed()
     {
+        if (transform.FindChild("Hraci").gameObject.activeSelf)
+        {
+            transform.FindChild("Hraci").gameObject.SetActive(false);
+            transform.FindChild("loadHruBut").gameObject.SetActive(false);
+        }
         BasePlayer pl = GameObject.Find("Player").GetComponent<BasePlayer>();
         if (pl.health > 0)
         {
@@ -158,7 +165,12 @@ public class MainMenu : MonoBehaviour
             connection = (IDbConnection)new SqliteConnection(path);
             connection.Open();
             IDbCommand command = connection.CreateCommand();
-            string sqlQuery = "UPDATE Players SET positionX = " + GameObject.Find("Player").transform.position.x.ToString() + ", positionY = " + GameObject.Find("Player").transform.position.y.ToString() + " + 1, positionZ = " + GameObject.Find("Player").transform.position.z.ToString() + " WHERE playerName = '" + GameObject.Find("Player").GetComponent<BasePlayer>().playerName + "';";
+            string sqlQuery = "UPDATE Players SET positionX = " + GameObject.Find("Player").transform.position.x.ToString() + @",
+                                positionY = " + GameObject.Find("Player").transform.position.y.ToString() + @" + 1,
+                                positionZ = " + GameObject.Find("Player").transform.position.z.ToString() + @",
+                                rotationY = " + GameObject.Find("Player").transform.rotation.eulerAngles.y + @",
+                                storyLine = " + GameObject.Find("Player").GetComponent<BasePlayer>().storyCheckpoint.ToString() + @" 
+                               WHERE playerName = '" + GameObject.Find("Player").GetComponent<BasePlayer>().playerName + "';";
             command.CommandText = sqlQuery;
             command.ExecuteNonQuery();
             command.Dispose();

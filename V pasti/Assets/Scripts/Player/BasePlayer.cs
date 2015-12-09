@@ -20,6 +20,7 @@ public class BasePlayer: MonoBehaviour
     public int activeArmor;
     public int pause;
     public bool attacking;
+    public int storyCheckpoint;
     private string character;
 
     void Update()
@@ -79,6 +80,8 @@ public class BasePlayer: MonoBehaviour
             minAttack = reader.GetInt32(9);
             maxAttack = reader.GetInt32(10);
             transform.position = new Vector3(float.Parse(reader[11].ToString()), float.Parse(reader[12].ToString()), float.Parse(reader[13].ToString()));
+            transform.rotation = Quaternion.Euler(new Vector3(0, float.Parse(reader[14].ToString()), 0));
+            storyCheckpoint = reader.GetInt32(15);
             attacking = false;
         }
         reader.Close();

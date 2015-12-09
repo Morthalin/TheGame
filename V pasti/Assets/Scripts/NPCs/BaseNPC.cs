@@ -13,12 +13,14 @@ public class BaseNPC : MonoBehaviour
     public int energy;
     public int armor;
     public bool hitted;
+    public bool inCombat;
     private Animator animator;
 
     void Awake()
     {
         animator = transform.GetComponent<Animator>();
         LoadNPC(creatureName);
+        inCombat = false;
     }
 
     void Update()

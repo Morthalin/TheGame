@@ -58,7 +58,7 @@ public class WaypointMovement : MonoBehaviour
 
     void Move()
     {
-        if ((transform.position - waypoints[position].position).sqrMagnitude < distanceToNext)
+        if ((transform.parent.position - waypoints[position].position).sqrMagnitude < distanceToNext)
         {
             position++;
             moving = false;
@@ -68,18 +68,18 @@ public class WaypointMovement : MonoBehaviour
         {
             if (singleMovementSpeed)
             {
-                transform.position = transform.position + transform.TransformDirection(0f, 0f, movementSpeeds[0] * Time.deltaTime);
+                transform.parent.position = transform.parent.position + transform.parent.TransformDirection(0f, 0f, movementSpeeds[0] * Time.deltaTime);
             }
             else
             {
-                transform.position = transform.position + transform.TransformDirection(0f, 0f, movementSpeeds[position] * Time.deltaTime);
+                transform.parent.position = transform.parent.position + transform.parent.TransformDirection(0f, 0f, movementSpeeds[position] * Time.deltaTime);
             }
         }
     }
 
     void Turn()
     {
-        float angle = Vector3.Angle(waypoints[position].position - transform.position, transform.forward);
+        float angle = Vector3.Angle(waypoints[position].position - transform.parent.position, transform.parent.forward);
         if (angle < 1f)
         {
             if (smooth)
@@ -97,28 +97,28 @@ public class WaypointMovement : MonoBehaviour
         {
             if (singleRotationSpeed)
             {
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(waypoints[position].position - transform.position), Time.deltaTime * rotationSpeeds[0]);
+                transform.parent.rotation = Quaternion.Lerp(transform.parent.rotation, Quaternion.LookRotation(waypoints[position].position - transform.parent.position), Time.deltaTime * rotationSpeeds[0]);
             }
             else
             {
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(waypoints[position].position - transform.position), Time.deltaTime * rotationSpeeds[position]);
+                transform.parent.rotation = Quaternion.Lerp(transform.parent.rotation, Quaternion.LookRotation(waypoints[position].position - transform.parent.position), Time.deltaTime * rotationSpeeds[position]);
             }
         }
     }
 
     void nextWaypoint()
     {
-        if (transform.parent.name == "Camera Target" && position == 0)
+        if (transform.parent.parent.name == "Camera Target" && position == 0)
         {
-            transform.parent.parent.GetComponent<BasePlayer>().pause++;
+            transform.parent.parent.parent.GetComponent<BasePlayer>().pause++;
         }
 
         if (position == waypoints.Length)
         {
-            if (transform.parent.name == "Camera Target")
+            if (transform.parent.parent.name == "Camera Target")
             {
-                transform.parent.parent.GetComponent<BasePlayer>().pause--;
-                transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+                transform.parent.parent.parent.GetComponent<BasePlayer>().pause--;
+                transform.parent.localEulerAngles = new Vector3(0f, 0f, 0f);
             }
             enabled = false;
         }

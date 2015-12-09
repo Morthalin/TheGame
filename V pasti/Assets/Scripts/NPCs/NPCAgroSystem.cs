@@ -100,6 +100,7 @@ public class NPCAgroSystem : MonoBehaviour
                 animator.SetBool("death", true);
                 animator.SetTrigger("die");
                 animator.SetBool("isCombat", false);
+                baseNPC.inCombat = false;
                 targetAnimator.SetBool("isCombat", false);
                 transform.Find("HPFrame").gameObject.SetActive(false);
 
@@ -118,6 +119,7 @@ public class NPCAgroSystem : MonoBehaviour
             targetAnimator.SetBool("death", true);
             targetAnimator.SetTrigger("die");
             animator.SetBool("isCombat", false);
+            baseNPC.inCombat = false;
             targetAnimator.SetBool("isCombat", false);
         }
         else
@@ -153,6 +155,7 @@ public class NPCAgroSystem : MonoBehaviour
                 goingHome = true;
                 baseNPC.health = baseNPC.healthMax;
                 animator.SetBool("isCombat", false);
+                baseNPC.inCombat = false;
                 targetAnimator.SetBool("isCombat", false);
                 transform.Find("HPFrame").gameObject.SetActive(false);
             }
@@ -165,6 +168,7 @@ public class NPCAgroSystem : MonoBehaviour
                 movementVector = transform.TransformDirection(movementVector);
 
                 animator.SetBool("isCombat", true);
+                baseNPC.inCombat = true;
                 targetAnimator.SetBool("isCombat", true);
                 animator.SetBool("isRunning", true);
                 animator.SetBool("runningForward", true);
@@ -217,6 +221,7 @@ public class NPCAgroSystem : MonoBehaviour
             //hrac je mrtvy
             goingHome = true;
             animator.SetBool("isCombat", false);
+            baseNPC.inCombat = false;
             targetAnimator.SetBool("isCombat", false);
         }
     }
