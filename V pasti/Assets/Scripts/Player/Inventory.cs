@@ -43,17 +43,18 @@ public class Inventory
 		
 		connection = (IDbConnection)new SqliteConnection(path);
 		connection.Open();
-		IDbCommand command = connection.CreateCommand();
+		IDbCommand command;
 
 		foreach (var item in l.itemsQuantity.Keys) {
 			for (int i = 0; i < l.itemsQuantity[item]; i++) {
 				string sqlQuery = "insert into Inventory (playerID,itemID) values ("+playerID+","+item+");";
-				command.CommandText = sqlQuery;
-				command.ExecuteReader();
-			}
+                command = connection.CreateCommand();
+                command.CommandText = sqlQuery;
+				command.ExecuteNonQuery();
+                command.Dispose();
+            }
 		}
 		
-		command.Dispose();
 		connection.Close();
 		SqliteConnection.ClearAllPools();
 	}

@@ -32,8 +32,8 @@ public class Loot : MonoBehaviour {
 	// helper variables
 	private bool showPressE = false;
 	private bool showInventoryPanel = false;
-	private float timesCalseBefore = 0.0f;
-	private ArrayList loadedItems = new ArrayList();
+	//private float timesCalseBefore = 0.0f;
+	//private ArrayList loadedItems = new ArrayList();
 	// inventory buttons
 	private string description = "";
 	private int    inventorySellectedItem = -1;
@@ -117,14 +117,22 @@ public class Loot : MonoBehaviour {
 			}
 		}
 		// ukazat/schovat inventar
-		if (Input.GetKeyDown ("i") || (GameObject.Find("Player").GetComponent<BasePlayer>().pause == 0 && showInventoryPanel)) {
+        if((GameObject.Find("Player").GetComponent<BasePlayer>().pause == 0 && showInventoryPanel))
+        {
+            showInventory(false);
+            showInventoryPanel = false;
+        }
+
+		if (Input.GetKeyDown("c") || Input.GetKeyDown ("i") || (GameObject.Find("Player").GetComponent<BasePlayer>().pause == 0 && showInventoryPanel)) {
 			if(showInventoryPanel){
 				showInventory (false);
 				showInventoryPanel = false;
-			} else {
+                transform.GetComponent<BasePlayer>().pause--;
+            } else {
 				showInventory (true);
 				showInventoryPanel = true;
-			}
+                transform.GetComponent<BasePlayer>().pause++;
+            }
 		}
 		List<int> keys = new List<int> (activePotions.Keys);
 		foreach (var item in keys) {
@@ -210,12 +218,7 @@ public class Loot : MonoBehaviour {
 		if (show) {
 			inventorySellectedItem = -1;
 			description = "";
-            transform.GetComponent<BasePlayer>().pause++;
-
-		} else
-        {
-            transform.GetComponent<BasePlayer>().pause--;
-        }
+		}
 
 	}
 

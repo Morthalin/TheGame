@@ -22,14 +22,18 @@ public class InfoTable : MonoBehaviour {
 
         if(GameObject.Find("Player").GetComponent<BasePlayer>().pause == 0 && isActive)
         {
-            isActive = !isActive;
+            isActive = false;
             statPanel.gameObject.SetActive(isActive);
         }
 
-		if (Input.GetKeyDown ("j")) {
+		if (Input.GetKeyDown ("c") || Input.GetKeyDown("i")) {
 			isActive = !isActive;
 			statPanel.gameObject.SetActive(isActive);
-		}
+            if(isActive)
+                GameObject.Find("Player").GetComponent<BasePlayer>().pause++;
+            else
+                GameObject.Find("Player").GetComponent<BasePlayer>().pause--;
+        }
 		// pokud jsou staty aktivni updatujeme hodnoty
 		if (isActive) {
 			BasePlayer pl = GameObject.Find ("Player").GetComponent<BasePlayer> ();

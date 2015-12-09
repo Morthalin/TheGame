@@ -19,7 +19,7 @@ public class killByRock : MonoBehaviour {
 			other.gameObject.GetComponent<BasePlayer>().health = 0;
 			other.gameObject.GetComponent<Transform>().localScale -= 
 											new Vector3(0.0f, 0.8f*(other.gameObject.GetComponent<Transform>().localScale.y),0.0f);
-			Debug.Log("Player hit!");
+			//Debug.Log("Player hit!");
 			hitted = true;
 		}
 	}
