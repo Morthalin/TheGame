@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 [RequireComponent(typeof(Collider))]
 public class trigger : MonoBehaviour {
@@ -42,14 +42,6 @@ public class trigger : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerExit(Collider other){
-		if (other.gameObject.name == "Player") {
-			foreach (MeshRenderer mr in renderers) {
-				mr.enabled = false;
-			}
-		}
-	}
-
 	void drop(){
 		if (pos < Stones.Length ) {
 			if (startTime + DeltaTimes [pos] <= Time.time) {
@@ -60,6 +52,19 @@ public class trigger : MonoBehaviour {
 			isTriggerd = false;
 		}
 	}
+
+	/*void restart(){
+		if (lastIteration + resetTime < Time.time) {
+			for(int i = 0; i < Stones.Length;i++){
+				Stones[i].transform.position = stonePosition[i];
+				if( ((int)((lastIteration-startTime)/resetTime))%3 == 0){
+					Stones[i].GetComponent<Rigidbody>().isKinematic = true;
+					Stones[i].GetComponent<Rigidbody>().isKinematic = false;
+				}
+			}
+			lastIteration = Time.time;
+		}
+	}*/
 
 	// Update is called once per frame
 	void Update () {

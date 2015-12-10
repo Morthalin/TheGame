@@ -19,7 +19,7 @@ public class blinking : MonoBehaviour {
 			lt.intensity = Random.Range(minIntensity, maxIntensity);
 			Color c = new Color();
 			c.r = 1.0f;
-			c.g = Random.Range(110.0f/255.0f, 1.0f);
+			c.g = Random.Range(110.0f/255.0f, 200.0f/255.0f);
 			c.b = 52.0f/255.0f;
 			c.a = 1.0f;
 			lt.color = c;
