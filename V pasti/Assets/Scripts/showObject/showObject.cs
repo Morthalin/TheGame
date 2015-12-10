@@ -1,28 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
-[RequireComponent(typeof(SphereCollider))]
-
 
 public class showObject : MonoBehaviour {
-
 	// Use this for initialization
-	public GameObject NPCs;
-	public GameObject items;
+	public GameObject [] objects;
 	SphereCollider sc;
 	private MeshRenderer[] renderers;
 	private SkinnedMeshRenderer[] skinnedRenderers;
 	private Canvas[] hpBars;
 
 	void Start () {
-		sc = GetComponent<SphereCollider>();
-		sc.isTrigger = true;
-		sc.radius = 100.0f * 1/gameObject.transform.localScale.x;
 
-		if (NPCs) {
-			NPCs.SetActive (true);
-			}
-		if (items) {
-			items.SetActive (true);
+		foreach (GameObject go in objects){
+			go.SetActive (true);
 		}
 
 		renderers = GetComponentsInChildren<MeshRenderer> ();
@@ -51,20 +41,7 @@ public class showObject : MonoBehaviour {
 				canvas.gameObject.SetActive(false);
 			}
 		}
-		if (items) {
-			if (other.gameObject.name == "Player") {
-				
-				items.SetActive (false);
-			}
-		}
-		/*
-		if (NPCs) {
-			if (other.gameObject.name == "Player") {
-				NPCs.SetActive (false);
-			}
-		}
 
-		*/
 	}
 
 	void OnTriggerStay (Collider other) {
@@ -79,12 +56,6 @@ public class showObject : MonoBehaviour {
 				canvas.gameObject.SetActive(true);
 			}
 		}
-		if (items) {
-			if (other.gameObject.name == "Player") {
-				//Debug.Log ("Enter");
-				items.SetActive (true);
-			}
-		}
 	}
 
 	void OnTriggerEnter(Collider other) {
@@ -97,11 +68,6 @@ public class showObject : MonoBehaviour {
 			}
 			foreach (Canvas canvas in hpBars) {
 				canvas.gameObject.SetActive(true);
-			}
-		}
-		if (items) {
-			if (other.gameObject.name == "Player") {
-				items.SetActive (true);
 			}
 		}
 	}
