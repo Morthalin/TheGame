@@ -209,9 +209,13 @@ public class NPCAgroSystem : MonoBehaviour
                 //perioda utoku
                 timer = 3f;
                 hitted = false;
-                int damage = (Random.Range(baseNPC.attackMin, baseNPC.attackMax) - targetScript.activeArmor);
+                int damage = Random.Range(baseNPC.attackMin, baseNPC.attackMax) * 10;
+                int defense = (((targetScript.activeArmor - 280) ^ 2) / 110) + 16;
+                int baseDamage = damage * defense / 730;
+                int finalDamage = baseDamage * (730 - (defense * 51 - defense ^ 2 / 11) / 10) / 730;
+
                 if(damage > 0)
-                    targetScript.health -= damage;
+                    targetScript.health -= finalDamage;
                 animator.SetTrigger("Attack1");
             }
         }

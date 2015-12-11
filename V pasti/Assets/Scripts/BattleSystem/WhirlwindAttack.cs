@@ -92,13 +92,14 @@ public class WhirlwindAttack : MonoBehaviour
 
     int DamageCalculation(BasePlayer player, BaseNPC target)
     {
-        int damage = (player.strength * 5) + Random.Range(player.minAttack, player.maxAttack) * 2;
-        int armor = target.armor - (player.agility * 5);
+        int damage = ((player.strength ^ 3 / 32) + 32) * Random.Range(player.minAttack, player.maxAttack) / 16;
+        int defense = (((target.armor - 280) ^ 2) / 110) + 16;
+        int baseDamage = damage * defense / 730;
+        int finalDamage = baseDamage * (730 - (defense * 51 - defense ^ 2 / 11) / 10) / 730;
 
-        damage -= armor;
-        if (damage <= 0)
-            damage = 0;
-        return damage;
+        if (finalDamage <= 0)
+            finalDamage = 0;
+        return finalDamage * 2;
     }
 
     void ResetHitted (List<BaseNPC> targets)

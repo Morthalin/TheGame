@@ -173,6 +173,7 @@ public class Events : MonoBehaviour
         }
         camera.GetComponent<CameraShaking>().shaking = false;
         transform.FindChild("BurpEffect").GetComponent<ParticleSystem>().Stop();
+        yield return new WaitForSeconds(2f);
         casting = false;
     }
 }
