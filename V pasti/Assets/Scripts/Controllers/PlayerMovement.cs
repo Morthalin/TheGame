@@ -89,8 +89,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (GetComponent<BasePlayer>().health <= 0)
         {
-            rotateVector = new Vector3(0f, Input.GetAxis("Mouse X") * rotateSpeed * Time.deltaTime, 0f);
-            transform.Find("Camera Target").Rotate(rotateVector);
             rotateVector = new Vector3(-(Input.GetAxis("Mouse Y") * rotateSpeed * Time.deltaTime), 0f, 0f);
 
             float actualAngle = transform.Find("Camera Target").rotation.eulerAngles.x;

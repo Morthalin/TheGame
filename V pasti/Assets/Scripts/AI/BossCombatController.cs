@@ -4,15 +4,8 @@ using System.Collections;
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody))]
-public class NPCAgroSystem : MonoBehaviour
+public class BossCombatController : MonoBehaviour
 {
-    public float speed = 8;
-    public float minAgro = 800;
-    public float agroReset = 2400;
-    public float attackRangeMax = 15;
-    public float attackRangeMin = 10;
-    private Vector3 initPosition;
-    private Quaternion initRotation;
     private GameObject target;
     private BasePlayer targetScript;
     private BaseNPC baseNPC;
@@ -20,33 +13,33 @@ public class NPCAgroSystem : MonoBehaviour
     private Rigidbody rigid;
     private Animator animator;
     private Animator targetAnimator;
-
-    private bool goingHome;
     private bool deadNPC;
     private bool deadPlayer;
-    private Vector3 movementVector;
+    private bool goingHome;
+    private Vector3 initPosition;
+    private Quaternion initRotation;
     private float initDistance;
     private float targetDistance;
-    private float timer;
-    private bool hitted;
+    private Vector3 movementVector;
+    private float speed;
+    private float minAgro;
 
-    void Start ()
+    void Awake ()
     {
         //Korenova pozicia a rotacia
         initPosition = transform.position;
         initRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
-        goingHome = false;
         deadNPC = false;
         deadPlayer = false;
-        timer = 0f;
-        hitted = false;
+        goingHome = false;
+        speed = 8;
+        minAgro = 800;
 
-        //Vyhladanie hraca
         if (GameObject.Find("Player"))
         {
             target = GameObject.Find("Player");
             targetAnimator = target.GetComponent<Animator>();
-            if(!targetAnimator)
+            if (!targetAnimator)
             {
                 Debug.LogError("Missing player animator!");
             }
@@ -56,14 +49,15 @@ public class NPCAgroSystem : MonoBehaviour
             {
                 Debug.LogError("Missing BasePlayer script on player character!");
             }
-        } else
+        }
+        else
         {
             Debug.LogError("No player founded!");
         }
 
         //Priradenie a kontrola komponent
         controller = GetComponent<CharacterController>();
-        if(!controller)
+        if (!controller)
         {
             Debug.LogError("Missing controller!");
         }
@@ -75,7 +69,7 @@ public class NPCAgroSystem : MonoBehaviour
         }
 
         rigid = GetComponent<Rigidbody>();
-        if(!rigid)
+        if (!rigid)
         {
             Debug.LogError("Missing rigidbody!");
         }
@@ -98,16 +92,16 @@ public class NPCAgroSystem : MonoBehaviour
                 deadNPC = true;
                 animator.SetBool("death", true);
                 animator.SetTrigger("die");
-                animator.SetBool("isCombat", false);
+                animator.SetBool("combat", false);
                 baseNPC.inCombat = false;
                 targetAnimator.SetBool("isCombat", false);
                 transform.Find("HPFrame").gameObject.SetActive(false);
 
-				// pridani mrtvoli
-				Loot.corpseList.Add (new Corpse(baseNPC.creatureName, baseNPC.transform.position));
+                // pridani mrtvoli
+                Loot.corpseList.Add(new Corpse(baseNPC.creatureName, baseNPC.transform.position));
 
-				//vypnuti collideru
-				gameObject.GetComponent<CharacterController>().enabled = false;
+                //vypnuti collideru
+                gameObject.GetComponent<CharacterController>().enabled = false;
             }
         }
         else if (targetScript.health <= 0 && !deadPlayer)
@@ -117,7 +111,7 @@ public class NPCAgroSystem : MonoBehaviour
             goingHome = true;
             targetAnimator.SetBool("death", true);
             targetAnimator.SetTrigger("die");
-            animator.SetBool("isCombat", false);
+            animator.SetBool("combat", false);
             baseNPC.inCombat = false;
             targetAnimator.SetBool("isCombat", false);
         }
@@ -125,6 +119,7 @@ public class NPCAgroSystem : MonoBehaviour
         {
             //Vzdialenost od korenovej pozicie
             initDistance = (initPosition - transform.position).sqrMagnitude;
+
             //Vzdialenost od hraca
             targetDistance = (target.transform.position - transform.position).sqrMagnitude;
 
@@ -141,87 +136,28 @@ public class NPCAgroSystem : MonoBehaviour
                     transform.LookAt(initPosition);
                     movementVector = new Vector3(0f, 0f, 1f);
                     movementVector = transform.TransformDirection(movementVector);
-
-                    animator.SetBool("isRunning", true);
-                    animator.SetBool("runningForward", true);
+                    
+                    animator.SetBool("running", true);
                     controller.SimpleMove(movementVector * speed);
                     initDistance = (initPosition - transform.position).sqrMagnitude;
                 }
             }
-            else if (initDistance > agroReset)
-            {
-                //Koniec Combatu
-                goingHome = true;
-                baseNPC.health = baseNPC.healthMax;
-                animator.SetBool("isCombat", false);
-                baseNPC.inCombat = false;
-                targetAnimator.SetBool("isCombat", false);
-                transform.Find("HPFrame").gameObject.SetActive(false);
-            }
-            else if (targetDistance < minAgro && targetDistance > attackRangeMin && !deadPlayer)
+            else if (targetDistance < minAgro && !deadPlayer)
             {
                 //Beh ku hracovy
                 transform.LookAt(target.transform);
                 transform.Find("HPFrame").gameObject.SetActive(true);
-                movementVector = new Vector3(0f, 0f, 1f);
-                movementVector = transform.TransformDirection(movementVector);
 
-                animator.SetBool("isCombat", true);
+                animator.SetBool("combat", true);
                 baseNPC.inCombat = true;
                 targetAnimator.SetBool("isCombat", true);
-                animator.SetBool("isRunning", true);
-                animator.SetBool("runningForward", true);
-                controller.SimpleMove(movementVector * speed);
                 initDistance = (initPosition - transform.position).sqrMagnitude;
             }
             else
             {
                 //Idle
-                animator.SetBool("isRunning", false);
-                animator.SetBool("runningForward", false);
+                animator.SetBool("running", false);
             }
-
-            if (targetDistance <= attackRangeMax && !deadPlayer)
-            {
-                //Atack
-                Attack1();
-            }
-        }
-    }
-
-    void Attack1 ()
-    {
-        transform.LookAt(target.transform);
-        
-        if (targetScript.health > 0)
-        {
-            if (timer > 0f)
-            {
-                timer -= Time.deltaTime;
-                if(timer <= 1f && !hitted)
-                {
-                    hitted = true;
-                    targetAnimator.SetTrigger("damage");
-                }
-            }
-            else
-            {
-                //perioda utoku
-                timer = 3f;
-                hitted = false;
-                int damage = (Random.Range(baseNPC.attackMin, baseNPC.attackMax) - targetScript.activeArmor);
-                if(damage > 0)
-                    targetScript.health -= damage;
-                animator.SetTrigger("Attack1");
-            }
-        }
-        else
-        {
-            //hrac je mrtvy
-            goingHome = true;
-            animator.SetBool("isCombat", false);
-            baseNPC.inCombat = false;
-            targetAnimator.SetBool("isCombat", false);
         }
     }
 }

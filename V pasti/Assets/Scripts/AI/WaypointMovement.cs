@@ -14,13 +14,15 @@ public class WaypointMovement : MonoBehaviour
     public bool stepEnter = false;
     public bool smooth = true;
     private int position;
-    private bool wait;
+    public bool wait;
+    public bool start;
 
     void Awake()
     {
         moving = false;
         turning = false;
         wait = true;
+        start = false;
         position = 0; 
 
         if(waypoints.Length != movementSpeeds.Length && !singleMovementSpeed)
@@ -38,8 +40,9 @@ public class WaypointMovement : MonoBehaviour
     {
         if (!moving && !turning)
         {
-            if (Input.GetKeyDown(KeyCode.KeypadEnter) || !wait)
+            if (start || !wait)
             {
+                start = false;
                 wait = stepEnter;
                 nextWaypoint();
             }
@@ -120,6 +123,7 @@ public class WaypointMovement : MonoBehaviour
                 transform.parent.parent.parent.GetComponent<BasePlayer>().pause--;
                 transform.parent.localEulerAngles = new Vector3(0f, 0f, 0f);
             }
+            wait = true;
             enabled = false;
         }
         else

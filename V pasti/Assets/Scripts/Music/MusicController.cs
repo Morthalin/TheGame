@@ -14,16 +14,11 @@ public class MusicController : MonoBehaviour
         {
             Debug.LogError("Missing audio source!");
         }
-
-        if(clips.Length == 0)
-        {
-            Debug.LogError("None music for play!");
-        }
 	}
 	
 	void Update ()
     {
-        if(!audioSource.isPlaying)
+        if(!audioSource.isPlaying && clips.Length != 0)
         {
             audioSource.clip = clips[Random.Range(0, clips.Length)];
             audioSource.Play();
