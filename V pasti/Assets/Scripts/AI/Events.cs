@@ -1,32 +1,51 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Events: MonoBehaviour
+public class Events : MonoBehaviour
 {
     int ticks = 0;
     bool casting = false;
     public GameObject fireball;
 
-    public void CastFireball()
+    public void CastAttack()
     {
         if (!casting)
         {
             casting = true;
-            
+
             Animator animator = transform.GetComponent<Animator>();
             if (!animator)
             {
                 Debug.LogError("Missing mage Animator!");
             }
+            Transform player = GameObject.Find("Player").transform;
+            if (!player)
+            {
+                Debug.LogError("Missing Player!");
+            }
 
-            animator.SetTrigger("castFireball");
-            StartCoroutine(Fireball());
+            if ((player.position - transform.position).sqrMagnitude > 240)
+            {
+                animator.SetTrigger("castFireball");
+                StartCoroutine(Fireball());
+            }
+            else
+            {
+                if (Random.Range(0, 100) > 66)
+                {
+                    StartCoroutine(Blink());
+                }
+                else
+                {
+                    StartCoroutine(Burp());
+                }
+            }
         }
     }
 
     public void FireballTick()
     {
-        if(ticks != 0)
+        if (ticks != 0)
         {
             Transform player = GameObject.Find("Player").transform;
             if (!player)
@@ -54,8 +73,7 @@ public class Events: MonoBehaviour
             StartCoroutine(Blink());
         }
     }
-
-
+    
 
     //Casove funkcie
 
@@ -98,7 +116,7 @@ public class Events: MonoBehaviour
 
     IEnumerator Blink()
     {
-        Transform[] blinkTargets = GameObject.Find("Mages_cave").transform.FindChild("BlinkTargets").GetComponentsInChildren<Transform>();
+        Transform[] blinkTargets = GameObject.Find("BlinkTargets").GetComponentsInChildren<Transform>();
         Transform player = GameObject.Find("Player").transform;
         if (!player)
         {
@@ -110,14 +128,51 @@ public class Events: MonoBehaviour
             Debug.LogError("Missing Animator!");
         }
 
-        if ((transform.position - player.position).sqrMagnitude < 50)
+        if ((transform.position - player.position).sqrMagnitude < 100)
         {
             animator.SetTrigger("castBlink");
+            transform.FindChild("BlinkStart").GetComponent<ParticleSystem>().Play();
             yield return new WaitForSeconds(2);
-            transform.FindChild("BlinkEffect").GetComponent<ParticleSystem>().Play();
+            transform.FindChild("BlinkEnd").GetComponent<ParticleSystem>().Play();
             yield return new WaitForSeconds(0.3f);
             transform.position = blinkTargets[Random.Range(0, blinkTargets.Length - 1)].position;
         }
+        casting = false;
+    }
+
+    IEnumerator Burp()
+    {
+        Transform player = GameObject.Find("Player").transform;
+        if (!player)
+        {
+            Debug.LogError("Missing Player!");
+        }
+        Animator animator = transform.GetComponent<Animator>();
+        if (!animator)
+        {
+            Debug.LogError("Missing Animator!");
+        }
+        Animator playerAnimator = player.GetComponent<Animator>();
+        if (!playerAnimator)
+        {
+            Debug.LogError("Missing player Animator!");
+        }
+        Transform camera = player.FindChild("Camera Target").FindChild("Main Camera");
+        if (!camera)
+        {
+            Debug.LogError("Missing Main Camera!");
+        }
+
+        transform.FindChild("BurpEffect").GetComponent<ParticleSystem>().Play();
+        camera.GetComponent<CameraShaking>().shaking = true;
+        for (int i = 0; i < 10; i++)
+        {
+            if((player.position - transform.position).sqrMagnitude < 240)
+                player.GetComponent<BasePlayer>().health -= 20;
+            yield return new WaitForSeconds(0.5f);
+        }
+        camera.GetComponent<CameraShaking>().shaking = false;
+        transform.FindChild("BurpEffect").GetComponent<ParticleSystem>().Stop();
         casting = false;
     }
 }
