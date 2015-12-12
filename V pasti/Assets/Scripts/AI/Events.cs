@@ -74,6 +74,23 @@ public class Events : MonoBehaviour
         }
     }
     
+    public void HealthRegen()
+    {
+        BasePlayer player = transform.GetComponent<BasePlayer>();
+        if (player.health + player.healthRegen < player.healthMax)
+            player.health += player.healthRegen;
+        else
+            player.health = player.healthMax;
+    }
+
+    public void EnergyRegen()
+    {
+        BasePlayer player = transform.GetComponent<BasePlayer>();
+        if (player.energy + player.energyRegen < player.energyMax)
+            player.energy += player.energyRegen;
+        else
+            player.energy = player.energyMax;
+    }
 
     //Casove funkcie
 

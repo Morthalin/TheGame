@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class HealCast : MonoBehaviour
@@ -11,6 +12,9 @@ public class HealCast : MonoBehaviour
     private float timer;
     private BasePlayer basePlayer;
     private bool healing;
+    public float cooldown = 5f;
+    public Button cooldownIndicator;
+    public int energy = 40;
 
     void Start()
     {
@@ -30,8 +34,13 @@ public class HealCast : MonoBehaviour
         {
             Debug.LogError("Missing particle system!");
         }
+        
+        if (!cooldownIndicator)
+        {
+            Debug.LogError("Missing cooldown button!");
+        }
 
-        if(!krigel)
+        if (!krigel)
         {
             Debug.LogError("Missing efect object!");
         }
@@ -48,11 +57,12 @@ public class HealCast : MonoBehaviour
             Destroy(localKrigel);
         }
 
-        if (basePlayer.health > 0 && basePlayer.pause == 0 && !(basePlayer.attacking && !healing))
+        if (basePlayer.health > 0)
         {
             if (timer > 0f)
             {
-                if (timer < 2.5f && basePlayer.attacking)
+                cooldownIndicator.GetComponent<Image>().fillAmount = timer / cooldown;
+                if (timer < cooldown - 3f && healing)
                 {
                     if (basePlayer.healthMax < basePlayer.health + HealCalculation(basePlayer))
                     {
@@ -81,13 +91,16 @@ public class HealCast : MonoBehaviour
             }
             else
             {
-                if (Input.GetKeyDown(KeyCode.Q))
+                cooldownIndicator.GetComponent<Image>().fillAmount = 0;
+                if (Input.GetKeyDown(KeyCode.Q) && basePlayer.energy >= energy && basePlayer.pause == 0 && !basePlayer.attacking && !healing)
                 {
+                    basePlayer.energy -= energy;
                     animator.SetTrigger("HealCast");
                     basePlayer.attacking = true;
                     healing = true;
                     basePlayer.activeArmor /= 2;
-                    timer = 5f;
+                    timer = cooldown;
+                    cooldownIndicator.GetComponent<Image>().fillAmount = 1;
                 }
             }
         }

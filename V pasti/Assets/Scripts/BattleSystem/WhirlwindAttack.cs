@@ -11,6 +11,9 @@ public class WhirlwindAttack : MonoBehaviour
     private bool attacking;
     private AudioSource audioSource;
     public AudioClip[] clip;
+    public float cooldown = 4f;
+    public Button cooldownIndicator;
+    public int energy = 30;
 
     void Start()
     {
@@ -30,6 +33,11 @@ public class WhirlwindAttack : MonoBehaviour
         if (!audioSource)
         {
             Debug.LogError("Missing audio source!");
+        }
+
+        if (!cooldownIndicator)
+        {
+            Debug.LogError("Missing cooldown button!");
         }
 
         if (clip.Length == 0)
@@ -58,11 +66,12 @@ public class WhirlwindAttack : MonoBehaviour
 
     void Update ()
     {
-        if (basePlayer.health > 0 && basePlayer.pause == 0 && !(basePlayer.attacking && !attacking))
+        if (basePlayer.health > 0)
         {
             if (timer > 0f)
             {
-                if (timer < 2.5f && basePlayer.attacking)
+                cooldownIndicator.GetComponent<Image>().fillAmount = timer / cooldown;
+                if (timer < cooldown - 2f && attacking)
                 {
                     basePlayer.attacking = false;
                     attacking = false;
@@ -72,8 +81,10 @@ public class WhirlwindAttack : MonoBehaviour
             }
             else
             {
-                if (Input.GetMouseButton(1))
+                cooldownIndicator.GetComponent<Image>().fillAmount = 0;
+                if (Input.GetMouseButton(1) && basePlayer.energy >= energy && basePlayer.pause == 0 && !basePlayer.attacking && !attacking)
                 {
+                    basePlayer.energy -= energy;
                     audioSource.clip = clip[Random.Range(0, clip.Length)];
                     audioSource.volume = Random.Range(0.5f, 1f);
                     audioSource.pitch = 1f;
@@ -84,7 +95,8 @@ public class WhirlwindAttack : MonoBehaviour
                     basePlayer.activeArmor /= 2;
                     ResetHitted(targets);
                     targets.Clear();
-                    timer = 4f;
+                    timer = cooldown;
+                    cooldownIndicator.GetComponent<Image>().fillAmount = 1;
                 }
             }
         }

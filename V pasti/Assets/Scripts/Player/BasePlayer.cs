@@ -16,12 +16,15 @@ public class BasePlayer: MonoBehaviour
     public int health;
     public int healthMax;
     public int energy;
+    public int energyMax;
     public int armor;
     public int activeArmor;
     public int pause;
     public bool attacking;
     public int storyCheckpoint;
     private string character;
+    public int healthRegen = 5;
+    public int energyRegen = 1;
 
     void Update()
     {
@@ -72,9 +75,8 @@ public class BasePlayer: MonoBehaviour
             intellect = reader.GetInt32(4);
             agility = reader.GetInt32(5);
             stamina = reader.GetInt32(6);
-            health = stamina * 100;
-            healthMax = health;
-            energy = reader.GetInt32(7);
+            healthMax = health = stamina * 100;
+            energyMax = energy = reader.GetInt32(7);
             armor = reader.GetInt32(8);
             activeArmor = armor;
             minAttack = reader.GetInt32(9);

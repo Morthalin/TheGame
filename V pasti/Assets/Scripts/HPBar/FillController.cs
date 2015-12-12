@@ -8,6 +8,8 @@ public class FillController : MonoBehaviour
     private BaseNPC baseNPC;
     private BasePlayer basePlayer;
     private bool player;
+    public bool energy = false;
+
 	void Start ()
     {
         baseNPC = target.GetComponent<BaseNPC>();
@@ -31,21 +33,33 @@ public class FillController : MonoBehaviour
 	
 	void Update ()
     {
-	    if(player)
+        if (!energy)
         {
-            if (basePlayer.health < 0)
-                basePlayer.health = 0;
-            float percentage = (float)basePlayer.health / (float)basePlayer.healthMax;
+            if (player)
+            {
+                if (basePlayer.health < 0)
+                    basePlayer.health = 0;
+                float percentage = (float)basePlayer.health / (float)basePlayer.healthMax;
 
-            transform.GetComponent<Image>().fillAmount = percentage;
-            transform.Find("Text").GetComponent<Text>().text = basePlayer.health.ToString() + "/" + basePlayer.healthMax.ToString();
+                transform.GetComponent<Image>().fillAmount = percentage;
+                transform.Find("Text").GetComponent<Text>().text = basePlayer.health.ToString() + "/" + basePlayer.healthMax.ToString();
+            }
+            else
+            {
+                float percentage = (float)baseNPC.health / (float)baseNPC.healthMax;
+
+                transform.GetComponent<Image>().fillAmount = percentage;
+                transform.Find("Text").GetComponent<Text>().text = baseNPC.health.ToString() + "/" + baseNPC.healthMax.ToString();
+            }
         }
         else
         {
-            float percentage = (float)baseNPC.health / (float)baseNPC.healthMax;
+            if (basePlayer.energy < 0)
+                basePlayer.energy = 0;
+            float percentage = (float)basePlayer.energy / (float)basePlayer.energyMax;
 
             transform.GetComponent<Image>().fillAmount = percentage;
-            transform.Find("Text").GetComponent<Text>().text = baseNPC.health.ToString() + "/" + baseNPC.healthMax.ToString();
+            transform.Find("Text").GetComponent<Text>().text = basePlayer.energy.ToString() + "/" + basePlayer.energyMax.ToString();
         }
 	}
 }
