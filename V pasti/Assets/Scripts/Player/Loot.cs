@@ -8,6 +8,20 @@ using System;
 
 
 public class Loot : MonoBehaviour {
+	//PlayerPartsRenderers
+	/*
+	index - Head 0
+			Chest 1-3
+			Shoulders 4-5
+			Arms and hands 6-11
+			Legs 12-15
+			Foots 16-17
+	 */
+	public Renderer [] PlayerPartsRenderers;
+
+	/*newMaterials index - head 0, other 1*/
+	public Material [] newMaterials;
+
 	// corpseList
 	public static ArrayList corpseList = new ArrayList();
 	public float  lootDistSqrt  = 25;
@@ -314,6 +328,12 @@ public class Loot : MonoBehaviour {
 		}
 	}
 
+	void changeMaterial(int from, int to, int matIndex){
+		for(int i = from; i <= to; i++){
+			PlayerPartsRenderers[i].material = newMaterials[matIndex];
+		}
+	}
+
 	void useItem(BaseItemStats item)
 	{
 		BasePlayer pl = GameObject.Find ("Player").GetComponent<BasePlayer> ();
@@ -345,6 +365,16 @@ public class Loot : MonoBehaviour {
 				itemsQuantity [bis.ItemID]++;
 			}
 			equipmentMap [equipmentOrder [index]] = item;
+			switch((int)etype){
+			case 1 :{changeMaterial(0,0,0); break;}
+			case 2 :{changeMaterial(1,3,1); break;}
+			case 3 :{changeMaterial(4,5,1); break;}
+			case 4 :{changeMaterial(6,11,1); break;}
+			case 5 :{changeMaterial(12,15,1); break;}
+			case 6 :{changeMaterial(16,17,1); break;}
+			}
+			//zmena materialu
+
 		} else if (item.ItemType == BaseItems.ItemTypes.WEAPON) {
 			BaseWeapon.WeaponTypes wtype = ItemsData.weaponsData [item.ItemID].WeaponType;
 			int index = (int)wtype - 1 + 6;
