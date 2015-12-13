@@ -21,6 +21,7 @@ public class BasePlayer: MonoBehaviour
     public int activeArmor;
     public int pause;
     public bool attacking;
+    public bool dead = false;
     public int storyCheckpoint;
     private string character;
     public int healthRegen = 5;

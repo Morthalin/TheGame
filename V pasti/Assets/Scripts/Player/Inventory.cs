@@ -45,9 +45,15 @@ public class Inventory
 		connection.Open();
 		IDbCommand command;
 
-		foreach (var item in l.itemsQuantity.Keys) {
+        string sqlQuery = "DELETE FROM Inventory WHERE PlayerID = " + playerID + ";";
+        command = connection.CreateCommand();
+        command.CommandText = sqlQuery;
+        command.ExecuteNonQuery();
+        command.Dispose();
+
+        foreach (var item in l.itemsQuantity.Keys) {
 			for (int i = 0; i < l.itemsQuantity[item]; i++) {
-				string sqlQuery = "insert into Inventory (playerID,itemID) values ("+playerID+","+item+");";
+				sqlQuery = "insert into Inventory (playerID,itemID) values ("+playerID+","+item+");";
                 command = connection.CreateCommand();
                 command.CommandText = sqlQuery;
 				command.ExecuteNonQuery();

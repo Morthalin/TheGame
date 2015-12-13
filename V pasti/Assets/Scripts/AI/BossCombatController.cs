@@ -14,7 +14,6 @@ public class BossCombatController : MonoBehaviour
     private Animator animator;
     private Animator targetAnimator;
     private bool deadNPC;
-    private bool deadPlayer;
     private bool goingHome;
     private Vector3 initPosition;
     private Quaternion initRotation;
@@ -30,7 +29,6 @@ public class BossCombatController : MonoBehaviour
         initPosition = transform.position;
         initRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
         deadNPC = false;
-        deadPlayer = false;
         goingHome = false;
         speed = 8;
         minAgro = 800;
@@ -84,6 +82,11 @@ public class BossCombatController : MonoBehaviour
 	
 	void LateUpdate ()
     {
+        if (baseNPC.health > 0)
+        {
+            deadNPC = false;
+        }
+
         if (baseNPC.health <= 0)
         {
             //smrt NPC
@@ -104,10 +107,10 @@ public class BossCombatController : MonoBehaviour
                 gameObject.GetComponent<CharacterController>().enabled = false;
             }
         }
-        else if (targetScript.health <= 0 && !deadPlayer)
+        else if (targetScript.health <= 0 && !targetScript.dead)
         {
             //smrt hraca
-            deadPlayer = true;
+            targetScript.dead = true;
             goingHome = true;
             targetAnimator.SetBool("death", true);
             targetAnimator.SetTrigger("die");
@@ -142,7 +145,7 @@ public class BossCombatController : MonoBehaviour
                     initDistance = (initPosition - transform.position).sqrMagnitude;
                 }
             }
-            else if (targetDistance < minAgro && !deadPlayer)
+            else if (targetDistance < minAgro && !targetScript.dead)
             {
                 //Beh ku hracovy
                 transform.LookAt(target.transform);

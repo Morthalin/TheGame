@@ -37,8 +37,14 @@ public class FillController : MonoBehaviour
         {
             if (player)
             {
-                if (basePlayer.health < 0)
+                if (basePlayer.health <= 0)
+                {
                     basePlayer.health = 0;
+                }
+                else
+                {
+                    basePlayer.dead = false;
+                }
                 float percentage = (float)basePlayer.health / (float)basePlayer.healthMax;
 
                 transform.GetComponent<Image>().fillAmount = percentage;

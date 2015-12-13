@@ -77,10 +77,13 @@ public class Events : MonoBehaviour
     public void HealthRegen()
     {
         BasePlayer player = transform.GetComponent<BasePlayer>();
-        if (player.health + player.healthRegen < player.healthMax)
-            player.health += player.healthRegen;
-        else
-            player.health = player.healthMax;
+        if (!player.dead)
+        {
+            if (player.health + player.healthRegen < player.healthMax)
+                player.health += player.healthRegen;
+            else
+                player.health = player.healthMax;
+        }
     }
 
     public void EnergyRegen()
@@ -117,17 +120,31 @@ public class Events : MonoBehaviour
 
         yield return new WaitForSeconds(2);
         localFireball = (GameObject)Instantiate(fireball, initFireball.position, initFireball.rotation);
-        while ((localFireball.transform.position - player.position).sqrMagnitude > 5f)
+        
+        while ((localFireball.transform.position - player.position).sqrMagnitude > 40f)
         {
-            localFireball.transform.rotation = Quaternion.Lerp(localFireball.transform.rotation, Quaternion.LookRotation(player.position - localFireball.transform.position), 1f);
-            movementVector = localFireball.transform.TransformDirection(0f, 0f, 2f);
+            localFireball.transform.rotation = Quaternion.Lerp(localFireball.transform.rotation, Quaternion.LookRotation(player.position - localFireball.transform.position), 0.5f);
+            movementVector = localFireball.transform.TransformDirection(0f, 0f, 3f);
             localFireball.transform.position += movementVector;
             yield return new WaitForSeconds(0.1f);
         }
+        while ((localFireball.transform.position - player.position).sqrMagnitude < 40f)
+        {
+            movementVector = localFireball.transform.TransformDirection(0f, 0f, 3f);
+            localFireball.transform.position += movementVector;
+            if ((localFireball.transform.position - player.position).sqrMagnitude < 10f)
+            {
+                playerAnimator.SetTrigger("damage");
+                player.GetComponent<BasePlayer>().health -= 200;
+                ticks = 10;
+                break;
+            }
+            if ((localFireball.transform.position - transform.position).sqrMagnitude > (player.transform.position - transform.position).sqrMagnitude + 40f)
+                break;
+
+            yield return new WaitForSeconds(0.1f);
+        }
         Destroy(localFireball);
-        playerAnimator.SetTrigger("damage");
-        player.GetComponent<BasePlayer>().health -= 200;
-        ticks = 10;
         casting = false;
     }
 

@@ -27,7 +27,7 @@ public class DialogEvent : MonoBehaviour
         {
             Debug.LogError("Missing DialogID!");
         }
-		Debug.Log ("awaknuto");
+		//Debug.Log ("awaknuto");
 	}
 	
 	void Update ()

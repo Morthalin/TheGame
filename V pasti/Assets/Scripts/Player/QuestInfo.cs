@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class QuestInfo : MonoBehaviour {
 	BasePlayer player;
-	bool 	seen;
+	//bool 	seen;
 	float 	ttl;
 	int 	last;
 
@@ -31,7 +31,7 @@ public class QuestInfo : MonoBehaviour {
 		}
 		last = -1;
 		ttl = 10.0f;
-		seen = false;
+		//seen = false;
 	}
 	
 	// Update is called once per frame

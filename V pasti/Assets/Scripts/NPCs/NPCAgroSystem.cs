@@ -23,7 +23,6 @@ public class NPCAgroSystem : MonoBehaviour
 
     private bool goingHome;
     private bool deadNPC;
-    private bool deadPlayer;
     private Vector3 movementVector;
     private float initDistance;
     private float targetDistance;
@@ -37,7 +36,6 @@ public class NPCAgroSystem : MonoBehaviour
         initRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
         goingHome = false;
         deadNPC = false;
-        deadPlayer = false;
         timer = 0f;
         hitted = false;
 
@@ -90,6 +88,11 @@ public class NPCAgroSystem : MonoBehaviour
 	
 	void LateUpdate ()
     {
+        if (baseNPC.health > 0)
+        {
+            deadNPC = false;
+        }
+
         if (baseNPC.health <= 0)
         {
             //smrt NPC
@@ -110,10 +113,10 @@ public class NPCAgroSystem : MonoBehaviour
 				gameObject.GetComponent<CharacterController>().enabled = false;
             }
         }
-        else if (targetScript.health <= 0 && !deadPlayer)
+        else if (targetScript.health <= 0 && !targetScript.dead)
         {
             //smrt hraca
-            deadPlayer = true;
+            targetScript.dead = true;
             goingHome = true;
             targetAnimator.SetBool("death", true);
             targetAnimator.SetTrigger("die");
@@ -158,7 +161,7 @@ public class NPCAgroSystem : MonoBehaviour
                 targetAnimator.SetBool("isCombat", false);
                 transform.Find("HPFrame").gameObject.SetActive(false);
             }
-            else if (targetDistance < minAgro && targetDistance > attackRangeMin && !deadPlayer)
+            else if (targetDistance < minAgro && targetDistance > attackRangeMin && !targetScript.dead)
             {
                 //Beh ku hracovy
                 transform.LookAt(target.transform);
@@ -181,7 +184,7 @@ public class NPCAgroSystem : MonoBehaviour
                 animator.SetBool("runningForward", false);
             }
 
-            if (targetDistance <= attackRangeMax && !deadPlayer)
+            if (targetDistance <= attackRangeMax && !targetScript.dead)
             {
                 //Atack
                 Attack1();

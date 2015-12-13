@@ -45,6 +45,7 @@ public class MainMenu : MonoBehaviour
 	{
         if (transform.FindChild("Hraci").gameObject.activeSelf)
         {
+            transform.FindChild("Hraci").GetComponent<Dropdown>().value = -1;
             transform.FindChild("Hraci").gameObject.SetActive(false);
             transform.FindChild("loadHruBut").gameObject.SetActive(false);
         }
@@ -88,6 +89,7 @@ public class MainMenu : MonoBehaviour
     {
         if (transform.FindChild("Hraci").gameObject.activeSelf)
         {
+            transform.FindChild("Hraci").GetComponent<Dropdown>().value = -1;
             transform.FindChild("Hraci").gameObject.SetActive(false);
             transform.FindChild("loadHruBut").gameObject.SetActive(false);
         }
@@ -99,6 +101,7 @@ public class MainMenu : MonoBehaviour
     {
         if (transform.FindChild("Hraci").gameObject.activeSelf)
         {
+            transform.FindChild("Hraci").GetComponent<Dropdown>().value = -1;
             transform.FindChild("Hraci").gameObject.SetActive(false);
             transform.FindChild("loadHruBut").gameObject.SetActive(false);
         }
@@ -140,8 +143,12 @@ public class MainMenu : MonoBehaviour
     public void loadGamePressedIngame()
     {
         GameObject.Find("Interface").GetComponent<LoadPlayer>().loadPlayer(transform.FindChild("Hraci").GetComponent<Dropdown>().options[transform.FindChild("Hraci").GetComponent<Dropdown>().value].text);
-        transform.FindChild("Hraci").gameObject.SetActive(false);
-        transform.FindChild("loadHruBut").gameObject.SetActive(false);
+        if (transform.FindChild("Hraci").gameObject.activeSelf)
+        {
+            transform.FindChild("Hraci").GetComponent<Dropdown>().value = -1;
+            transform.FindChild("Hraci").gameObject.SetActive(false);
+            transform.FindChild("loadHruBut").gameObject.SetActive(false);
+        }
         mainMenu.parent.gameObject.SetActive(false);
         mainMenu.gameObject.SetActive(false);
         exitMenu.gameObject.SetActive(false);
@@ -150,14 +157,12 @@ public class MainMenu : MonoBehaviour
 
     public void savePressed()
     {
-        if (transform.FindChild("Hraci").gameObject.activeSelf)
-        {
-            transform.FindChild("Hraci").gameObject.SetActive(false);
-            transform.FindChild("loadHruBut").gameObject.SetActive(false);
-        }
+        LoadingSceen loading = GameObject.Find("Menu").GetComponent<LoadingSceen>();
         BasePlayer pl = GameObject.Find("Player").GetComponent<BasePlayer>();
+        
         if (pl.health > 0)
         {
+            loading.loading++;
             pl.inventory.Save();
             string path = "URI=file:" + Application.dataPath + "/Database/Database.s3db";
             IDbConnection connection;
@@ -176,6 +181,19 @@ public class MainMenu : MonoBehaviour
             command.Dispose();
             connection.Close();
             SqliteConnection.ClearAllPools();
+            pl.pause--;
+            loading.loading--;
+            if (transform.FindChild("Hraci").gameObject.activeSelf)
+            {
+                transform.FindChild("Hraci").GetComponent<Dropdown>().value = -1;
+                transform.FindChild("Hraci").gameObject.SetActive(false);
+                transform.FindChild("loadHruBut").gameObject.SetActive(false);
+            }
+            mainMenu.parent.gameObject.SetActive(false);
+            mainMenu.gameObject.SetActive(false);
+            exitMenu.gameObject.SetActive(false);
+            settingsMenu.gameObject.SetActive(false);
         }
+        
     }
 }
