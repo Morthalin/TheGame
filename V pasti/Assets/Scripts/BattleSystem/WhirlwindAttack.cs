@@ -11,7 +11,7 @@ public class WhirlwindAttack : MonoBehaviour
     private bool attacking;
     private AudioSource audioSource;
     public AudioClip[] clip;
-    public float cooldown = 4f;
+    public float cooldown = 10f;
     public Button cooldownIndicator;
     public int energy = 30;
 

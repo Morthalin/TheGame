@@ -12,9 +12,9 @@ public class HealCast : MonoBehaviour
     private float timer;
     private BasePlayer basePlayer;
     private bool healing;
-    public float cooldown = 5f;
+    public float cooldown = 30f;
     public Button cooldownIndicator;
-    public int energy = 40;
+    public int energy = 50;
 
     void Start()
     {
