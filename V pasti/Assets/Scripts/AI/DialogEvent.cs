@@ -13,6 +13,7 @@ public class DialogEvent : MonoBehaviour
     private Transform dialogBox;
     public int dialog = 0;
     private int order = 0;
+	private bool isself = false;
 
 	void Awake ()
     {
@@ -26,14 +27,16 @@ public class DialogEvent : MonoBehaviour
         {
             Debug.LogError("Missing DialogID!");
         }
+		Debug.Log ("awaknuto");
 	}
 	
 	void Update ()
     {
-        if(start || Input.GetKeyDown(KeyCode.T))
+        if(start /*|| Input.GetKeyDown(KeyCode.T)/**/)
         {
             active = true;
             start = true;
+			isself = true;
             GameObject.Find("Player").GetComponent<BasePlayer>().pause++;
             Time.timeScale = 0f;
         }
@@ -74,11 +77,12 @@ public class DialogEvent : MonoBehaviour
         }
         else
         {
-            if (dialogBox.gameObject.activeSelf)
+            if (dialogBox.gameObject.activeSelf && isself )
             {
                 dialogBox.gameObject.SetActive(false);
                 Time.timeScale = 1f;
                 GameObject.Find("Player").GetComponent<BasePlayer>().pause--;
+				isself = false;
             }
         }
 	}
