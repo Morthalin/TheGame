@@ -43,11 +43,11 @@ public class QuestInfo : MonoBehaviour {
 			last = player.storyCheckpoint;
 		}
 		switch (player.storyCheckpoint) {
-		case 0: text.text = "Vydej se po cestě do místní vesnice, musíš sehnat vyproštovák.";
+		case 0: text.text = "<b>Ukol 1:</b> Vydej se po cestě do místní vesnice, musíš sehnat vyproštovák.";
 			break;
-		case 1: text.text = "Druha zprava";
+		case 1: text.text = "<b>Info:</b> Podle pradávného proroctví, kdo nezemře po vypití nápoje kterého jsi právě vypil, je vyvolený.";
 			break;
-		case 2: text.text = "Treti zprava.";
+		case 2: text.text = "<b>Ukol 2:</b> Zabij bandity a přines domorodci ukradené suroviny.";
 			break;
 	
 		default: text.text = "";
