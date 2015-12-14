@@ -6,6 +6,7 @@ public class WaypointMovement : MonoBehaviour
     public Transform[] waypoints;
     public float[] movementSpeeds;
     public float[] rotationSpeeds;
+    public Transform[] targets;
     public float distanceToNext = 10f;
     private bool moving;
     private bool turning;
@@ -40,7 +41,7 @@ public class WaypointMovement : MonoBehaviour
     {
         if (!moving && !turning)
         {
-            if (start || !wait)
+            if (start || !wait || Input.GetKeyDown(KeyCode.T))
             {
                 start = false;
                 wait = stepEnter;
@@ -69,6 +70,15 @@ public class WaypointMovement : MonoBehaviour
         }
         else
         {
+            if (targets[position])
+            {
+                transform/*.parent*/.LookAt(targets[position]);
+            }
+            else
+            {
+                transform/*.parent*/.LookAt(waypoints[position]);
+            }
+
             if (singleMovementSpeed)
             {
                 transform.parent.position = transform.parent.position + transform.parent.TransformDirection(0f, 0f, movementSpeeds[0] * Time.deltaTime);
@@ -111,18 +121,18 @@ public class WaypointMovement : MonoBehaviour
 
     void nextWaypoint()
     {
-        if (transform.parent.parent.name == "Camera Target" && position == 0)
-        {
-            transform.parent.parent.parent.GetComponent<BasePlayer>().pause++;
-        }
+        //if (transform.parent.parent.name == "Camera Target" && position == 0)
+        //{
+        //    transform.parent.parent.parent.GetComponent<BasePlayer>().pause++;
+        //}
 
         if (position == waypoints.Length)
         {
-            if (transform.parent.parent.name == "Camera Target")
-            {
-                transform.parent.parent.parent.GetComponent<BasePlayer>().pause--;
-                transform.parent.localEulerAngles = new Vector3(0f, 0f, 0f);
-            }
+            //if (transform.parent.parent.name == "Camera Target")
+            //{
+            //    transform.parent.parent.parent.GetComponent<BasePlayer>().pause--;
+            //    transform.parent.localEulerAngles = new Vector3(0f, 0f, 0f);
+            //}
             wait = true;
             enabled = false;
         }
