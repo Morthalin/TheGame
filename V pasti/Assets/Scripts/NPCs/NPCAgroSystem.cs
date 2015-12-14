@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [RequireComponent(typeof(CharacterController))]
@@ -28,6 +29,7 @@ public class NPCAgroSystem : MonoBehaviour
     private float targetDistance;
     private float timer;
     private bool hitted;
+    int finalDamage;
 
     void Start ()
     {
@@ -38,6 +40,7 @@ public class NPCAgroSystem : MonoBehaviour
         deadNPC = false;
         timer = 0f;
         hitted = false;
+        finalDamage = 0;
 
         //Vyhladanie hraca
         if (GameObject.Find("Player"))
@@ -205,6 +208,8 @@ public class NPCAgroSystem : MonoBehaviour
                 {
                     hitted = true;
                     targetAnimator.SetTrigger("damage");
+                    GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamageText").GetComponent<Text>().text = finalDamage.ToString();
+                    GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamageText").GetComponent<Animator>().SetTrigger("Hit");
                 }
             }
             else
@@ -215,7 +220,7 @@ public class NPCAgroSystem : MonoBehaviour
                 int damage = Random.Range(baseNPC.attackMin, baseNPC.attackMax) * 10;
                 int defense = (((targetScript.activeArmor - 280) ^ 2) / 110) + 16;
                 int baseDamage = damage * defense / 730;
-                int finalDamage = baseDamage * (730 - (defense * 51 - defense ^ 2 / 11) / 10) / 730;
+                finalDamage = baseDamage * (730 - (defense * 51 - defense ^ 2 / 11) / 10) / 730;
 
                 if(damage > 0)
                     targetScript.health -= finalDamage;

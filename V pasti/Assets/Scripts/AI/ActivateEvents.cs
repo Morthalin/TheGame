@@ -10,7 +10,7 @@ public class ActivateEvents : MonoBehaviour {
 	private BasePlayer player  = null;
 	private Text 	presseText = null;
 	private bool    done = false;
-	// Use this for initialization
+    
 	void Start () {
 		player = GameObject.Find ("Player").GetComponent<BasePlayer> ();
 		if (!player) {
@@ -25,12 +25,11 @@ public class ActivateEvents : MonoBehaviour {
 		}
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		// todo check storyCheckpoint for multiple takls
 		if (! done && (transform.position -player.transform.position).sqrMagnitude < distanceSqrtToActivate) {
 			done = true;
-			Debug.Log("nalezen " + transform.GetComponents<DialogEvent>().Length + " dialog(y).");
+			//Debug.Log("nalezen " + transform.GetComponents<DialogEvent>().Length + " dialog(y).");
 			gameObject.GetComponent<DialogEvent>().start = true;
 		} 
 	}

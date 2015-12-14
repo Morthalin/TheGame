@@ -6,6 +6,7 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 public class BossCombatController : MonoBehaviour
 {
+    public float agroReset = 3000;
     private GameObject target;
     private BasePlayer targetScript;
     private BaseNPC baseNPC;
@@ -144,6 +145,16 @@ public class BossCombatController : MonoBehaviour
                     controller.SimpleMove(movementVector * speed);
                     initDistance = (initPosition - transform.position).sqrMagnitude;
                 }
+            }
+            else if (initDistance > agroReset)
+            {
+                //Koniec Combatu
+                goingHome = true;
+                baseNPC.health = baseNPC.healthMax;
+                animator.SetBool("combat", false);
+                baseNPC.inCombat = false;
+                targetAnimator.SetBool("isCombat", false);
+                transform.Find("HPFrame").gameObject.SetActive(false);
             }
             else if (targetDistance < minAgro && !targetScript.dead)
             {

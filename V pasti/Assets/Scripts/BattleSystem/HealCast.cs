@@ -72,6 +72,8 @@ public class HealCast : MonoBehaviour
                     {
                         basePlayer.health += HealCalculation(basePlayer);
                     }
+                    GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("HealText").GetComponent<Text>().text = HealCalculation(basePlayer).ToString();
+                    GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("HealText").GetComponent<Animator>().SetTrigger("Hit");
 
                     Vector3 eAngle = new Vector3(180f, 0f, 90f) + GameObject.Find("Player").transform.rotation.eulerAngles;
                     Vector3 pos = GameObject.Find("Player").transform.TransformPoint(new Vector3(10f, 20f, 0f));

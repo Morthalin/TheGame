@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Events : MonoBehaviour
@@ -62,6 +63,8 @@ public class Events : MonoBehaviour
             if(!player.FindChild("OnFireEffect").GetComponent<ParticleSystem>().isPlaying)
                 player.FindChild("OnFireEffect").GetComponent<ParticleSystem>().Play();
             playerAnimator.SetTrigger("damage");
+            GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamageText").GetComponent<Text>().text = "20";
+            GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamageText").GetComponent<Animator>().SetTrigger("Hit");
             player.GetComponent<BasePlayer>().health -= 20;
             ticks--;
         }
@@ -142,7 +145,9 @@ public class Events : MonoBehaviour
             if ((localFireball.transform.position - player.position).sqrMagnitude < 10f)
             {
                 playerAnimator.SetTrigger("damage");
-                player.GetComponent<BasePlayer>().health -= 200;
+                GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamageText").GetComponent<Text>().text = "400";
+                GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamageText").GetComponent<Animator>().SetTrigger("Hit");
+                player.GetComponent<BasePlayer>().health -= 400;
                 ticks = 10;
                 break;
             }
@@ -208,8 +213,13 @@ public class Events : MonoBehaviour
         camera.GetComponent<CameraShaking>().shaking = true;
         for (int i = 0; i < 10; i++)
         {
-            if((player.position - transform.position).sqrMagnitude < 240)
-                player.GetComponent<BasePlayer>().health -= 20;
+            if ((player.position - transform.position).sqrMagnitude < 240)
+            {
+                playerAnimator.SetTrigger("damage");
+                GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamageText").GetComponent<Text>().text = "40";
+                GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamageText").GetComponent<Animator>().SetTrigger("Hit");
+                player.GetComponent<BasePlayer>().health -= 40;
+            }
             yield return new WaitForSeconds(0.5f);
         }
         camera.GetComponent<CameraShaking>().shaking = false;

@@ -57,8 +57,11 @@ public class BasicAttack : MonoBehaviour
         {
             if (!hitted && basePlayer.attacking)
             {
-                collider.gameObject.GetComponent<BaseNPC>().health -= DamageCalculation(GameObject.Find("Player").GetComponent<BasePlayer>(), collider.gameObject.GetComponent<BaseNPC>());
+                int damage = DamageCalculation(GameObject.Find("Player").GetComponent<BasePlayer>(), collider.gameObject.GetComponent<BaseNPC>());
+                collider.gameObject.GetComponent<BaseNPC>().health -= damage;
                 collider.gameObject.GetComponent<Animator>().SetTrigger("damage");
+                collider.transform.FindChild("FloatingDamageText").FindChild("Text").GetComponent<Text>().text = damage.ToString();
+                collider.transform.FindChild("FloatingDamageText").FindChild("Text").GetComponent<Animator>().SetTrigger("Hit");
                 //HPBarChange(hit.transform.gameObject);
                 hitted = true;
             }
