@@ -67,9 +67,9 @@ public class Events : MonoBehaviour
             playerAnimator.SetTrigger("damage");
             localText = (GameObject)Instantiate(damageText, GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamagePosition").position, GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamagePosition").rotation);
             localText.transform.SetParent(GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamagePosition"));
-            localText.GetComponent<Text>().text = "20";
+            localText.GetComponent<Text>().text = "40";
             localText.GetComponent<Animator>().SetTrigger("Hit");
-            player.GetComponent<BasePlayer>().health -= 20;
+            player.GetComponent<BasePlayer>().health -= 40;
             ticks--;
         }
         else
@@ -163,6 +163,7 @@ public class Events : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         Destroy(localFireball);
+        yield return new WaitForSeconds(2f);
         casting = false;
     }
 
@@ -224,9 +225,9 @@ public class Events : MonoBehaviour
                 playerAnimator.SetTrigger("damage");
                 localText = (GameObject)Instantiate(damageText, GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamagePosition").position, GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamagePosition").rotation);
                 localText.transform.SetParent(GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamagePosition"));
-                localText.GetComponent<Text>().text = "40";
+                localText.GetComponent<Text>().text = "120";
                 localText.GetComponent<Animator>().SetTrigger("Hit");
-                player.GetComponent<BasePlayer>().health -= 40;
+                player.GetComponent<BasePlayer>().health -= 120;
             }
             yield return new WaitForSeconds(0.5f);
         }
