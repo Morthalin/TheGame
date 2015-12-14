@@ -59,9 +59,16 @@ public class Events : MonoBehaviour
                 Debug.LogError("Missing player Animator!");
             }
 
+            if(!player.FindChild("OnFireEffect").GetComponent<ParticleSystem>().isPlaying)
+                player.FindChild("OnFireEffect").GetComponent<ParticleSystem>().Play();
             playerAnimator.SetTrigger("damage");
             player.GetComponent<BasePlayer>().health -= 20;
             ticks--;
+        }
+        else
+        {
+            if (GameObject.Find("Player").transform.FindChild("OnFireEffect").GetComponent<ParticleSystem>().isPlaying)
+                GameObject.Find("Player").transform.FindChild("OnFireEffect").GetComponent<ParticleSystem>().Stop();
         }
     }
 
