@@ -15,6 +15,8 @@ public class HealCast : MonoBehaviour
     public float cooldown = 30f;
     public Button cooldownIndicator;
     public int energy = 50;
+    public GameObject healText;
+    private GameObject localText;
 
     void Start()
     {
@@ -22,6 +24,11 @@ public class HealCast : MonoBehaviour
         if (!animator)
         {
             Debug.LogError("Missing animator!");
+        }
+
+        if(!healText)
+        {
+            Debug.LogError("Missing healText!");
         }
 
         basePlayer = GameObject.Find("Player").GetComponent<BasePlayer>();
@@ -72,8 +79,10 @@ public class HealCast : MonoBehaviour
                     {
                         basePlayer.health += HealCalculation(basePlayer);
                     }
-                    GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("HealText").GetComponent<Text>().text = HealCalculation(basePlayer).ToString();
-                    GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("HealText").GetComponent<Animator>().SetTrigger("Hit");
+                    localText = (GameObject)Instantiate(healText, GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("HealPosition").position, GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("HealPosition").rotation);
+                    localText.transform.SetParent(GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("HealPosition"));
+                    localText.GetComponent<Text>().text = HealCalculation(basePlayer).ToString();
+                    localText.GetComponent<Animator>().SetTrigger("Hit");
 
                     Vector3 eAngle = new Vector3(180f, 0f, 90f) + GameObject.Find("Player").transform.rotation.eulerAngles;
                     Vector3 pos = GameObject.Find("Player").transform.TransformPoint(new Vector3(10f, 20f, 0f));

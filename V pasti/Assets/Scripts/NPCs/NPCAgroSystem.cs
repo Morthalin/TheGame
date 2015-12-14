@@ -12,6 +12,7 @@ public class NPCAgroSystem : MonoBehaviour
     public float agroReset = 2400;
     public float attackRangeMax = 15;
     public float attackRangeMin = 10;
+    public GameObject damageText;
     private Vector3 initPosition;
     private Quaternion initRotation;
     private GameObject target;
@@ -21,6 +22,7 @@ public class NPCAgroSystem : MonoBehaviour
     private Rigidbody rigid;
     private Animator animator;
     private Animator targetAnimator;
+    private GameObject localText;
 
     private bool goingHome;
     private bool deadNPC;
@@ -60,6 +62,11 @@ public class NPCAgroSystem : MonoBehaviour
         } else
         {
             Debug.LogError("No player founded!");
+        }
+
+        if(!damageText)
+        {
+            Debug.LogError("Missing damageText!");
         }
 
         //Priradenie a kontrola komponent
@@ -204,12 +211,22 @@ public class NPCAgroSystem : MonoBehaviour
             if (timer > 0f)
             {
                 timer -= Time.deltaTime;
-                if(timer <= 1f && !hitted)
+                if(timer <= 2f && !hitted)
                 {
                     hitted = true;
                     targetAnimator.SetTrigger("damage");
-                    GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamageText").GetComponent<Text>().text = finalDamage.ToString();
-                    GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamageText").GetComponent<Animator>().SetTrigger("Hit");
+                    int damage = Random.Range(baseNPC.attackMin, baseNPC.attackMax) * 10;
+                    int defense = (((targetScript.activeArmor - 280) ^ 2) / 110) + 16;
+                    int baseDamage = damage * defense / 730;
+                    finalDamage = baseDamage * (730 - (defense * 51 - defense ^ 2 / 11) / 10) / 730;
+
+                    if (damage > 0)
+                        targetScript.health -= finalDamage;
+
+                    localText = (GameObject)Instantiate(damageText, GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamagePosition").position, GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamagePosition").rotation);
+                    localText.transform.SetParent(GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamagePosition"));
+                    localText.GetComponent<Text>().text = finalDamage.ToString();
+                    localText.GetComponent<Animator>().SetTrigger("Hit");
                 }
             }
             else
@@ -217,13 +234,7 @@ public class NPCAgroSystem : MonoBehaviour
                 //perioda utoku
                 timer = 3f;
                 hitted = false;
-                int damage = Random.Range(baseNPC.attackMin, baseNPC.attackMax) * 10;
-                int defense = (((targetScript.activeArmor - 280) ^ 2) / 110) + 16;
-                int baseDamage = damage * defense / 730;
-                finalDamage = baseDamage * (730 - (defense * 51 - defense ^ 2 / 11) / 10) / 730;
-
-                if(damage > 0)
-                    targetScript.health -= finalDamage;
+                
                 animator.SetTrigger("Attack1");
             }
         }

@@ -7,6 +7,8 @@ public class Events : MonoBehaviour
     int ticks = 0;
     bool casting = false;
     public GameObject fireball;
+    public GameObject damageText;
+    private GameObject localText;
 
     public void CastAttack()
     {
@@ -63,8 +65,10 @@ public class Events : MonoBehaviour
             if(!player.FindChild("OnFireEffect").GetComponent<ParticleSystem>().isPlaying)
                 player.FindChild("OnFireEffect").GetComponent<ParticleSystem>().Play();
             playerAnimator.SetTrigger("damage");
-            GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamageText").GetComponent<Text>().text = "20";
-            GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamageText").GetComponent<Animator>().SetTrigger("Hit");
+            localText = (GameObject)Instantiate(damageText, GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamagePosition").position, GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamagePosition").rotation);
+            localText.transform.SetParent(GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamagePosition"));
+            localText.GetComponent<Text>().text = "20";
+            localText.GetComponent<Animator>().SetTrigger("Hit");
             player.GetComponent<BasePlayer>().health -= 20;
             ticks--;
         }
@@ -145,8 +149,10 @@ public class Events : MonoBehaviour
             if ((localFireball.transform.position - player.position).sqrMagnitude < 10f)
             {
                 playerAnimator.SetTrigger("damage");
-                GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamageText").GetComponent<Text>().text = "400";
-                GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamageText").GetComponent<Animator>().SetTrigger("Hit");
+                localText = (GameObject)Instantiate(damageText, GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamagePosition").position, GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamagePosition").rotation);
+                localText.transform.SetParent(GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamagePosition"));
+                localText.GetComponent<Text>().text = "400";
+                localText.GetComponent<Animator>().SetTrigger("Hit");
                 player.GetComponent<BasePlayer>().health -= 400;
                 ticks = 10;
                 break;
@@ -216,8 +222,10 @@ public class Events : MonoBehaviour
             if ((player.position - transform.position).sqrMagnitude < 240)
             {
                 playerAnimator.SetTrigger("damage");
-                GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamageText").GetComponent<Text>().text = "40";
-                GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamageText").GetComponent<Animator>().SetTrigger("Hit");
+                localText = (GameObject)Instantiate(damageText, GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamagePosition").position, GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamagePosition").rotation);
+                localText.transform.SetParent(GameObject.Find("Interface").transform.FindChild("HPBar").FindChild("DamagePosition"));
+                localText.GetComponent<Text>().text = "40";
+                localText.GetComponent<Animator>().SetTrigger("Hit");
                 player.GetComponent<BasePlayer>().health -= 40;
             }
             yield return new WaitForSeconds(0.5f);

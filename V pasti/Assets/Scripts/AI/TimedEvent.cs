@@ -30,9 +30,10 @@ public class TimedEvent : MonoBehaviour
 	
 	void Update ()
     {
-        if(combatTiming && timer != -1)
+        if (combatTiming && timer != -1)
         {
             //V kombate
+
             if(transform.GetComponent<BaseNPC>().inCombat)
             {
                 if(timer > 0)
