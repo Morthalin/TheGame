@@ -27,7 +27,11 @@ public class DialogEvent : MonoBehaviour
         {
             Debug.LogError("Missing DialogID!");
         }
-		//Debug.Log ("awaknuto");
+		player = GameObject.Find ("Player").GetComponent<BasePlayer> ();
+		if (!player) {
+			Debug.LogError("There is no player object.");
+			return;
+		}
 	}
 	
 	void Update ()
@@ -83,7 +87,34 @@ public class DialogEvent : MonoBehaviour
                 Time.timeScale = 1f;
                 GameObject.Find("Player").GetComponent<BasePlayer>().pause--;
 				isself = false;
+				applyPostTalkEffect();
             }
         }
+	}
+
+	private BasePlayer player;
+
+	void applyPostTalkEffect(){
+		// po monologu
+		if (player.storyCheckpoint == 0 && dialog == 1)
+			player.storyCheckpoint = 1;
+		// vypije vyprostovak
+		if (player.storyCheckpoint == 1 && dialog == 2)
+			player.storyCheckpoint = 2;
+		// proroctvi + vysvobod nas + byt hrdinou mi slusi
+		else if (player.storyCheckpoint == 3 && dialog == 3)
+			player.storyCheckpoint = 4;
+		// bylinkarka zadala ukol.
+		else if (player.storyCheckpoint == 4 && dialog == 5)
+			player.storyCheckpoint = 5;
+		else if (player.storyCheckpoint == 6 && dialog == 6)
+			player.storyCheckpoint = 7;
+		else if(player.storyCheckpoint == 7 && dialog == 7)
+		{
+			player.healthMax += 150;
+			player.agility   += 10;
+		}
+			
+		
 	}
 }

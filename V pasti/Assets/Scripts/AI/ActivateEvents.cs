@@ -27,17 +27,26 @@ public class ActivateEvents : MonoBehaviour {
 	
 	void Update () {
 		// todo check storyCheckpoint for multiple takls
+		if (storyCheckpoint != player.storyCheckpoint)
+			return;
 		if (! done && (transform.position -player.transform.position).sqrMagnitude < distanceSqrtToActivate) {
-			done = true;
 			//Debug.Log("nalezen " + transform.GetComponents<DialogEvent>().Length + " dialog(y).");
-			gameObject.GetComponent<DialogEvent>().start = true;
+			//gameObject.GetComponent<DialogEvent>().start = true;
+			foreach(var item in gameObject.GetComponents<DialogEvent>()){
+				if( item.dialog == dialogId ){
+					item.start = true;
+					done = true;
+				}
+			}
 		} 
 	}
 
-	void OnGUI()
+
+
+/*	void OnGUI()
 	{
 		if (! done && (transform.position - player.transform.position).sqrMagnitude < distanceSqrtToActivate) {
 			GUI.TextField (new Rect (10, 10, 60, 30), "[t] dialog");
 		}
-	}
+	}*/
 }

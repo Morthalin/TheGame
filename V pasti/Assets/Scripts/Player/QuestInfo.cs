@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 public class QuestInfo : MonoBehaviour {
 	BasePlayer player;
-	//bool 	seen;
 	float 	ttl;
 	int 	last;
 
@@ -30,27 +29,33 @@ public class QuestInfo : MonoBehaviour {
 			return;
 		}
 		last = -1;
-		ttl = 10.0f;
-		//seen = false;
+		ttl = 6.0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (last < player.storyCheckpoint) {
-			ttl = 10.0f;
+			ttl = 6.0f;
 			panel.gameObject.SetActive(true);
 			text.enabled = true;
 			last = player.storyCheckpoint;
 		}
 		switch (player.storyCheckpoint) {
-		case 0: text.text = "<b>Ukol 1:</b> Vydej se po cestě do místní vesnice, musíš sehnat vyproštovák.";
+		case 1: text.text = "<b>Ukol 1:</b> Vydej se po cestě do místní vesnice, musíš sehnat vyproštovák.";
 			break;
-		case 1: text.text = "<b>Info:</b> Podle pradávného proroctví, kdo nezemře po vypití nápoje kterého jsi právě vypil, je vyvolený.";
+		case 2: text.text = "<b>Info:</b> Podle pradávného proroctví, kdo nezemře po vypití nápoje který jsi právě vypil, je vyvolený.";
 			break;
-		case 2: text.text = "<b>Ukol 2:</b> Zabij bandity a přines domorodci ukradené suroviny.";
+		case 3: text.text = "<b>Nápověda:</b> Hledej domorodce, ktery s tebou chce mluvit.";
 			break;
-	
+		case 4: text.text = "<b>Nápověda:</b> Mistní bylinkářka má pro tebe prosbu.";
+			break;
+		case 5: text.text = "<b>Ukol 2:</b> Zabij bandity a přines domorodci ukradené suroviny.";
+			break;
+		case 7: text.text = "<b>Info:</b> Výborně, získal jsi zpět věci paní bylinářky, která na tebe s napětím čeká.";
+			break;
 		default: text.text = "";
+			panel.gameObject.SetActive(false);
+			text.enabled = false;
 			break;
 		}
 		if (ttl > 0.0f) {
@@ -58,8 +63,20 @@ public class QuestInfo : MonoBehaviour {
 			if( ttl <= 0.0f ){
 				panel.gameObject.SetActive(false);
 				text.enabled = false;
+				applyPostMessageEffect();
 			}
+		}
+
+		if(Input.GetKeyDown(KeyCode.L)){
+			last --;
 		}
 	}
 
+
+	void applyPostMessageEffect(){
+		if (player.storyCheckpoint == 2) {
+			player.storyCheckpoint = 3;
+		} else if (player.storyCheckpoint == 4) {
+		}
+	}
 }

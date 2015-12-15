@@ -6,7 +6,8 @@ using System.Collections.Generic;
 public class Inventory
 {
     public int playerID;
-    public List<int> itemsID = new List<int>();
+ //   public List<int> itemsID = new List<int>();
+	public  Dictionary<int, int>           itemsQuantity = new Dictionary<int, int>();
 
     public Inventory(int ID)
     {
@@ -22,7 +23,7 @@ public class Inventory
         IDataReader reader = command.ExecuteReader();
         while (reader.Read())
         {
-            itemsID.Add(reader.GetInt32(2));
+            itemsQuantity[reader.GetInt32(2)] = reader.GetInt32(3);
         }
         reader.Close();
         command.Dispose();
@@ -52,13 +53,11 @@ public class Inventory
         command.Dispose();
 
         foreach (var item in l.itemsQuantity.Keys) {
-			for (int i = 0; i < l.itemsQuantity[item]; i++) {
-				sqlQuery = "insert into Inventory (playerID,itemID) values ("+playerID+","+item+");";
-                command = connection.CreateCommand();
-                command.CommandText = sqlQuery;
-				command.ExecuteNonQuery();
-                command.Dispose();
-            }
+			sqlQuery = "insert into Inventory (playerID,itemID,quantity) values ("+playerID+","+item+","+ l.itemsQuantity[item] +");";
+            command = connection.CreateCommand();
+            command.CommandText = sqlQuery;
+			command.ExecuteNonQuery();
+            command.Dispose();        
 		}
 		
 		connection.Close();

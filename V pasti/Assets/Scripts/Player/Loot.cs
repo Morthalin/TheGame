@@ -58,13 +58,9 @@ public class Loot : MonoBehaviour {
 
 		initEquipment ();
 		BasePlayer pl = GameObject.Find ("Player").GetComponent<BasePlayer> ();
-		foreach (var item in pl.inventory.itemsID) {
-			if (!itemsQuantity.ContainsKey(item)) {
-				itemsQuantity[item] = 0;
-				itemsData[item] = ItemsData.itemsData[item];
-			}
-			itemsQuantity[item] ++;
-		}
+		itemsQuantity = pl.inventory.itemsQuantity;
+		itemsData = ItemsData.itemsData;
+		
 
 		presseText = GameObject.Find ("Interface").transform.Find ("PressE").GetComponent<Text> ();
 		if (presseText == null) {
