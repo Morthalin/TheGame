@@ -72,19 +72,19 @@ public class WaypointMovement : MonoBehaviour
         {
 			if (targets[position])
 			{
-				if( position != 0 && targets[position] == targets[position - 1])
-				{
-					transform/*.parent*/.LookAt(targets[position]);
-				}
-				else
-				{
-					transform.rotation = Quaternion.Lerp(transform.parent.rotation, Quaternion.LookRotation(targets[position].position - transform.parent.position), Time.deltaTime * rotationSpeeds[0]);
-				}
+                if (position != 0 && targets[position] == targets[position - 1])
+                {
+                    transform/*.parent*/.LookAt(targets[position]);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targets[position].position - transform.position), Time.deltaTime);
+                }
 			}
 			else
 			{
 				//transform/*.parent*/.LookAt(waypoints[position]);
-				transform.rotation = Quaternion.Lerp(transform.parent.rotation, Quaternion.LookRotation(targets[position].position - transform.parent.position), Time.deltaTime * rotationSpeeds[0]);
+				transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targets[position].position - transform.position), Time.deltaTime * rotationSpeeds[0]);
 			}
 			
 			if (singleMovementSpeed)
