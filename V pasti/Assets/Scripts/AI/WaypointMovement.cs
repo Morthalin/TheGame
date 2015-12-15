@@ -17,6 +17,8 @@ public class WaypointMovement : MonoBehaviour
     private int position;
     public bool wait;
     public bool start;
+	private float lastDistance;
+	private int boostSpeed;
 
     void Awake()
     {
@@ -24,7 +26,8 @@ public class WaypointMovement : MonoBehaviour
         turning = false;
         wait = true;
         start = false;
-        position = 0; 
+        position = 0;
+		boostSpeed = 0;
 
         if(waypoints.Length != movementSpeeds.Length && !singleMovementSpeed)
         {
@@ -46,6 +49,7 @@ public class WaypointMovement : MonoBehaviour
                 start = false;
                 wait = stepEnter;
                 nextWaypoint();
+				lastDistance = (waypoints[position].position - transform.parent.position).sqrMagnitude;
             }
         }
 
@@ -65,11 +69,17 @@ public class WaypointMovement : MonoBehaviour
         if ((transform.parent.position - waypoints[position].position).sqrMagnitude < distanceToNext)
         {
             position++;
+			boostSpeed = 0;
             moving = false;
             turning = false;
         }
         else
         {
+			if((transform.parent.position - waypoints[position].position).sqrMagnitude >= lastDistance)
+			{
+				boostSpeed++;
+			}
+			lastDistance = (transform.parent.position - waypoints[position].position).sqrMagnitude;
 			if (targets[position])
 			{
                 if (position != 0 && targets[position] == targets[position - 1])
@@ -84,7 +94,7 @@ public class WaypointMovement : MonoBehaviour
 			else
 			{
 				//transform/*.parent*/.LookAt(waypoints[position]);
-				transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targets[position].position - transform.position), Time.deltaTime * rotationSpeeds[0]);
+				transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(waypoints[position].position - transform.position), Time.deltaTime * rotationSpeeds[0]);
 			}
 			
 			if (singleMovementSpeed)
@@ -118,11 +128,11 @@ public class WaypointMovement : MonoBehaviour
         {
             if (singleRotationSpeed)
             {
-                transform.parent.rotation = Quaternion.Lerp(transform.parent.rotation, Quaternion.LookRotation(waypoints[position].position - transform.parent.position), Time.deltaTime * rotationSpeeds[0]);
+                transform.parent.rotation = Quaternion.Lerp(transform.parent.rotation, Quaternion.LookRotation(waypoints[position].position - transform.parent.position), Time.deltaTime * (rotationSpeeds[0] + boostSpeed));
             }
             else
             {
-                transform.parent.rotation = Quaternion.Lerp(transform.parent.rotation, Quaternion.LookRotation(waypoints[position].position - transform.parent.position), Time.deltaTime * rotationSpeeds[position]);
+                transform.parent.rotation = Quaternion.Lerp(transform.parent.rotation, Quaternion.LookRotation(waypoints[position].position - transform.parent.position), Time.deltaTime * (rotationSpeeds[position] + boostSpeed));
             }
         }
     }
