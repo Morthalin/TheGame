@@ -143,16 +143,22 @@ public class MainMenu : MonoBehaviour
     public void loadGamePressedIngame()
     {
         GameObject.Find("Interface").GetComponent<LoadPlayer>().loadPlayer(transform.FindChild("Hraci").GetComponent<Dropdown>().options[transform.FindChild("Hraci").GetComponent<Dropdown>().value].text);
-        if (transform.FindChild("Hraci").gameObject.activeSelf)
+        //if (transform.FindChild("Hraci").gameObject.activeSelf)
+        //{
+        //    transform.FindChild("Hraci").GetComponent<Dropdown>().value = -1;
+        //    transform.FindChild("Hraci").gameObject.SetActive(false);
+        //    transform.FindChild("loadHruBut").gameObject.SetActive(false);
+        //}
+        //mainMenu.parent.gameObject.SetActive(false);
+        //mainMenu.gameObject.SetActive(false);
+        //exitMenu.gameObject.SetActive(false);
+        //settingsMenu.gameObject.SetActive(false);
+        transform.parent.GetComponent<LoadingSceen>().loading++;
+        if (GameObject.Find("LoadPlayer"))
         {
-            transform.FindChild("Hraci").GetComponent<Dropdown>().value = -1;
-            transform.FindChild("Hraci").gameObject.SetActive(false);
-            transform.FindChild("loadHruBut").gameObject.SetActive(false);
+            GameObject.Find("LoadPlayer").GetComponent<LoadPlayerChar>().jmeno = transform.FindChild("Hraci").GetComponent<Dropdown>().options[transform.FindChild("Hraci").GetComponent<Dropdown>().value].text;
         }
-        mainMenu.parent.gameObject.SetActive(false);
-        mainMenu.gameObject.SetActive(false);
-        exitMenu.gameObject.SetActive(false);
-        settingsMenu.gameObject.SetActive(false);
+        Application.LoadLevel("scene");
     }
 
     public void savePressed()
