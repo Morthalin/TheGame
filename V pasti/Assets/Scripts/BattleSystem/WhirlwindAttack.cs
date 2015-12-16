@@ -101,6 +101,10 @@ public class WhirlwindAttack : MonoBehaviour
                     timer = cooldown;
                     cooldownIndicator.GetComponent<Image>().fillAmount = 1;
                 }
+                else if (Input.GetMouseButton(1) && basePlayer.energy < energy)
+                {
+                    GameObject.Find("Interface").transform.FindChild("EnergyBar").FindChild("NoEnergyText").GetComponent<Animator>().SetTrigger("Hit");
+                }
             }
         }
     }

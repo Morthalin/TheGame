@@ -146,7 +146,7 @@ public class BossCombatController : MonoBehaviour
                     initDistance = (initPosition - transform.position).sqrMagnitude;
                 }
             }
-            else if (initDistance > agroReset)
+            else if (targetDistance > agroReset)
             {
                 //Koniec Combatu
                 goingHome = true;

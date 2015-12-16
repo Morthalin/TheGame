@@ -113,6 +113,10 @@ public class HealCast : MonoBehaviour
                     timer = cooldown;
                     cooldownIndicator.GetComponent<Image>().fillAmount = 1;
                 }
+                else if(Input.GetKeyDown(KeyCode.Q) && basePlayer.energy < energy)
+                {
+                    GameObject.Find("Interface").transform.FindChild("EnergyBar").FindChild("NoEnergyText").GetComponent<Animator>().SetTrigger("Hit");
+                }
             }
         }
 	}
