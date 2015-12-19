@@ -15,7 +15,7 @@ public class LoadPlayer : MonoBehaviour
         }
         else
         {
-            player.LoadPlayer("test");
+            player.LoadPlayer("TestEvent");
         }
     }
 

@@ -211,6 +211,7 @@ public class NPCAgroSystem : MonoBehaviour
 
             if (targetDistance <= attackRangeMax && !targetScript.dead)
             {
+                navigation.SetDestination(transform.position);
                 //Atack
                 Attack1();
             }
