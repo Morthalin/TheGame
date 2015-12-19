@@ -5,6 +5,7 @@ using System.Collections;
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class NPCAgroSystem : MonoBehaviour
 {
     public float speed = 8;
@@ -20,13 +21,14 @@ public class NPCAgroSystem : MonoBehaviour
     private BaseNPC baseNPC;
     private CharacterController controller;
     private Rigidbody rigid;
+    private NavMeshAgent navigation;
     private Animator animator;
     private Animator targetAnimator;
     private GameObject localText;
 
     private bool goingHome;
     private bool deadNPC;
-    private Vector3 movementVector;
+    //private Vector3 movementVector;
     private float initDistance;
     private float targetDistance;
     private float timer;
@@ -88,6 +90,17 @@ public class NPCAgroSystem : MonoBehaviour
             Debug.LogError("Missing rigidbody!");
         }
         rigid.constraints = RigidbodyConstraints.FreezeAll;
+
+        navigation = transform.GetComponent<NavMeshAgent>();
+        if(!navigation)
+        {
+            Debug.LogError("Missing NavMeshAgent!");
+        }
+        else
+        {
+            navigation.speed = speed;
+            navigation.acceleration = 16f;
+        }
 
         baseNPC = GetComponent<BaseNPC>();
         if (!baseNPC)
@@ -151,13 +164,14 @@ public class NPCAgroSystem : MonoBehaviour
                 }
                 else
                 {
-                    transform.LookAt(initPosition);
-                    movementVector = new Vector3(0f, 0f, 1f);
-                    movementVector = transform.TransformDirection(movementVector);
+                    //transform.LookAt(initPosition);
+                    //movementVector = new Vector3(0f, 0f, 1f);
+                    //movementVector = transform.TransformDirection(movementVector);
 
                     animator.SetBool("isRunning", true);
                     animator.SetBool("runningForward", true);
-                    controller.SimpleMove(movementVector * speed);
+                    //controller.SimpleMove(movementVector * speed);
+                    navigation.SetDestination(initPosition);
                     initDistance = (initPosition - transform.position).sqrMagnitude;
                 }
             }
@@ -174,17 +188,18 @@ public class NPCAgroSystem : MonoBehaviour
             else if (targetDistance < minAgro && targetDistance > attackRangeMin && !targetScript.dead)
             {
                 //Beh ku hracovy
-                transform.LookAt(target.transform);
+                //transform.LookAt(target.transform);
                 transform.Find("HPFrame").gameObject.SetActive(true);
-                movementVector = new Vector3(0f, 0f, 1f);
-                movementVector = transform.TransformDirection(movementVector);
+                //movementVector = new Vector3(0f, 0f, 1f);
+                //movementVector = transform.TransformDirection(movementVector);
 
                 animator.SetBool("isCombat", true);
                 baseNPC.inCombat = true;
                 targetAnimator.SetBool("isCombat", true);
                 animator.SetBool("isRunning", true);
                 animator.SetBool("runningForward", true);
-                controller.SimpleMove(movementVector * speed);
+                //controller.SimpleMove(movementVector * speed);
+                navigation.SetDestination(target.transform.position);
                 initDistance = (initPosition - transform.position).sqrMagnitude;
             }
             else
