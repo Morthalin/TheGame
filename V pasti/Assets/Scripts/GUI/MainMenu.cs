@@ -165,8 +165,7 @@ public class MainMenu : MonoBehaviour
     {
         LoadingSceen loading = GameObject.Find("Menu").GetComponent<LoadingSceen>();
         BasePlayer pl = GameObject.Find("Player").GetComponent<BasePlayer>();
-        
-        if (pl.health > 0)
+		if (pl.health > 0)
         {
             loading.loading++;
             pl.inventory.Save();
@@ -180,7 +179,15 @@ public class MainMenu : MonoBehaviour
                                 positionY = " + GameObject.Find("Player").transform.position.y.ToString() + @" + 1,
                                 positionZ = " + GameObject.Find("Player").transform.position.z.ToString() + @",
                                 rotationY = " + GameObject.Find("Player").transform.rotation.eulerAngles.y + @",
-                                storyLine = " + GameObject.Find("Player").GetComponent<BasePlayer>().storyCheckpoint.ToString() + @" 
+                                storyLine = " + pl.storyCheckpoint.ToString() + @",
+								strength = " + pl.strength.ToString() + @",
+								intellect = " + pl.intellect.ToString() + @",
+								agility = " + pl.agility.ToString() + @",
+								stamina = " + pl.stamina.ToString() + @",
+								energy = " + pl.energy.ToString() + @",
+								armor = " + pl.armor.ToString() + @",
+								minAttack = " + pl.minAttack.ToString() + @",
+								maxAttack = " + pl.maxAttack.ToString() + @"
                                WHERE playerName = '" + GameObject.Find("Player").GetComponent<BasePlayer>().playerName + "';";
             command.CommandText = sqlQuery;
             command.ExecuteNonQuery();
@@ -189,6 +196,7 @@ public class MainMenu : MonoBehaviour
             SqliteConnection.ClearAllPools();
             pl.pause--;
             loading.loading--;
+		
             if (transform.FindChild("Hraci").gameObject.activeSelf)
             {
                 transform.FindChild("Hraci").GetComponent<Dropdown>().value = -1;

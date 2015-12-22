@@ -33,14 +33,14 @@ public class Loot : MonoBehaviour {
 	private float   lootListLive = 0.0f;
 
 	// soft copy of players inventry object
-	private Dictionary<int, BaseItemStats> itemsData = new Dictionary<int, BaseItemStats>();
-	public  Dictionary<int, int>           itemsQuantity = new Dictionary<int, int>();
+	private Dictionary<int, BaseItemStats> itemsData;
+	public  Dictionary<int, int>           itemsQuantity;
 
 	// equipment
-	private Dictionary<string, BaseItemStats>   equipmentMap;
-	private List<string>						equipmentOrder;
+	private Dictionary<string, BaseItemStats>   equipmentMap = null;
+	private List<string>						equipmentOrder = null;
 	// active potions
-	private Dictionary<int, float> 				activePotions = new Dictionary<int, float>();
+	private Dictionary<int, float> 				activePotions = null;
 	
 
 	// helper variables
@@ -54,12 +54,11 @@ public class Loot : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		ItemsData.Load ();
 
-		initEquipment ();
 		BasePlayer pl = GameObject.Find ("Player").GetComponent<BasePlayer> ();
 		itemsQuantity = pl.inventory.itemsQuantity;
 		itemsData = ItemsData.itemsData;
+		initEquipment ();
 		
 
 		presseText = GameObject.Find ("Interface").transform.Find ("PressE").GetComponent<Text> ();
@@ -235,6 +234,8 @@ public class Loot : MonoBehaviour {
 	void OnGUI()
 	{
 		displayActivePotions ();
+		if (GameObject.Find ("Menu"))
+			return;
 		if (showInventoryPanel) {
 			int fromX = Screen.width - 320;
 			GUI.Box(new Rect( fromX-200, 25, 300+200, 450 ), "Inventář" );
@@ -278,26 +279,11 @@ public class Loot : MonoBehaviour {
 	}
 	private BaseItemStats emptyItem = new BaseItemStats ();
 	void initEquipment(){
-		equipmentOrder = new List<string> ();
-		equipmentMap = new Dictionary<string, BaseItemStats> ();
-		equipmentOrder.Add ("Hlava");
-		equipmentOrder.Add ("Hruď");
-		equipmentOrder.Add ("Ramena");
-		equipmentOrder.Add ("Ruce");
-		equipmentOrder.Add ("Nohy");
-		equipmentOrder.Add ("Chodidla");
-
-		equipmentOrder.Add ("Meč");
-		equipmentOrder.Add ("Věc");
-		equipmentOrder.Add ("Štít");
-
-		//BaseItemStats emptyItem = new BaseItemStats ();
-		emptyItem.ItemName = "(prázdné)";
-		emptyItem.Agility = emptyItem.Armor = emptyItem.Intellect = emptyItem.Stamina = emptyItem.Strength = 0;
-
-		foreach (var item in equipmentOrder) {
-			equipmentMap[item] = emptyItem;
-		}
+		BasePlayer pl = GameObject.Find ("Player").GetComponent<BasePlayer> ();
+		emptyItem = pl.inventory.emptyItem;
+		equipmentMap = pl.inventory.equipmentMap;
+		equipmentOrder = pl.inventory.equipmentOrder;
+		activePotions = pl.inventory.activePotions;
 	}
 
 	void displayEquipment(Rect grouprec){
