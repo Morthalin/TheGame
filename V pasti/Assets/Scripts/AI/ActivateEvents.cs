@@ -10,9 +10,10 @@ public class ActivateEvents : MonoBehaviour {
 	public float distanceSqrtToGo = 196f;
 	public Type type = Type.DIALOG;
 	private BasePlayer player  = null;
-	private Text 	presseText = null;
+//	private Text 	presseText = null;
 	private bool    done = false;
 	private NavMeshAgent navigation;
+	private bool isRunning = false;
     
 
 	public enum Type
@@ -46,7 +47,7 @@ public class ActivateEvents : MonoBehaviour {
 	
 	void Update () {
 		// todo check storyCheckpoint for multiple takls
-		if (storyCheckpoint != player.storyCheckpoint)
+		if (storyCheckpoint != player.storyCheckpoint || done )
 			return;
 
 		if (type == Type.DIALOG) {
@@ -58,10 +59,10 @@ public class ActivateEvents : MonoBehaviour {
 
 	void dialogUpdate()
 	{
-		if (! done && (transform.position -player.transform.position).sqrMagnitude < distanceSqrtToGo) {
+		if ( (transform.position -player.transform.position).sqrMagnitude < distanceSqrtToGo ) {
+
 			transform.LookAt(player.transform.position);
-			CharacterController chc = transform.GetComponent<CharacterController>();
-			//chc.SimpleMove(transform.forward.normalized*100.0f*Time.deltaTime);
+			isRunning = true;
 			GetComponent<Animator>().SetBool("isRunning",true);
 			GetComponent<Animator>().SetBool("runningForward",true);
 
@@ -72,13 +73,16 @@ public class ActivateEvents : MonoBehaviour {
 				GetComponent<Animator>().SetBool("isRunning",false);
 				GetComponent<Animator>().SetBool("runningForward",false);
 			}
+		} else if(isRunning){
+			isRunning = false;
+			GetComponent<Animator>().SetBool("isRunning",false);
+			GetComponent<Animator>().SetBool("runningForward",false);
 		}
 	}
 
 	void monologUpdate()
 	{
-		if (! done && (transform.position -player.transform.position).sqrMagnitude < distanceSqrtToActivate) {
-			//gameObject.transform.LookAt(player.transform.position);
+		if ((transform.position -player.transform.position).sqrMagnitude < distanceSqrtToActivate) {
 			foreach(var item in gameObject.GetComponents<DialogEvent>()){
 				if( item.dialog == dialogId ){
 					item.start = true;
