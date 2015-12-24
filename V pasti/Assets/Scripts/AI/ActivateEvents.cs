@@ -3,45 +3,90 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class ActivateEvents : MonoBehaviour {
-	//public bool dialog = true;
+	public bool dialog = true;
 	public int dialogId;
 	public int storyCheckpoint;
-	public float distanceSqrtToActivate = 36f;
+	public float distanceSqrtToActivate = 49f;
+	public float distanceSqrtToGo = 196f;
+	public Type type = Type.DIALOG;
 	private BasePlayer player  = null;
 	private Text 	presseText = null;
 	private bool    done = false;
+	private NavMeshAgent navigation;
     
+
+	public enum Type
+	{
+		DIALOG,
+		MONOLOG,
+	}
+
 	void Start () {
 		player = GameObject.Find ("Player").GetComponent<BasePlayer> ();
 		if (!player) {
 			Debug.LogError("There is no player object.");
 			return;
 		}
+		if (type == Type.MONOLOG)
+			return;
 
-		presseText = GameObject.Find ("Interface").transform.Find ("PressE").GetComponent<Text> ();
+		navigation = transform.GetComponent<NavMeshAgent>();
+		if(!navigation)
+		{
+			Debug.LogError("Missing NavMeshAgent!");
+			return;
+		}
+
+/*		presseText = GameObject.Find ("Interface").transform.Find ("PressE").GetComponent<Text> ();
 		if (presseText == null) {
 			Debug.LogError("presseText");
 			return;
-		}
+		}*/
 	}
 	
 	void Update () {
 		// todo check storyCheckpoint for multiple takls
 		if (storyCheckpoint != player.storyCheckpoint)
 			return;
+
+		if (type == Type.DIALOG) {
+			dialogUpdate ();
+		} else if (type == Type.MONOLOG) {
+			monologUpdate ();
+		}
+	}
+
+	void dialogUpdate()
+	{
+		if (! done && (transform.position -player.transform.position).sqrMagnitude < distanceSqrtToGo) {
+			transform.LookAt(player.transform.position);
+			CharacterController chc = transform.GetComponent<CharacterController>();
+			//chc.SimpleMove(transform.forward.normalized*100.0f*Time.deltaTime);
+			GetComponent<Animator>().SetBool("isRunning",true);
+			GetComponent<Animator>().SetBool("runningForward",true);
+
+			navigation.SetDestination(player.transform.position - transform.forward.normalized*Mathf.Sqrt(distanceSqrtToActivate-10.0f) );
+			monologUpdate();
+			if( done ){
+				player.transform.LookAt(transform.position);
+				GetComponent<Animator>().SetBool("isRunning",false);
+				GetComponent<Animator>().SetBool("runningForward",false);
+			}
+		}
+	}
+
+	void monologUpdate()
+	{
 		if (! done && (transform.position -player.transform.position).sqrMagnitude < distanceSqrtToActivate) {
-			//Debug.Log("nalezen " + transform.GetComponents<DialogEvent>().Length + " dialog(y).");
-			//gameObject.GetComponent<DialogEvent>().start = true;
+			//gameObject.transform.LookAt(player.transform.position);
 			foreach(var item in gameObject.GetComponents<DialogEvent>()){
 				if( item.dialog == dialogId ){
 					item.start = true;
 					done = true;
 				}
 			}
-		} 
+		}
 	}
-
-
 
 /*	void OnGUI()
 	{
