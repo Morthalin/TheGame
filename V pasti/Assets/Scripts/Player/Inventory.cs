@@ -171,7 +171,6 @@ public class Inventory
 				",Staff = " + equipmentMap[equipmentOrder[7]].ItemID +
 				",Shield = " + equipmentMap[equipmentOrder[8]].ItemID +
 			" WHERE PlayerID = " + playerID + ";";
-		Debug.Log (query);
 
 		string path = "URI=file:" + Application.dataPath + "/Database/Database.s3db";
 		IDbConnection connection;
