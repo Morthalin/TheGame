@@ -16,7 +16,13 @@ public class blinking : MonoBehaviour {
 		float T = Time.time;
 		if (T - lastTime > deltaTime) {
 			lastTime = T;
-			lt.intensity = Random.Range(minIntensity, maxIntensity);
+			lt.intensity += Random.Range(minIntensity/2, maxIntensity/2) * (Random.Range(0.0f,1.0f) > 0.5 ? 1 : -1) ;
+			if(lt.intensity < minIntensity){
+				lt.intensity = minIntensity;
+			}
+			if(lt.intensity > maxIntensity){
+				lt.intensity = maxIntensity;
+			}
 			Color c = new Color();
 			c.r = 1.0f;
 			c.g = Random.Range(110.0f/255.0f, 200.0f/255.0f);
