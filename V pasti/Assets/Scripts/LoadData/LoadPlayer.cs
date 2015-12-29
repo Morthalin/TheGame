@@ -5,18 +5,20 @@ public class LoadPlayer : MonoBehaviour
 {
     private BasePlayer player;
     private BaseNPC baseNPC;
+    public GameObject loadPlayerCharacter;
 
     void Awake()
     {
         player = GameObject.Find("Player").GetComponent<BasePlayer>();
-        if (GameObject.Find("LoadPlayer"))
+        if (!GameObject.Find("LoadPlayer"))
         {
-            player.LoadPlayer(GameObject.Find("LoadPlayer").GetComponent<LoadPlayerChar>().jmeno);
-        }
-        else
-        {
-			player.LoadPlayer("TestEvent");
+            GameObject playerCharacter;
+            playerCharacter = Instantiate(loadPlayerCharacter);
+            playerCharacter.name = "LoadPlayer";
+            playerCharacter.GetComponent<LoadPlayerChar>().jmeno = "TestEvent";
 		}
+
+        player.LoadPlayer(GameObject.Find("LoadPlayer").GetComponent<LoadPlayerChar>().jmeno);
     }
 
     public void loadPlayer(string name)

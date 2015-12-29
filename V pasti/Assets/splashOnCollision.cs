@@ -13,7 +13,7 @@ public class splashOnCollision : MonoBehaviour {
 	}
 
 	void OnTriggerEnter (Collider other) {
-		Debug.Log("waterCollision");
+		//Debug.Log("waterCollision");
 		Quaternion p = new Quaternion();
 		p.Set (0.0f, 0.0f, 0.0f, 0.0f);
 		ParticleSystem tmp = Instantiate(splashOriginal, other.gameObject.transform.position,p) as ParticleSystem;
