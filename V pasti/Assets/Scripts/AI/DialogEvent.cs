@@ -27,11 +27,6 @@ public class DialogEvent : MonoBehaviour
         {
             Debug.LogError("Missing DialogID!");
         }
-		player = GameObject.Find ("Player").GetComponent<BasePlayer> ();
-		if (!player) {
-			Debug.LogError("There is no player object.");
-			return;
-		}
 	}
 	
 	void Update ()
@@ -92,9 +87,12 @@ public class DialogEvent : MonoBehaviour
         }
 	}
 
-	private BasePlayer player;
-
 	void applyPostTalkEffect(){
+		BasePlayer player = GameObject.Find ("Player").GetComponent<BasePlayer> ();
+		if (!player) {
+			Debug.LogError("Events.StoryPointIncrem:There is no player object.");
+			return;
+		}
 		// po monologu
 		if (player.storyCheckpoint == 0 && dialog == 1)
 			player.storyCheckpoint = 1;
@@ -113,6 +111,7 @@ public class DialogEvent : MonoBehaviour
 		{
 			player.healthMax += 150;
 			player.agility   += 10;
+			player.storyCheckpoint ++;
 		}
 			
 		

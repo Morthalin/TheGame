@@ -76,7 +76,8 @@ public class QuestInfo : MonoBehaviour {
 	void applyPostMessageEffect(){
 		if (player.storyCheckpoint == 2) {
 			player.storyCheckpoint = 3;
-		} else if (player.storyCheckpoint == 4) {
-		}
+		}// else if (player.storyCheckpoint == 6) {
+		//	player.storyCheckpoint = 7;
+		//}
 	}
 }

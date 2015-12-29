@@ -401,8 +401,8 @@ public class Loot : MonoBehaviour {
 		switch (bp.PotionType) {
 		case BasePotion.PotionTypes.AGILITY 	: pl.agility += bp.PotionValue; break;
 		case BasePotion.PotionTypes.ARMOR 		: pl.armor += bp.PotionValue; break;
-		case BasePotion.PotionTypes.ENERGY 		: pl.energy += bp.PotionValue; break;
-		case BasePotion.PotionTypes.HEALTH 		: pl.health += bp.PotionValue; break;
+		case BasePotion.PotionTypes.ENERGY 		: pl.energyMax += bp.PotionValue; pl.energy = Math.Max(pl.energy,pl.energy + bp.PotionValue); break;
+		case BasePotion.PotionTypes.HEALTH 		: pl.healthMax += bp.PotionValue; pl.health = Math.Max(pl.health,pl.health + bp.PotionValue); break;
 		case BasePotion.PotionTypes.INTELLECT 	: pl.intellect += bp.PotionValue; break;
 		case BasePotion.PotionTypes.STAMINA  	: pl.stamina += bp.PotionValue; break;
 		case BasePotion.PotionTypes.STRENGTH 	: pl.strength += bp.PotionValue; break;

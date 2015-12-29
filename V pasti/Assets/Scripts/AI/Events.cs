@@ -109,6 +109,16 @@ public class Events : MonoBehaviour
             player.energy = player.energyMax;
     }
 
+	public void StoryPointIncrem()
+	{
+		BasePlayer player = GameObject.Find ("Player").GetComponent<BasePlayer> ();
+		if (!player) {
+			Debug.LogError("Events.StoryPointIncrem:There is no player object.");
+			return;
+		}
+		player.storyCheckpoint++;
+	}
+
     //Casove funkcie
 
 

@@ -4,6 +4,7 @@ using System.Collections;
 public class OnKillEffect : MonoBehaviour {
 	public enum EffectType{
 		STORYJUMP = 1,
+		TIMED_EVENT_SET = 2,
 	}
 
 
@@ -14,6 +15,9 @@ public class OnKillEffect : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+	}
+
+	void frameInit(){
 		npc = transform.GetComponent<BaseNPC> ();
 		if (!npc) {
 			Debug.LogError("This transform has not BaseNPC component.");
@@ -25,13 +29,16 @@ public class OnKillEffect : MonoBehaviour {
 			return;
 		}
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
+		frameInit ();
 		if (npc.health <= 0) {
 			if(effectType == EffectType.STORYJUMP){
 				player.storyCheckpoint = targetStoryCheckpoint;
 				return;
+			} else if (effectType == EffectType.TIMED_EVENT_SET) {
+
 			}
 		}
 	}
