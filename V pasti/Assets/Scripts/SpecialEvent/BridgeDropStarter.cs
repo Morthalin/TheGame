@@ -5,10 +5,10 @@ public class BridgeDropStarter : MonoBehaviour
 {
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.name == "Player" && transform.parent.GetComponent<EventController>().checkpoint == 5)
+        if (collider.gameObject.name == "Player" && collider.gameObject.GetComponent<BasePlayer>().storyCheckpoint == 14)
         {
             transform.GetComponent<BoxCollider>().isTrigger = false;
-            transform.parent.GetComponent<EventController>().checkpoint++;
+            collider.gameObject.GetComponent<BasePlayer>().storyCheckpoint++;
         }
     }
 }

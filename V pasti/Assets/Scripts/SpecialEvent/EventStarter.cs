@@ -5,9 +5,9 @@ public class EventStarter : MonoBehaviour
 {
     void OnTriggerEnter(Collider collider)
     {
-        if(collider.gameObject.name == "Player" && transform.parent.GetComponent<EventController>().checkpoint == 0)
+        if(collider.gameObject.name == "Player" && collider.gameObject.GetComponent<BasePlayer>().storyCheckpoint == 9)
         {
-            transform.parent.GetComponent<EventController>().checkpoint++;
+            collider.gameObject.GetComponent<BasePlayer>().storyCheckpoint++;
         }
     }
 }

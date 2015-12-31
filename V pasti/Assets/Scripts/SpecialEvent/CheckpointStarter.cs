@@ -7,16 +7,16 @@ public class CheckpointStarter : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
 
-        if (collider.gameObject.name == "Player" && transform.parent.GetComponent<EventController>().checkpoint == 3)
+        if (collider.gameObject.name == "Player" && collider.gameObject.GetComponent<BasePlayer>().storyCheckpoint == 12)
         {
-            transform.parent.GetComponent<EventController>().checkpoint++;
+            collider.gameObject.GetComponent<BasePlayer>().storyCheckpoint++;
         }
 
-        if(collider.gameObject.name == "Goblin" && transform.parent.GetComponent<EventController>().checkpoint == 2)
+        if(collider.gameObject.name == "Goblin" && GameObject.Find("Player").GetComponent<BasePlayer>().storyCheckpoint == 11)
         {
             collider.gameObject.SetActive(false);
             goblin1.SetActive(true);
-            transform.parent.GetComponent<EventController>().checkpoint++;
+            GameObject.Find("Player").GetComponent<BasePlayer>().storyCheckpoint++;
         }
     }   
 }

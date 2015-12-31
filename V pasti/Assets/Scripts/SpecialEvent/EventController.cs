@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class EventController : MonoBehaviour
 {
-    public int checkpoint;
     public Transform player;
     public Transform goblin;
     public Transform goblin1;
@@ -13,16 +12,24 @@ public class EventController : MonoBehaviour
 
     private bool cameraMove;
     private bool secondTarget;
+    private BasePlayer basePlayer;
 
 	void Awake ()
     {
-        checkpoint = 0;
         cameraMove = false;
         secondTarget = false;
 
         if (!player)
         {
             Debug.LogError("Missing player!");
+        }
+        else
+        {
+            basePlayer = player.GetComponent<BasePlayer>();
+            if(!basePlayer)
+            {
+                Debug.LogError("Missing base player script!");
+            }
         }
 
         if (!goblin)
@@ -43,9 +50,9 @@ public class EventController : MonoBehaviour
 	
 	void Update ()
     {
-	    switch(checkpoint)
+	    switch(basePlayer.storyCheckpoint)
         {
-            case 1:
+            case 10:
                 if (player.GetComponent<BasePlayer>().pause == 0)
                 {
                     player.GetComponent<BasePlayer>().pause++;
@@ -78,12 +85,12 @@ public class EventController : MonoBehaviour
                         {
                             StartCoroutine(cameraWait1());
                             cameraMove = false;
-                            checkpoint++;
+                            basePlayer.storyCheckpoint++;
                         }
                     }
                 }
                 break;
-            case 4:
+            case 13:
                 if (player.GetComponent<BasePlayer>().pause == 0)
                 {
                     player.GetComponent<BasePlayer>().pause++;
@@ -123,12 +130,12 @@ public class EventController : MonoBehaviour
                         {
                             StartCoroutine(cameraWait2());
                             cameraMove = false;
-                            checkpoint++;
+                            basePlayer.storyCheckpoint++;
                         }
                     }
                 }
                 break;
-            case 6:
+            case 15:
                 if (player.GetComponent<BasePlayer>().pause == 0)
                 {
                     player.GetComponent<BasePlayer>().pause++;
@@ -171,7 +178,7 @@ public class EventController : MonoBehaviour
                     {
                         StartCoroutine(cameraWait3());
                         cameraMove = false;
-                        checkpoint++;
+                        basePlayer.storyCheckpoint = 20;
                     }
                 }
                 break;
