@@ -109,6 +109,9 @@ public class NPCAgroSystem : MonoBehaviour
 	
 	void LateUpdate ()
     {
+		/* check player_friendly */
+		if (gameObject.layer == 27)
+			return;
         if (baseNPC.health > 0)
         {
             deadNPC = false;

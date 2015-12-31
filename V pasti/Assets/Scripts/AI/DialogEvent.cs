@@ -107,13 +107,17 @@ public class DialogEvent : MonoBehaviour
 			player.storyCheckpoint = 5;
 		else if (player.storyCheckpoint == 6 && dialog == 6)
 			player.storyCheckpoint = 7;
-		else if(player.storyCheckpoint == 7 && dialog == 7)
-		{
+		else if (player.storyCheckpoint == 7 && dialog == 7) {
 			player.healthMax += 150;
-			player.agility   += 10;
+			player.agility += 10;
 			player.storyCheckpoint ++;
+		} else if (player.storyCheckpoint == 20) {
+			player.storyCheckpoint += 3;
+		} else if (player.storyCheckpoint == 24){
+			player.storyCheckpoint ++;
+		} else if (player.storyCheckpoint == 27) {
+			GameObject.Find ("Interface").transform.Find ("Choice").gameObject.SetActive (true);
 		}
-			
-		
+	
 	}
 }

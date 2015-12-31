@@ -63,20 +63,40 @@ public class ActivateEvents : MonoBehaviour {
 
 			transform.LookAt(player.transform.position);
 			isRunning = true;
-			GetComponent<Animator>().SetBool("isRunning",true);
-			GetComponent<Animator>().SetBool("runningForward",true);
-
-			navigation.SetDestination(player.transform.position - transform.forward.normalized*Mathf.Sqrt(distanceSqrtToActivate-10.0f) );
-			monologUpdate();
+			if(transform.name == "mage"){
+			// mag se dela pres animator
+				GetComponent<Animator>().SetBool("combat", false);
+				GetComponent<Animator>().SetBool("running", false);
+			} else {
+			// ostatni pres nav
+				GetComponent<Animator>().SetBool("isRunning",true);
+				GetComponent<Animator>().SetBool("runningForward",true);
+			}
+				navigation.SetDestination(player.transform.position - transform.forward.normalized*Mathf.Sqrt(distanceSqrtToActivate-10.0f) );
+				monologUpdate();
 			if( done ){
 				player.transform.LookAt(transform.position);
-				GetComponent<Animator>().SetBool("isRunning",false);
-				GetComponent<Animator>().SetBool("runningForward",false);
+				if(transform.name == "mage"){
+					// mag se dela pres animator
+					GetComponent<Animator>().SetBool("combat", false);
+					GetComponent<Animator>().SetBool("running", false);
+				} else {
+					// ostatni pres nav
+					GetComponent<Animator>().SetBool("isRunning",false);
+					GetComponent<Animator>().SetBool("runningForward",false);
+				}
 			}
 		} else if(isRunning){
 			isRunning = false;
-			GetComponent<Animator>().SetBool("isRunning",false);
-			GetComponent<Animator>().SetBool("runningForward",false);
+			if(transform.name == "mage"){
+				// mag se dela pres animator
+				GetComponent<Animator>().SetBool("combat", false);
+				GetComponent<Animator>().SetBool("running", false);
+			} else {
+				// ostatni pres navMeshAgent
+				GetComponent<Animator>().SetBool("isRunning",false);
+				GetComponent<Animator>().SetBool("runningForward",false);
+			}
 		}
 	}
 
