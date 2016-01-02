@@ -42,14 +42,12 @@ public class SpecialStoryJumps : MonoBehaviour {
 		// vycaruje sud
 		else if (pl.storyCheckpoint == MageStoryPoint + 2) {
 			/// cary mary
-			GameObject sud = GameObject.Find ("Mages_cave").transform.Find("soudek").gameObject;
+			GameObject sud = GameObject.Find ("Mages_cave").transform.Find("sud").gameObject;
 			if(!sud) {
 				Debug.LogError("Soudek neni");
 				return;
 			}
-			sud.transform.GetChild(0).GetComponent<Transform>().position = -2.0f*pl.transform.right +
-				.5f*(pl.transform.position + GameObject.Find ("Mages_cave").transform.Find ("mage").transform.position); 
-			sud.transform.GetChild(0).GetComponent<Transform>().localScale = new Vector3(1.0f,1.0f,1.0f);
+			sud.SetActive(true);
 			pl.storyCheckpoint +=2;
 		}
 		// vycaruje portal
@@ -57,11 +55,9 @@ public class SpecialStoryJumps : MonoBehaviour {
 			/// cary mary
 			GameObject portal = GameObject.Find ("Mages_cave").transform.Find("Portal").gameObject;
 			if(!portal) {
-				Debug.LogError("Soudek neni");
+				Debug.LogError("Portal neni");
 				return;
 			}
-			portal.transform.GetComponent<Transform>().position = 4.0f*pl.transform.right +
-				.5f*(pl.transform.position + GameObject.Find ("Mages_cave").transform.Find ("mage").transform.position); 
 			portal.SetActive(true);
 		}
 	}
