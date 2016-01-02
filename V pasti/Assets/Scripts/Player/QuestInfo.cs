@@ -53,6 +53,11 @@ public class QuestInfo : MonoBehaviour {
 			break;
 		case 7: text.text = "<b>Info:</b> Výborně, získal jsi zpět věci paní bylinářky, která na tebe s napětím čeká.";
 			break;
+
+		case 31: text.text = "<b>Nápověda:</b> Vezmi si sud a vrat se do vesnice.";
+			break;
+		case 32: text.text = "<b>Info:</b> Výborně, máš odtud vše co jsi potřeboval.";
+			break;
 		default: text.text = "";
 			panel.gameObject.SetActive(false);
 			text.enabled = false;

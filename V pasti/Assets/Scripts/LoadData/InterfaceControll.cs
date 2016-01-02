@@ -31,5 +31,11 @@ public class InterfaceControll : MonoBehaviour
             menu.GetChild(3).gameObject.SetActive(false);
             GameObject.Find("Player").GetComponent<BasePlayer>().pause--;
         }
+
+		if(GameObject.Find ("Player").GetComponent<BasePlayer>().storyCheckpoint == 29
+		|| GameObject.Find ("Player").GetComponent<BasePlayer>().storyCheckpoint == 34 ){
+			GameObject.Find ("Interface").transform.FindChild("End").GetComponent<RectTransform>().gameObject.SetActive(true);
+			Time.timeScale = 0.0f;
+		}
     }
 }
