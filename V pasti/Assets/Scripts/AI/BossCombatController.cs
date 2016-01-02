@@ -102,6 +102,7 @@ public class BossCombatController : MonoBehaviour
             animator.SetBool("combat", false);
             baseNPC.inCombat = false;
             targetAnimator.SetBool("isCombat", false);
+            transform.Find("HPFrame").gameObject.SetActive(false);
         }
         else
         {

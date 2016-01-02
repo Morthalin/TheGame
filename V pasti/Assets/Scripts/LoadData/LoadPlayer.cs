@@ -15,7 +15,7 @@ public class LoadPlayer : MonoBehaviour
             GameObject playerCharacter;
             playerCharacter = Instantiate(loadPlayerCharacter);
             playerCharacter.name = "LoadPlayer";
-            playerCharacter.GetComponent<LoadPlayerChar>().jmeno = "test";
+            playerCharacter.GetComponent<LoadPlayerChar>().jmeno = "tester";
 		}
 
         player.LoadPlayer(GameObject.Find("LoadPlayer").GetComponent<LoadPlayerChar>().jmeno);

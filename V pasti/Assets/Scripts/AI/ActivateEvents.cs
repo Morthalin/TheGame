@@ -65,21 +65,22 @@ public class ActivateEvents : MonoBehaviour {
 			isRunning = true;
 			if(transform.name == "mage"){
 			// mag se dela pres animator
-			//	GetComponent<Animator>().SetBool("combat", false);
-			//	GetComponent<Animator>().SetBool("running", false);
+				GetComponent<Animator>().SetBool("combat", false);
+				GetComponent<Animator>().SetBool("running", false);
 			} else {
 			// ostatni pres nav
 				GetComponent<Animator>().SetBool("isRunning",true);
 				GetComponent<Animator>().SetBool("runningForward",true);
-			}
-				navigation.SetDestination(player.transform.position - transform.forward.normalized*Mathf.Sqrt(distanceSqrtToActivate-10.0f) );
-				monologUpdate();
+                navigation.SetDestination(player.transform.position - transform.forward.normalized * Mathf.Sqrt(distanceSqrtToActivate - 10.0f));
+            }
+
+            monologUpdate();
 			if( done ){
 				player.transform.LookAt(transform.position);
 				if(transform.name == "mage"){
 					// mag se dela pres animator
-				//	GetComponent<Animator>().SetBool("combat", false);
-				//	GetComponent<Animator>().SetBool("running", false);
+					GetComponent<Animator>().SetBool("combat", false);
+					GetComponent<Animator>().SetBool("running", false);
 				} else {
 					// ostatni pres nav
 					GetComponent<Animator>().SetBool("isRunning",false);
