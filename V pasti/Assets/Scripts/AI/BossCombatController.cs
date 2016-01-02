@@ -23,6 +23,7 @@ public class BossCombatController : MonoBehaviour
     private Vector3 movementVector;
     private float speed;
     private float minAgro;
+	private int storyPoint;
 
     void Awake ()
     {
@@ -79,99 +80,126 @@ public class BossCombatController : MonoBehaviour
         {
             Debug.LogError("Missing BaseNPC script!");
         }
+
+        if (targetScript.storyCheckpoint >= 25 && targetScript.storyCheckpoint < 29)
+        {
+            gameObject.layer = 10;
+		}
+		else
+		{
+            gameObject.layer = 9;
+        }
     }
 	
 	void LateUpdate ()
     {
-        if (baseNPC.health > 0)
+		if(targetScript.storyCheckpoint >= 25 && targetScript.storyCheckpoint < 29)
         {
-            deadNPC = false;
-        }
-
-        if (baseNPC.health <= 0)
-        {
-            //smrt NPC
-            if (baseNPC.health <= 0 && !deadNPC)
+            if (gameObject.layer == 9)
             {
-                deadNPC = true;
-                animator.SetBool("death", true);
-                animator.SetTrigger("die");
-                animator.SetBool("combat", false);
-                baseNPC.inCombat = false;
-                targetAnimator.SetBool("isCombat", false);
-                transform.Find("HPFrame").gameObject.SetActive(false);
-
-                // pridani mrtvoli
-                Loot.corpseList.Add(new Corpse(baseNPC.creatureName, baseNPC.transform.position));
-
-                //vypnuti collideru
-                gameObject.GetComponent<CharacterController>().enabled = false;
+                gameObject.layer = 10;
             }
-        }
-        else if (targetScript.health <= 0 && !targetScript.dead)
-        {
-            //smrt hraca
-            targetScript.dead = true;
-            goingHome = true;
-            targetAnimator.SetBool("death", true);
-            targetAnimator.SetTrigger("die");
             animator.SetBool("combat", false);
             baseNPC.inCombat = false;
             targetAnimator.SetBool("isCombat", false);
         }
         else
         {
-            //Vzdialenost od korenovej pozicie
-            initDistance = (initPosition - transform.position).sqrMagnitude;
+            if (gameObject.layer == 10)
+            {
+                gameObject.layer = 9;
+            }
 
-            //Vzdialenost od hraca
-            targetDistance = (target.transform.position - transform.position).sqrMagnitude;
+            if (baseNPC.health > 0)
+			{
+				deadNPC = false;
+			}
 
-            if (goingHome == true)
-            {
-                GetComponent<Rigidbody>().useGravity = false;
-                if (initDistance < 5f)
-                {
-                    transform.rotation = initRotation;
-                    goingHome = false;
-                }
-                else
-                {
-                    transform.LookAt(initPosition);
-                    movementVector = new Vector3(0f, 0f, 1f);
-                    movementVector = transform.TransformDirection(movementVector);
-                    
-                    animator.SetBool("running", true);
-                    controller.SimpleMove(movementVector * speed);
-                    initDistance = (initPosition - transform.position).sqrMagnitude;
-                }
-            }
-            else if (targetDistance > agroReset)
-            {
-                //Koniec Combatu
-                goingHome = true;
-                baseNPC.health = baseNPC.healthMax;
-                animator.SetBool("combat", false);
-                baseNPC.inCombat = false;
-                targetAnimator.SetBool("isCombat", false);
-                transform.Find("HPFrame").gameObject.SetActive(false);
-            }
-            else if (targetDistance < minAgro && !targetScript.dead)
-            {
-                //Beh ku hracovy
-                transform.LookAt(target.transform);
-                transform.Find("HPFrame").gameObject.SetActive(true);
+			if (baseNPC.health <= 0)
+			{
+				//smrt NPC
+				if (baseNPC.health <= 0 && !deadNPC)
+				{
+					deadNPC = true;
+					animator.SetBool("death", true);
+					animator.SetTrigger("die");
+					animator.SetBool("combat", false);
+					baseNPC.inCombat = false;
+					targetAnimator.SetBool("isCombat", false);
+					transform.Find("HPFrame").gameObject.SetActive(false);
 
-                animator.SetBool("combat", true);
-                baseNPC.inCombat = true;
-                targetAnimator.SetBool("isCombat", true);
-                initDistance = (initPosition - transform.position).sqrMagnitude;
-            }
-            else
-            {
-                //Idle
-                animator.SetBool("running", false);
-            }
-        }
+					// pridani mrtvoli
+					Loot.corpseList.Add(new Corpse(baseNPC.creatureName, baseNPC.transform.position));
+
+					//vypnuti collideru
+					gameObject.GetComponent<CharacterController>().enabled = false;
+				}
+			}
+			else if (targetScript.health <= 0 && !targetScript.dead)
+			{
+				//smrt hraca
+				targetScript.dead = true;
+				goingHome = true;
+				targetAnimator.SetBool("death", true);
+				targetAnimator.SetTrigger("die");
+				animator.SetBool("combat", false);
+				baseNPC.inCombat = false;
+				targetAnimator.SetBool("isCombat", false);
+			}
+			else
+			{
+				//Vzdialenost od korenovej pozicie
+				initDistance = (initPosition - transform.position).sqrMagnitude;
+
+				//Vzdialenost od hraca
+				targetDistance = (target.transform.position - transform.position).sqrMagnitude;
+
+				if (goingHome == true)
+				{
+					GetComponent<Rigidbody>().useGravity = false;
+					if (initDistance < 5f)
+					{
+						transform.rotation = initRotation;
+						goingHome = false;
+					}
+					else
+					{
+						transform.LookAt(initPosition);
+						movementVector = new Vector3(0f, 0f, 1f);
+						movementVector = transform.TransformDirection(movementVector);
+						
+						animator.SetBool("running", true);
+						controller.SimpleMove(movementVector * speed);
+						initDistance = (initPosition - transform.position).sqrMagnitude;
+					}
+				}
+				else if (targetDistance > agroReset)
+				{
+					//Koniec Combatu
+					goingHome = true;
+					baseNPC.health = baseNPC.healthMax;
+					animator.SetBool("combat", false);
+					baseNPC.inCombat = false;
+					targetAnimator.SetBool("isCombat", false);
+					transform.Find("HPFrame").gameObject.SetActive(false);
+				}
+				else if (targetDistance < minAgro && !targetScript.dead)
+				{
+					//Beh ku hracovy
+					transform.LookAt(target.transform);
+					transform.Find("HPFrame").gameObject.SetActive(true);
+
+					animator.SetBool("combat", true);
+					baseNPC.inCombat = true;
+					targetAnimator.SetBool("isCombat", true);
+					initDistance = (initPosition - transform.position).sqrMagnitude;
+				}
+				else
+				{
+					//Idle
+					animator.SetBool("running", false);
+				}
+			}
+		}
     }
 }
