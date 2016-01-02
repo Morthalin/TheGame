@@ -113,10 +113,12 @@ public class DialogEvent : MonoBehaviour
 			player.storyCheckpoint ++;
 		} else if (player.storyCheckpoint == 20) {
 			player.storyCheckpoint += 3;
-		} else if (player.storyCheckpoint == 24){
+		} else if (player.storyCheckpoint == 24) {
 			player.storyCheckpoint ++;
 		} else if (player.storyCheckpoint == 27) {
 			GameObject.Find ("Interface").transform.Find ("Choice").gameObject.SetActive (true);
+		} else if (player.storyCheckpoint == 33) {
+			player.storyCheckpoint++; // end v2
 		}
 	
 	}
