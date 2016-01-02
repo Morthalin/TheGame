@@ -2,11 +2,11 @@ using UnityEngine;
 using System.Collections;
 
 public class SpecialStoryJumps : MonoBehaviour {
-	public float welcomeFightDuration = 4.0f;
+//	public float welcomeFightDuration = 4.0f;
 	public int   MageStoryPoint = 23;
 
-	private float welcomeFightSpend = 1.0f;
-	private bool welcomeFight = false;
+//	private float welcomeFightSpend = 1.0f;
+//	private bool welcomeFight = false;
 
 	// Use this for initialization
 	void Start () {
@@ -21,22 +21,13 @@ public class SpecialStoryJumps : MonoBehaviour {
 			return;
 		}
 		if (pl.storyCheckpoint == MageStoryPoint) {
-			if (GameObject.Find("Mages_cave").transform.Find ("mage").transform.GetComponent<BaseNPC>().inCombat) {
-				welcomeFightSpend -= Time.deltaTime;
-				if(!welcomeFight)
-				{
-					welcomeFight = true;
-					welcomeFightSpend = welcomeFightDuration;
-				}
-				if(welcomeFightSpend < 0.0f)
-				{
-					pl.storyCheckpoint ++;
+			if (4 * GameObject.Find("Mages_cave").transform.Find ("mage").transform.GetComponent<BaseNPC>().health
+			    <= GameObject.Find("Mages_cave").transform.Find ("mage").transform.GetComponent<BaseNPC>().healthMax) {
+				//welcomeFightSpend -= Time.deltaTime;
+				pl.storyCheckpoint ++;
 				//	GameObject.Find ("Mages_cave").transform.Find ("mage").GetComponent<BaseNPC>().inCombat = false;
 				//	GameObject.Find ("Mages_cave").transform.Find ("mage").GetComponent<Animator>().SetBool("combat", false);
 				//	GameObject.Find ("Mages_cave").transform.Find ("mage").GetComponent<Animator>().SetBool("running", false);
-				}
-			} else {
-				welcomeFight = false;
 			}
 		}
 		// vycaruje sud

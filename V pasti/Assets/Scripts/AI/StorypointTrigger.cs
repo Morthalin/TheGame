@@ -14,6 +14,7 @@ public class StorypointTrigger : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.name == "Player" && 
 		    other.gameObject.GetComponent<BasePlayer>().storyCheckpoint != TargetStorypoint) {
+
 			other.gameObject.GetComponent<BasePlayer>().storyCheckpoint = TargetStorypoint;
 		}
 	}

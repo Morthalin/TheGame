@@ -65,8 +65,8 @@ public class ActivateEvents : MonoBehaviour {
 			isRunning = true;
 			if(transform.name == "mage"){
 			// mag se dela pres animator
-				GetComponent<Animator>().SetBool("combat", false);
-				GetComponent<Animator>().SetBool("running", false);
+			//	GetComponent<Animator>().SetBool("combat", false);
+			//	GetComponent<Animator>().SetBool("running", false);
 			} else {
 			// ostatni pres nav
 				GetComponent<Animator>().SetBool("isRunning",true);
@@ -78,8 +78,8 @@ public class ActivateEvents : MonoBehaviour {
 				player.transform.LookAt(transform.position);
 				if(transform.name == "mage"){
 					// mag se dela pres animator
-					GetComponent<Animator>().SetBool("combat", false);
-					GetComponent<Animator>().SetBool("running", false);
+				//	GetComponent<Animator>().SetBool("combat", false);
+				//	GetComponent<Animator>().SetBool("running", false);
 				} else {
 					// ostatni pres nav
 					GetComponent<Animator>().SetBool("isRunning",false);
@@ -90,8 +90,8 @@ public class ActivateEvents : MonoBehaviour {
 			isRunning = false;
 			if(transform.name == "mage"){
 				// mag se dela pres animator
-				GetComponent<Animator>().SetBool("combat", false);
-				GetComponent<Animator>().SetBool("running", false);
+				//GetComponent<Animator>().SetBool("combat", false);
+				//GetComponent<Animator>().SetBool("running", false);
 			} else {
 				// ostatni pres navMeshAgent
 				GetComponent<Animator>().SetBool("isRunning",false);
