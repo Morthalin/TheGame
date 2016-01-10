@@ -324,6 +324,7 @@ public class Loot : MonoBehaviour {
 		pl.intellect += item.Intellect;
 		pl.agility += item.Agility; 
 		pl.stamina += item.Stamina; 
+		pl.healthMax += item.Stamina*10;
 		pl.armor += item.Armor;
 
 		if (item.ItemType == BaseItems.ItemTypes.NOTE) {
@@ -342,6 +343,7 @@ public class Loot : MonoBehaviour {
 				pl.intellect -= bis.Intellect;
 				pl.agility -= bis.Agility; 
 				pl.stamina -= bis.Stamina; 
+				pl.healthMax -= bis.Stamina*10;
 				pl.armor -= bis.Armor;
 				// pridani do inventare
 				itemsQuantity [bis.ItemID]++;
@@ -367,6 +369,7 @@ public class Loot : MonoBehaviour {
 				pl.intellect -= bis.Intellect;
 				pl.agility -= bis.Agility; 
 				pl.stamina -= bis.Stamina; 
+				pl.healthMax -= bis.Stamina*10;
 				pl.armor -= bis.Armor;
 				// pridani do inventare
 				itemsQuantity [bis.ItemID]++;
@@ -377,6 +380,7 @@ public class Loot : MonoBehaviour {
 			pl.intellect -= item.Intellect;
 			pl.agility -= item.Agility; 
 			pl.stamina -= item.Stamina; 
+			pl.healthMax -= item.Stamina*10;
 			pl.armor -= item.Armor;
 			BasePotion bp = ItemsData.potionsData[item.ItemID];
 			if(activePotions.ContainsKey(item.ItemID)){
